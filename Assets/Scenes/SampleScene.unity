@@ -178,6 +178,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f665217b53dc1b64db9c6cd49f4b790b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 4123538215520549574, guid: 594195e5ffd540f44a6a966a31438cf2, type: 3}
+  timeBetweenWaves: 20
+  alertTime: 5
+  timeBetweenAsteroids: 3
+  waveCount: 5
+  asteroidSpeed: 0
   moneyText: {fileID: 639752792}
 --- !u!1001 &409293747
 PrefabInstance:
@@ -910,7 +916,6 @@ GameObject:
   - component: {fileID: 2059460788}
   - component: {fileID: 2059460790}
   - component: {fileID: 2059460791}
-  - component: {fileID: 2059460792}
   m_Layer: 0
   m_Name: Core
   m_TagString: Untagged
@@ -1036,18 +1041,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &2059460792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059460787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a733605abd42e654683eb53e30e7642c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3110675493782395698
 PrefabInstance:
   m_ObjectHideFlags: 0

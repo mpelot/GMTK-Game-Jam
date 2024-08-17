@@ -6,27 +6,24 @@ public class Spawner : MonoBehaviour
 {
     public Asteroid asteroid;
     public Core core;
+    private float timeBetweenAsteroids;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartCoroutine(Spawn());
+    public void Init(float timeBetweenAsteroids, int count) {
+        this.timeBetweenAsteroids = timeBetweenAsteroids;
+        StartCoroutine(SpawnAsteroid(count));
     }
 
-    IEnumerator Spawn() {
-        //float angle = Random.Range(0, 360);
-        float angle = 50f;
-        Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * 10f;
-        Asteroid ast = Instantiate(asteroid, position, Quaternion.identity);
-        ast.GetComponent<Rigidbody2D>().velocity = (core.transform.position - ast.transform.position).normalized * 0.8f;
+    IEnumerator SpawnAsteroid(int count) {
+        if (count <= 0) {
+            Destroy(gameObject);
+        } else {
 
-        angle = 250f;
-        position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * 10f;
-        Asteroid ast2 = Instantiate(asteroid, position, Quaternion.identity);
-        ast2.GetComponent<Rigidbody2D>().velocity = (core.transform.position - ast2.transform.position).normalized * 0.8f;
+            Asteroid ast = Instantiate(asteroid, transform.position, Quaternion.identity);
+            ast.GetComponent<Rigidbody2D>().velocity = (-ast.transform.position).normalized * 0.8f;
 
-        yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(timeBetweenAsteroids);
 
-        StartCoroutine(Spawn());
+            StartCoroutine(SpawnAsteroid(count - 1));
+        }
     }
 }
