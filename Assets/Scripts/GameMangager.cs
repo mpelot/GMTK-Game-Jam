@@ -6,7 +6,13 @@ using TMPro;
 public class GameMangager : MonoBehaviour
 {
     private int _money;
-    public Spawner spawner;
+    [SerializeField] private Spawner spawner;
+    [SerializeField] private float timeBetweenWaves;
+    [SerializeField] private float alertTime;
+    [SerializeField] private float timeBetweenAsteroids;
+    [SerializeField] private int waveCount;
+    [SerializeField] private float asteroidSpeed;
+
     public int money
     {
         get
@@ -25,6 +31,7 @@ public class GameMangager : MonoBehaviour
     void Start()
     {
         money = 0;
+        StartCoroutine(SpawnWave());
     }
 
     // Update is called once per frame
@@ -43,9 +50,9 @@ public class GameMangager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         Spawner sp = Instantiate(spawner, position, Quaternion.identity);
-        sp.Init(5);
+        sp.Init(timeBetweenAsteroids, waveCount);
 
-        yield return new WaitForSeconds(20f);
+        yield return new WaitForSeconds(timeBetweenWaves);
 
         StartCoroutine(SpawnWave());
     }

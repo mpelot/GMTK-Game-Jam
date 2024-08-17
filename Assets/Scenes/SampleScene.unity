@@ -179,6 +179,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 4123538215520549574, guid: 594195e5ffd540f44a6a966a31438cf2, type: 3}
+  timeBetweenWaves: 20
+  alertTime: 5
+  timeBetweenAsteroids: 3
+  waveCount: 5
+  asteroidSpeed: 0
   moneyText: {fileID: 639752792}
 --- !u!1001 &409293747
 PrefabInstance:
