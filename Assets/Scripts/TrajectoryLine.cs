@@ -37,7 +37,7 @@ public class TrajectoryLine : MonoBehaviour
         {
             points[i] = position;
 
-            RaycastHit2D[] hits = Physics2D.CircleCastAll(position, radius, velocity, velocity.magnitude * timeStep, LayerMask.GetMask("Planet"));
+            RaycastHit2D[] hits = Physics2D.CircleCastAll(position, radius, velocity, velocity.magnitude * timeStep, LayerMask.GetMask("Gravity"));
             foreach (RaycastHit2D hit in hits)
             {
                 if (hit.collider != null)
