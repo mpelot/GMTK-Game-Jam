@@ -40,6 +40,11 @@ public class TrajectoryLine : MonoBehaviour
         {
             points[i] = position;
 
+            // Calculate gravitational force due to the Core
+            Vector2 distanceToCore = (Vector2)core.transform.position - position;
+            Vector2 coreForce = distanceToCore.normalized * (coreForceMagnitude / distanceToCore.sqrMagnitude);
+            Vector2 totalForce = coreForce;
+
             RaycastHit2D[] hits = Physics2D.CircleCastAll(position, radius, velocity, velocity.magnitude * timeStep, LayerMask.GetMask("Gravity"));
             foreach (RaycastHit2D hit in hits)
             {
