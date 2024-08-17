@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroid: {fileID: 2354696616855961990, guid: d40eb5c35ac0def4d91ae73c42dae24f, type: 3}
   core: {fileID: 0}
+  trajectoryLine: {fileID: 4348236201198097972}
 --- !u!1001 &7686015188082505951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104,6 +105,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2ebca087b168184189e873e26be7e91, type: 3}
+--- !u!114 &4348236201198097972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6265140254945193707, guid: b2ebca087b168184189e873e26be7e91, type: 3}
+  m_PrefabInstance: {fileID: 7686015188082505951}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0401c04ab34c9444e880fb5270616f4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4525728068814678329 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6081174118195827174, guid: b2ebca087b168184189e873e26be7e91, type: 3}

@@ -166,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroid: {fileID: 2354696616855961990, guid: d40eb5c35ac0def4d91ae73c42dae24f, type: 3}
   core: {fileID: 2059460790}
+  trajectoryLine: {fileID: 0}
 --- !u!114 &51138261
 MonoBehaviour:
   m_ObjectHideFlags: 0

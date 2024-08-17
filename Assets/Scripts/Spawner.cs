@@ -6,10 +6,13 @@ public class Spawner : MonoBehaviour
 {
     public Asteroid asteroid;
     public Core core;
+    public TrajectoryLine trajectoryLine;
     private float timeBetweenAsteroids;
 
     public void Init(float timeBetweenAsteroids, int count) {
         this.timeBetweenAsteroids = timeBetweenAsteroids;
+        trajectoryLine.startingVelocity = (-transform.position).normalized * 0.8f;
+        trajectoryLine.Show();
         StartCoroutine(SpawnAsteroid(count));
     }
 

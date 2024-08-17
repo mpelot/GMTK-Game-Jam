@@ -2,23 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TrajectoryLine : MonoBehaviour
 {
     public LineRenderer lineRenderer;
     public float coreForceMagnitude;
+    public Vector2 startingVelocity;
+    public float circleCastRadius;
+    private Collider2D[] startingColliders;
 
     private Core core;
     // Start is called before the first frame update
     void Start()
     {
         core = FindFirstObjectByType<Core>();
+        startingColliders = Physics2D.OverlapCircleAll(transform.position, circleCastRadius);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2[] points = calculateTrajectoryPoints(1000, 1, 0.2f);
+        Vector2[] points = CalculateTrajectoryPoints(1000, 1, circleCastRadius);
 
         Vector3[] convertedPoints = new Vector3[points.Length];
         for (int i = 0; i < points.Length; i++)
@@ -29,12 +34,24 @@ public class TrajectoryLine : MonoBehaviour
         lineRenderer.SetPositions(convertedPoints);
     }
 
-    private Vector2[] calculateTrajectoryPoints(int pointCount, float timeMultiplier, float radius)
+    public void Show()
+    {
+        lineRenderer.enabled = true;
+    }    
+    
+    public void Hide()
+    {
+        lineRenderer.enabled = false;
+    }
+
+    private Vector2[] CalculateTrajectoryPoints(int pointCount, float timeMultiplier, float radius)
     {
         Vector2[] points = new Vector2[pointCount];
         Vector2 position = transform.position;
-        Vector2 velocity = (-position).normalized * 0.8f;
+        Vector2 velocity = startingVelocity;
         float timeStep = Time.fixedDeltaTime * timeMultiplier;
+
+        
 
         bool endEarly = false;
 
@@ -67,8 +84,12 @@ public class TrajectoryLine : MonoBehaviour
                     }
                     else if (hit.collider.CompareTag("Core") || hit.collider.CompareTag("Planet") || hit.collider.CompareTag("Harvester"))
                     {
-                        endEarly = true;
-                        break;
+                        if (!IsInStartingColliders(hit.collider))
+                        {
+                            endEarly = true;
+                            break;
+                        }
+                        
                     }
                 }
             }
@@ -78,5 +99,18 @@ public class TrajectoryLine : MonoBehaviour
             position += velocity * timeStep;
         }
         return points;
+    }
+
+
+    private bool IsInStartingColliders(Collider2D collider)
+    {
+        foreach (Collider2D startingCollider in startingColliders)
+        {
+            if (collider == startingCollider)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
