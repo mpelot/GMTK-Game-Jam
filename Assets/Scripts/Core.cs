@@ -12,9 +12,7 @@ public class Core : MonoBehaviour, Selectable
     }
 
     private void OnMouseDown() {
-        if (selected)
-            Deselect();
-        else
+        if (!selected)
             gm.selectedObject = this;
     }
 
