@@ -22,6 +22,8 @@ public class Asteroid : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
-        rb.AddForce((collision.gameObject.transform.position - transform.position).normalized * 0.3f * (2.7f - (collision.gameObject.transform.position - transform.position).magnitude), ForceMode2D.Force);
+        if (collision.CompareTag("Planet")) {
+            rb.AddForce((collision.gameObject.transform.position - transform.position).normalized * 0.3f * (2.7f - (collision.gameObject.transform.position - transform.position).magnitude), ForceMode2D.Force);
+        }
     }
 }

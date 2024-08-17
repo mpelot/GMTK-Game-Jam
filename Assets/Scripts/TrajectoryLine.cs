@@ -37,15 +37,16 @@ public class TrajectoryLine : MonoBehaviour
         {
             points[i] = position;
 
-            RaycastHit2D hit = Physics2D.Raycast(position, velocity, velocity.magnitude * timeStep, LayerMask.GetMask("Planet"));
-            if (hit.collider != null)
-            {
-                Vector2 directionToPlanet = (hit.collider.transform.position - (Vector3)position).normalized;
-                float distanceToPlanet = Vector2.Distance(position, hit.collider.transform.position);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(position, velocity, velocity.magnitude * timeStep, LayerMask.GetMask("Planet"));
+            foreach (RaycastHit2D hit in hits) {
+                if (hit.collider != null) {
+                    Vector2 directionToPlanet = (hit.collider.transform.position - (Vector3)position).normalized;
+                    float distanceToPlanet = Vector2.Distance(position, hit.collider.transform.position);
 
 
-                Vector2 gravitationalForce = directionToPlanet * 0.3f * (2.7f - distanceToPlanet);
-                velocity += gravitationalForce * timeStep;
+                    Vector2 gravitationalForce = directionToPlanet * 0.3f * (2.7f - distanceToPlanet);
+                    velocity += gravitationalForce * timeStep;
+                }
             }
 
             position += velocity * timeStep;
