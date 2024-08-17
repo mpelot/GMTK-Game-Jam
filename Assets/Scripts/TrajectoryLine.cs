@@ -6,11 +6,11 @@ using UnityEngine;
 public class TrajectoryLine : MonoBehaviour
 {
     public LineRenderer lineRenderer;
-    public Core core;
+    private Core core;
     // Start is called before the first frame update
     void Start()
     {
-        
+        core = FindFirstObjectByType<Core>();
     }
 
     // Update is called once per frame
