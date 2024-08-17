@@ -21,6 +21,10 @@ public class Asteroid : MonoBehaviour
         if (Mathf.Abs(transform.position.x) > 10f || Mathf.Abs(transform.position.y) > 10f) {
             Destroy(gameObject);
         }
+    }
+
+    void FixedUpdate()
+    {
         // Add gravitational force due to core
         Vector2 distanceToCore = core.transform.position - transform.position;
         rb.AddForce(distanceToCore.normalized * (coreForce / distanceToCore.sqrMagnitude), ForceMode2D.Force);

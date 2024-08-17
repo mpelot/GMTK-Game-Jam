@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 6181920857114407098}
-  coreForceMagnitude: 0.065
+  coreForceMagnitude: 0.75
 --- !u!120 &6181920857114407098
 LineRenderer:
   serializedVersion: 2
