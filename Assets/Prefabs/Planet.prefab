@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7107442539159630829}
   - component: {fileID: 152544801686046771}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Inner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 49593013507969878}
   - component: {fileID: 1370430673509114698}
   - component: {fileID: 5366837471315516740}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Planet
   m_TagString: Planet
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5764433942885624039}
   - component: {fileID: 3484035313931433482}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}

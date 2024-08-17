@@ -37,8 +37,8 @@ public class TrajectoryLine : MonoBehaviour
         {
             points[i] = position;
 
-            RaycastHit2D hit = Physics2D.Raycast(position, velocity, velocity.magnitude * timeStep);
-            if (hit.collider != null && hit.collider.CompareTag("Planet"))
+            RaycastHit2D hit = Physics2D.Raycast(position, velocity, velocity.magnitude * timeStep, LayerMask.GetMask("Planet"));
+            if (hit.collider != null)
             {
                 Vector2 directionToPlanet = (hit.collider.transform.position - (Vector3)position).normalized;
                 float distanceToPlanet = Vector2.Distance(position, hit.collider.transform.position);
