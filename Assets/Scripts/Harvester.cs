@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Harvester : MonoBehaviour
+public class Harvester : MonoBehaviour, Selectable
 {
     private GameMangager gameManager;
     public int moneyPerAsteroid;
+    private bool selected;
 
     public void Start()
     {
@@ -19,5 +20,12 @@ public class Harvester : MonoBehaviour
             Destroy(collision.gameObject);
             gameManager.money += moneyPerAsteroid;
         }
+    }
+    public void Select() {
+        selected = true;
+    }
+
+    public void Deselect() {
+        selected = false;
     }
 }
