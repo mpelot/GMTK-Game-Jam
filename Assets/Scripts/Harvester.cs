@@ -12,24 +12,32 @@ public class Harvester : MonoBehaviour, Selectable
     public float maximumShotVelocity;
     public float shotForce;
     public GameObject shrinkRockPrefab;
+    public int growthLevel = 0;
+    public int splitThreshold;
+    private List<Collider2D> ignoredColliders;
 
     void Start()
     {
         gm = FindAnyObjectByType<GameMangager>();
         trajectoryLine.Hide();
+        ignoredColliders = new List<Collider2D>();
     }
 
     void Update()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            if (selected)
+            if (selected && growthLevel > 0)
             {
                 isAiming = true;
             }
         }
         if (isAiming)
         {
+            if (growthLevel <= 0)
+            {
+                StopAiming();
+            }
             Vector2 shotVelocity = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)) * shotForce;
             if (shotVelocity.magnitude < minimumShotVelocity)
             {
@@ -64,6 +72,8 @@ public class Harvester : MonoBehaviour, Selectable
     {
         GameObject spawnedShrinkRock = Instantiate(shrinkRockPrefab, transform.position, Quaternion.identity);
         spawnedShrinkRock.GetComponent<Rigidbody2D>().velocity = shotVelocity;
+        ignoredColliders.Add(spawnedShrinkRock.GetComponent<Collider2D>());
+        growthLevel--;
 
         StopAiming();
     }
@@ -76,9 +86,33 @@ public class Harvester : MonoBehaviour, Selectable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Contains("Asteroid"))
+        if (ignoredColliders.Contains(collision))
+        {
+            ignoredColliders.Remove(collision);
+            return;
+        }
+        if (collision.gameObject.CompareTag("Asteroid"))
         {
             Destroy(collision.gameObject);
+            growthLevel++;
+
+            if (growthLevel >= splitThreshold)
+            {
+                growthLevel = 0;
+                GameObject spawnedHarvester = Instantiate(gameObject, transform.position, Quaternion.identity);
+            }
+        }
+        if (collision.gameObject.CompareTag("ShrinkRock"))
+        {
+            Destroy(collision.gameObject);
+            if (growthLevel > 0)
+            {
+                growthLevel--;
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
