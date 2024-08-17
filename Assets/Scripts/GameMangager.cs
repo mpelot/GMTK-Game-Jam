@@ -5,7 +5,6 @@ using TMPro;
 
 public class GameMangager : MonoBehaviour
 {
-    private int _money;
     private Selectable _selectedObject;
     [SerializeField] private Spawner spawner;
     [SerializeField] private float timeBetweenWaves;
@@ -13,20 +12,6 @@ public class GameMangager : MonoBehaviour
     [SerializeField] private float timeBetweenAsteroids;
     [SerializeField] private int waveCount;
     [SerializeField] private float asteroidSpeed;
-
-    public int money
-    {
-        get
-        {
-            return _money;
-        }
-        set
-        {
-            _money = value;
-            moneyText.text = "$" + _money;
-        }
-    }
-    public TextMeshProUGUI moneyText;
 
     public Selectable selectedObject {
         get {
@@ -43,7 +28,6 @@ public class GameMangager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        money = 0;
         StartCoroutine(SpawnWave());
     }
 
