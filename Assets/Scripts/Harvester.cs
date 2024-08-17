@@ -9,7 +9,7 @@ public class Harvester : MonoBehaviour, Selectable
     private bool selected;
     private GameMangager gm;
 
-    public void Start()
+    void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameMangager>();
         gm = FindAnyObjectByType<GameMangager>();
