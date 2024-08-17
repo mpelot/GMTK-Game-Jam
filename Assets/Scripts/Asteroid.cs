@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
+    public float coreForce;
+
     private Rigidbody2D rb;
+    private Core core;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        core = GameObject.Find("Core").GetComponent<Core>();
     }
 
     // Update is called once per frame
@@ -17,8 +21,9 @@ public class Asteroid : MonoBehaviour
         if (Mathf.Abs(transform.position.x) > 10f || Mathf.Abs(transform.position.y) > 10f) {
             Destroy(gameObject);
         }
-        /*float step = 0.2f * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, transform.right, step);*/
+        // Add gravitational force due to core
+        Vector2 distanceToCore = core.transform.position - transform.position;
+        rb.AddForce(distanceToCore.normalized * (coreForce / distanceToCore.sqrMagnitude), ForceMode2D.Force);
     }
 
     private void OnTriggerStay2D(Collider2D collision) {

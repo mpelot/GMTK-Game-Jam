@@ -6,6 +6,8 @@ using UnityEngine;
 public class TrajectoryLine : MonoBehaviour
 {
     public LineRenderer lineRenderer;
+    public float coreForceMagnitude;
+
     private Core core;
     // Start is called before the first frame update
     void Start()
@@ -16,7 +18,7 @@ public class TrajectoryLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2[] points = calculateTrajectoryPoints(100, 10, 0.2f);
+        Vector2[] points = calculateTrajectoryPoints(1000, 1, 0.2f);
 
         Vector3[] convertedPoints = new Vector3[points.Length];
         for (int i = 0; i < points.Length; i++)
@@ -31,11 +33,17 @@ public class TrajectoryLine : MonoBehaviour
     {
         Vector2[] points = new Vector2[pointCount];
         Vector2 position = transform.position;
-        Vector2 velocity = ((Vector2) core.transform.position - position).normalized * 0.8f;
+        Vector2 velocity = (-position).normalized * 0.8f;
         float timeStep = Time.fixedDeltaTime * timeMultiplier;
+
         for (int i = 0; i < pointCount; i++)
         {
             points[i] = position;
+
+            // Calculate gravitational force due to the Core
+            Vector2 distanceToCore = (Vector2)core.transform.position - position;
+            Vector2 coreForce = distanceToCore.normalized * (coreForceMagnitude / distanceToCore.sqrMagnitude);
+            Vector2 totalForce = coreForce;
 
             RaycastHit2D[] hits = Physics2D.CircleCastAll(position, radius, velocity, velocity.magnitude * timeStep, LayerMask.GetMask("Planet"));
             foreach (RaycastHit2D hit in hits)
@@ -46,9 +54,11 @@ public class TrajectoryLine : MonoBehaviour
                     float distanceToPlanet = Vector2.Distance(position, hit.collider.transform.position);
 
                     Vector2 gravitationalForce = directionToPlanet * 0.3f * (2.7f - distanceToPlanet);
-                    velocity += gravitationalForce * timeStep;
+                    totalForce += gravitationalForce;
                 }
             }
+
+            velocity += totalForce * timeStep;
 
             position += velocity * timeStep;
         }
