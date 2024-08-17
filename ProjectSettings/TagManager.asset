@@ -8,6 +8,8 @@ TagManager:
   - Gravity
   - Core
   - Harvester
+  - ShrinkRock
+  - Asteroid
   layers:
   - Default
   - TransparentFX

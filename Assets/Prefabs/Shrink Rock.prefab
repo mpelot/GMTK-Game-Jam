@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6437157962285716480}
   m_Layer: 8
   m_Name: Shrink Rock
-  m_TagString: Untagged
+  m_TagString: ShrinkRock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,4 +164,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e17f59a1cb5fa4e8f0b64c398baddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coreForce: 0.75
