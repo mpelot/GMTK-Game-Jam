@@ -8,6 +8,10 @@ public class Harvester : MonoBehaviour, Selectable
     private bool isAiming;
     private GameMangager gm;
     public TrajectoryLine trajectoryLine;
+    public float minimumShotVelocity;
+    public float maximumShotVelocity;
+    public float shotForce;
+    public GameObject shrinkRockPrefab;
 
     void Start()
     {
@@ -26,15 +30,48 @@ public class Harvester : MonoBehaviour, Selectable
         }
         if (isAiming)
         {
-            trajectoryLine.Show();
-            trajectoryLine.startingVelocity = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position) * 0.5f;
-
-            if (Input.GetMouseButtonUp(1) || !selected)
+            Vector2 shotVelocity = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)) * shotForce;
+            if (shotVelocity.magnitude < minimumShotVelocity)
             {
-                isAiming = false;
                 trajectoryLine.Hide();
+                if (Input.GetMouseButtonUp(1))
+                {
+                    StopAiming();
+                }
+            }
+            else
+            {
+                if (shotVelocity.magnitude > maximumShotVelocity)
+                {
+                    shotVelocity = shotVelocity.normalized * maximumShotVelocity;
+                }
+                trajectoryLine.Show();
+                trajectoryLine.startingVelocity = shotVelocity;
+
+                if (Input.GetMouseButtonUp(1))
+                {
+                    Fire(shotVelocity);
+                }
+                else if (!selected)
+                {
+                    StopAiming();
+                }
             }
         }
+    }
+
+    void Fire(Vector2 shotVelocity)
+    {
+        GameObject spawnedShrinkRock = Instantiate(shrinkRockPrefab, transform.position, Quaternion.identity);
+        spawnedShrinkRock.GetComponent<Rigidbody2D>().velocity = shotVelocity;
+
+        StopAiming();
+    }
+
+    void StopAiming()
+    {
+        isAiming = false;
+        trajectoryLine.Hide();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
