@@ -16,7 +16,7 @@ public class TrajectoryLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2[] points = calculateTrajectoryPoints(100, 10);
+        Vector2[] points = calculateTrajectoryPoints(100, 10, 0.2f);
 
         Vector3[] convertedPoints = new Vector3[points.Length];
         for (int i = 0; i < points.Length; i++)
@@ -27,7 +27,7 @@ public class TrajectoryLine : MonoBehaviour
         lineRenderer.SetPositions(convertedPoints);
     }
 
-    private Vector2[] calculateTrajectoryPoints(int pointCount, float timeMultiplier)
+    private Vector2[] calculateTrajectoryPoints(int pointCount, float timeMultiplier, float radius)
     {
         Vector2[] points = new Vector2[pointCount];
         Vector2 position = transform.position;
@@ -37,12 +37,13 @@ public class TrajectoryLine : MonoBehaviour
         {
             points[i] = position;
 
-            RaycastHit2D[] hits = Physics2D.RaycastAll(position, velocity, velocity.magnitude * timeStep, LayerMask.GetMask("Planet"));
-            foreach (RaycastHit2D hit in hits) {
-                if (hit.collider != null) {
+            RaycastHit2D[] hits = Physics2D.CircleCastAll(position, radius, velocity, velocity.magnitude * timeStep, LayerMask.GetMask("Planet"));
+            foreach (RaycastHit2D hit in hits)
+            {
+                if (hit.collider != null)
+                {
                     Vector2 directionToPlanet = (hit.collider.transform.position - (Vector3)position).normalized;
                     float distanceToPlanet = Vector2.Distance(position, hit.collider.transform.position);
-
 
                     Vector2 gravitationalForce = directionToPlanet * 0.3f * (2.7f - distanceToPlanet);
                     velocity += gravitationalForce * timeStep;
