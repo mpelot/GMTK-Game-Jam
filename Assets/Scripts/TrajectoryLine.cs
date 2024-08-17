@@ -36,9 +36,16 @@ public class TrajectoryLine : MonoBehaviour
         Vector2 velocity = (-position).normalized * 0.8f;
         float timeStep = Time.fixedDeltaTime * timeMultiplier;
 
+        bool endEarly = false;
+
         for (int i = 0; i < pointCount; i++)
         {
             points[i] = position;
+
+            if (endEarly)
+            {
+                continue;
+            }
 
             // Calculate gravitational force due to the Core
             Vector2 distanceToCore = (Vector2)core.transform.position - position;
@@ -48,17 +55,21 @@ public class TrajectoryLine : MonoBehaviour
             RaycastHit2D[] hits = Physics2D.CircleCastAll(position, radius, velocity, velocity.magnitude * timeStep);
             foreach (RaycastHit2D hit in hits)
             {
-                if (hit.collider != null && hit.collider.CompareTag("Gravity"))
+                if (hit.collider != null)
                 {
-                    Vector2 directionToPlanet = (hit.collider.transform.position - (Vector3)position).normalized;
-                    float distanceToPlanet = Vector2.Distance(position, hit.collider.transform.position);
+                    if (hit.collider.CompareTag("Gravity"))
+                    {
+                        Vector2 directionToPlanet = (hit.collider.transform.position - (Vector3)position).normalized;
+                        float distanceToPlanet = Vector2.Distance(position, hit.collider.transform.position);
 
-                    Vector2 gravitationalForce = directionToPlanet * 0.3f * (2.7f - distanceToPlanet);
-                    totalForce += gravitationalForce;
-                }
-                else if (hit.collider != null && hit.collider.CompareTag("Core"))
-                {
-                    return points;
+                        Vector2 gravitationalForce = directionToPlanet * 0.3f * (2.7f - distanceToPlanet);
+                        totalForce += gravitationalForce;
+                    }
+                    else if (hit.collider.CompareTag("Core") || hit.collider.CompareTag("Planet") || hit.collider.CompareTag("Harvester"))
+                    {
+                        endEarly = true;
+                        break;
+                    }
                 }
             }
 

@@ -585,6 +585,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 49593013507969878, guid: 676db081c7e3a7641ab7ffa1d481849b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2192145176971243070, guid: 676db081c7e3a7641ab7ffa1d481849b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3810498752290098040, guid: 676db081c7e3a7641ab7ffa1d481849b, type: 3}
       propertyPath: m_Name
       value: Planet

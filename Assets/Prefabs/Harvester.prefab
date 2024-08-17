@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7819063478075708561}
   m_Layer: 0
   m_Name: Harvester
-  m_TagString: Untagged
+  m_TagString: Harvester
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,4 +178,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7529b42923d91f94b96cd88a7264133d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyPerAsteroid: 1

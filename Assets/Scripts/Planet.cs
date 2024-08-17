@@ -31,4 +31,13 @@ public class Planet : MonoBehaviour, Selectable
         selected = false;
         ring.SetActive(false);
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name.Contains("Asteroid"))
+        {
+            Destroy(collision.gameObject);
+            transform.localScale = new Vector3(transform.localScale.x + .1f, transform.localScale.y + .1f, 0f);
+        }
+    }
 }
