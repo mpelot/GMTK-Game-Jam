@@ -45,16 +45,20 @@ public class TrajectoryLine : MonoBehaviour
             Vector2 coreForce = distanceToCore.normalized * (coreForceMagnitude / distanceToCore.sqrMagnitude);
             Vector2 totalForce = coreForce;
 
-            RaycastHit2D[] hits = Physics2D.CircleCastAll(position, radius, velocity, velocity.magnitude * timeStep, LayerMask.GetMask("Gravity"));
+            RaycastHit2D[] hits = Physics2D.CircleCastAll(position, radius, velocity, velocity.magnitude * timeStep);
             foreach (RaycastHit2D hit in hits)
             {
-                if (hit.collider != null)
+                if (hit.collider != null && hit.collider.CompareTag("Gravity"))
                 {
                     Vector2 directionToPlanet = (hit.collider.transform.position - (Vector3)position).normalized;
                     float distanceToPlanet = Vector2.Distance(position, hit.collider.transform.position);
 
                     Vector2 gravitationalForce = directionToPlanet * 0.3f * (2.7f - distanceToPlanet);
                     totalForce += gravitationalForce;
+                }
+                else if (hit.collider != null && hit.collider.CompareTag("Core"))
+                {
+                    return points;
                 }
             }
 
