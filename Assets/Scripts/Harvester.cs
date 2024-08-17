@@ -7,10 +7,12 @@ public class Harvester : MonoBehaviour, Selectable
     private GameMangager gameManager;
     public int moneyPerAsteroid;
     private bool selected;
+    private GameMangager gm;
 
     public void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameMangager>();
+        gm = FindAnyObjectByType<GameMangager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -21,6 +23,14 @@ public class Harvester : MonoBehaviour, Selectable
             gameManager.money += moneyPerAsteroid;
         }
     }
+
+    private void OnMouseDown() {
+        if (selected)
+            Deselect();
+        else
+            gm.selectedObject = this;
+    }
+
     public void Select() {
         selected = true;
     }

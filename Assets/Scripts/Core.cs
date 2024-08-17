@@ -5,6 +5,12 @@ using UnityEngine;
 public class Core : MonoBehaviour, Selectable
 {
     private bool selected;
+    private GameMangager gm;
+
+    void Start() {
+        gm = FindAnyObjectByType<GameMangager>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.name.Contains("Asteroid")) {
             Destroy(collision.gameObject);
@@ -13,7 +19,10 @@ public class Core : MonoBehaviour, Selectable
     }
 
     private void OnMouseDown() {
-        Select();
+        if (selected)
+            Deselect();
+        else
+            gm.selectedObject = this;
     }
 
     public void Select() {
