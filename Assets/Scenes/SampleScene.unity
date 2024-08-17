@@ -651,7 +651,7 @@ MonoBehaviour:
   hair: {fileID: 1954066551}
   hairPiece: {fileID: 3617420138530459214, guid: b867d8e2148a0e845944e0e31e459561, type: 3}
   speed: 5
-  rotationSpeed: 50
+  rotationSpeed: 100
   circleCollider: {fileID: 372026750}
   rb: {fileID: 2008878641}
 --- !u!60 &2008878640
