@@ -34,7 +34,7 @@ Transform:
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5433344009510401847}
+  - {fileID: 8236379333874301495}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5337230643446924482
@@ -179,14 +179,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7529b42923d91f94b96cd88a7264133d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trajectoryLine: {fileID: 5328191484435073082}
+  trajectoryLine: {fileID: 8132352107411703098}
   minimumShotVelocity: 0.6
   maximumShotVelocity: 5
   shotForce: 1
   shrinkRockPrefab: {fileID: 2762680425495791541, guid: 82fe04a098aec474783b8196abaa3b80, type: 3}
   growthLevel: 0
   splitThreshold: 5
---- !u!1001 &2234830170013935313
+--- !u!1001 &2749963216396135377
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -243,10 +243,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2ebca087b168184189e873e26be7e91, type: 3}
---- !u!114 &5328191484435073082 stripped
+--- !u!114 &8132352107411703098 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6265140254945193707, guid: b2ebca087b168184189e873e26be7e91, type: 3}
-  m_PrefabInstance: {fileID: 2234830170013935313}
+  m_PrefabInstance: {fileID: 2749963216396135377}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -254,8 +254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0401c04ab34c9444e880fb5270616f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &5433344009510401847 stripped
+--- !u!4 &8236379333874301495 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6081174118195827174, guid: b2ebca087b168184189e873e26be7e91, type: 3}
-  m_PrefabInstance: {fileID: 2234830170013935313}
+  m_PrefabInstance: {fileID: 2749963216396135377}
   m_PrefabAsset: {fileID: 0}
