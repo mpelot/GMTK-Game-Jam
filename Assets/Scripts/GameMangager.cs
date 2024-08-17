@@ -6,6 +6,7 @@ using TMPro;
 public class GameMangager : MonoBehaviour
 {
     private int _money;
+    private Selectable _selectedObject;
     [SerializeField] private Spawner spawner;
     [SerializeField] private float timeBetweenWaves;
     [SerializeField] private float alertTime;
@@ -26,6 +27,18 @@ public class GameMangager : MonoBehaviour
         }
     }
     public TextMeshProUGUI moneyText;
+
+    public Selectable selectedObject {
+        get {
+            return _selectedObject;
+        }
+        set {
+            if (_selectedObject != null)
+                _selectedObject.Deselect();
+            _selectedObject = value;
+            _selectedObject.Select();
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
