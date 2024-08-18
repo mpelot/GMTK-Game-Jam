@@ -105,6 +105,9 @@ public class Harvester : MonoBehaviour, Selectable
                 trajectoryLine.Show();
                 trajectoryLine.startingVelocity = shotVelocity;
 
+                float shotVelcoityScale = (shotVelocity.magnitude - minimumShotVelocity) / (maximumShotVelocity - minimumShotVelocity);
+                trajectoryLine.lineRenderer.textureScale = new Vector2((-3.5f * shotVelcoityScale) + 5, 1f);
+
                 if (Input.GetMouseButtonUp(1))
                 {
                     SetFiringPath(shotVelocity);
