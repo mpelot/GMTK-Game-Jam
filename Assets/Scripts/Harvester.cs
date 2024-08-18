@@ -24,6 +24,7 @@ public class Harvester : MonoBehaviour, Selectable
     public float slowdownPerGrowthLevel;
     public float scaleRate;
     public float _growthLevel = 0;
+    private Animator animator;
     public float growthLevel
     {
         get
@@ -73,6 +74,7 @@ public class Harvester : MonoBehaviour, Selectable
         startingScale = transform.localScale;
         startingColor = spriteRenderer.color;
         movable = GetComponent<Movable>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -188,9 +190,11 @@ public class Harvester : MonoBehaviour, Selectable
 
     public void Select() {
         selected = true;
+        animator.SetBool("Selected", true);
     }
 
     public void Deselect() {
         selected = false;
+        animator.SetBool("Selected", false);
     }
 }
