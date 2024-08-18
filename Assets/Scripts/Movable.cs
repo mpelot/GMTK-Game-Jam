@@ -6,6 +6,7 @@ public class Movable : MonoBehaviour
 {
     private Rigidbody2D rb;
     public float dragSpeed;
+    public float dragSpeedMultiplier = 1f;
     private bool destinationSet;
     private Camera cam;
     private Vector3 targetPos;
@@ -43,7 +44,7 @@ public class Movable : MonoBehaviour
             if ((targetPos - transform.position).magnitude < 0.01f) {
                 rb.drag = 10;
             } else {
-                forceVector += (Vector2) (targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0f, 1.5f) * dragSpeed;
+                forceVector += (Vector2) (targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0f, 1.5f) * (dragSpeed * dragSpeedMultiplier);
             }
         }
 
@@ -53,7 +54,7 @@ public class Movable : MonoBehaviour
                 destinationSet = false;
                 rb.drag = 10;
             } else {
-                forceVector += (Vector2) (targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0f, 1.5f) * dragSpeed;
+                forceVector += (Vector2) (targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0f, 1.5f) * (dragSpeed * dragSpeedMultiplier);
             }
         }
 

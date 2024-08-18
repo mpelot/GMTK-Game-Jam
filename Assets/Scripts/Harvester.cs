@@ -15,12 +15,13 @@ public class Harvester : MonoBehaviour, Selectable
     private bool isFiringPathSet;
     public GameObject shrinkRockPrefab;
     private Movable movable;
-    public int splitThreshold;
+    public float splitThreshold;
     private List<Collider2D> ignoredColliders;
     private SpriteRenderer spriteRenderer;
     private Vector3 startingScale;
     private Color32 startingColor;
-    public int unstableGrowthLevel;
+    public float unstableGrowthLevel;
+    public float slowdownPerGrowthLevel;
     public float growthRate;
     private float _growthLevel = 0;
     public float growthLevel
@@ -45,6 +46,7 @@ public class Harvester : MonoBehaviour, Selectable
             _growthLevel = value;
             transform.localScale = new Vector3(startingScale.x + (_growthLevel * growthRate), startingScale.y + (_growthLevel * growthRate), 0f);
             spriteRenderer.color = new Color32(startingColor.r, (byte)(startingColor.g + (_growthLevel * 10)), startingColor.b, startingColor.a);
+            movable.dragSpeedMultiplier = 1f - (_growthLevel * slowdownPerGrowthLevel);
 
             if (_growthLevel >= unstableGrowthLevel)
             {

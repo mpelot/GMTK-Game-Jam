@@ -255,6 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ring: {fileID: 7191544145778345292}
   unstableGrowthThreshold: 5
+  slowdownPerGrowthLevel: 0.1
   growthRate: 0.1
   _growthLevel: 0
 --- !u!114 &5366837471315516740
@@ -270,6 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragSpeed: 2
+  dragSpeedMultiplier: 1
   selected: 0
   isBeingPulledToCore: 0
   coreForce: 1

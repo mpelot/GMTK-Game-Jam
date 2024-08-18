@@ -9,10 +9,11 @@ public class Planet : MonoBehaviour, Selectable
     private Rigidbody2D rb;
     private bool selected = false;
     private GameMangager gm;
-    private Movable moveable;
+    private Movable movable;
 
     private Vector3 startingScale;
     public float unstableGrowthThreshold;
+    public float slowdownPerGrowthLevel;
     public float growthRate;
     public float _growthLevel = 0;
     public float growthLevel
@@ -29,13 +30,14 @@ public class Planet : MonoBehaviour, Selectable
             }
             _growthLevel = value;
             transform.localScale = new Vector3(startingScale.x + (_growthLevel * growthRate), startingScale.y + (_growthLevel * growthRate), 0f);
+            movable.dragSpeedMultiplier = 1f - (_growthLevel * slowdownPerGrowthLevel);
             if (_growthLevel >= unstableGrowthThreshold)
             {
-                moveable.isBeingPulledToCore = true;
+                movable.isBeingPulledToCore = true;
             }
             else
             {
-                moveable.isBeingPulledToCore = false;
+                movable.isBeingPulledToCore = false;
             }
         }
     }
@@ -44,7 +46,7 @@ public class Planet : MonoBehaviour, Selectable
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         gm = FindAnyObjectByType<GameMangager>();
-        moveable = GetComponent<Movable>();
+        movable = GetComponent<Movable>();
         startingScale = transform.localScale;
     }
 
@@ -69,13 +71,13 @@ public class Planet : MonoBehaviour, Selectable
 
     public void Select() {
         selected = true;
-        moveable.selected = true;
+        movable.selected = true;
         ring.SetActive(true);
     }
 
     public void Deselect() {
         selected = false;
-        moveable.selected = false;
+        movable.selected = false;
         ring.SetActive(false);
     }
 
