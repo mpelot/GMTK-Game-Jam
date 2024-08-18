@@ -8,6 +8,7 @@ public class TrajectoryLine : MonoBehaviour
 {
     public LineRenderer lineRenderer;
     public float coreForceMagnitude;
+    public float planetForceMagnitude;
     public Vector2 startingVelocity;
     public float circleCastRadius;
     private Collider2D[] startingColliders;
@@ -79,7 +80,7 @@ public class TrajectoryLine : MonoBehaviour
                         Vector2 directionToPlanet = (hit.collider.transform.position - (Vector3)position).normalized;
                         float distanceToPlanet = Vector2.Distance(position, hit.collider.transform.position);
 
-                        Vector2 gravitationalForce = directionToPlanet * 0.3f * (2.7f - distanceToPlanet);
+                        Vector2 gravitationalForce = directionToPlanet * planetForceMagnitude * (2.7f - distanceToPlanet);
                         totalForce += gravitationalForce;
                     }
                     else if (hit.collider.CompareTag("Core") || hit.collider.CompareTag("Planet") || hit.collider.CompareTag("Harvester"))

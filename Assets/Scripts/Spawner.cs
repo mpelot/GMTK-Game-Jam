@@ -8,25 +8,26 @@ public class Spawner : MonoBehaviour
     public Core core;
     public TrajectoryLine trajectoryLine;
     private float timeBetweenAsteroids;
+    public float asteroidSpawnSpeed;
 
-    public void Init(float timeBetweenAsteroids, int count) {
+    public void Init(float alertTime, float timeBetweenAsteroids, int count) {
         this.timeBetweenAsteroids = timeBetweenAsteroids;
-        trajectoryLine.startingVelocity = (-transform.position).normalized * 0.8f;
+        trajectoryLine.startingVelocity = (-transform.position).normalized * asteroidSpawnSpeed;
         trajectoryLine.Show();
-        StartCoroutine(SpawnAsteroid(count));
+        StartCoroutine(SpawnWave(alertTime, timeBetweenAsteroids, count));
     }
 
-    IEnumerator SpawnAsteroid(int count) {
-        if (count <= 0) {
-            Destroy(gameObject);
-        } else {
-
+    IEnumerator SpawnWave(float alertTime, float timeBetweenAsteroids, int waveCount)
+    {
+        yield return new WaitForSeconds(alertTime);
+        for (int i = 0; i < waveCount; i++)
+        {
             Asteroid ast = Instantiate(asteroid, transform.position, Quaternion.identity);
-            ast.GetComponent<Rigidbody2D>().velocity = (-ast.transform.position).normalized * 0.8f;
+            ast.GetComponent<Rigidbody2D>().velocity = (-ast.transform.position).normalized * asteroidSpawnSpeed;
 
             yield return new WaitForSeconds(timeBetweenAsteroids);
-
-            StartCoroutine(SpawnAsteroid(count - 1));
         }
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
     }
 }

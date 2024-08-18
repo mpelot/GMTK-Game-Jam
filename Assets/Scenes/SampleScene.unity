@@ -167,6 +167,7 @@ MonoBehaviour:
   asteroid: {fileID: 2354696616855961990, guid: d40eb5c35ac0def4d91ae73c42dae24f, type: 3}
   core: {fileID: 2059460790}
   trajectoryLine: {fileID: 0}
+  asteroidSpawnSpeed: 0.8
 --- !u!114 &51138261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,9 +181,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 4123538215520549574, guid: 594195e5ffd540f44a6a966a31438cf2, type: 3}
-  timeBetweenWaves: 20
+  timeBetweenWaves: 5
   alertTime: 5
-  timeBetweenAsteroids: 3
+  timeBetweenAsteroids: 0.4
   waveCount: 5
   asteroidSpeed: 0
 --- !u!1001 &121528964

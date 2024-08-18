@@ -5,6 +5,7 @@ using UnityEngine;
 public class Asteroid : MonoBehaviour
 {
     public float coreForce;
+    public float planetForce;
 
     private Rigidbody2D rb;
     private Core core;
@@ -32,7 +33,7 @@ public class Asteroid : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision) {
         if (collision.CompareTag("Gravity")) {
-            rb.AddForce((collision.gameObject.transform.position - transform.position).normalized * 0.3f * (2.7f - (collision.gameObject.transform.position - transform.position).magnitude), ForceMode2D.Force);
+            rb.AddForce((collision.gameObject.transform.position - transform.position).normalized * planetForce * (2.7f - (collision.gameObject.transform.position - transform.position).magnitude), ForceMode2D.Force);
         }
     }
 

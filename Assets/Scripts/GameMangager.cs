@@ -42,13 +42,10 @@ public class GameMangager : MonoBehaviour
         float angle = Random.Range(0, 360);
         Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * 10f;
 
-        //Alert
-
-        yield return new WaitForSeconds(3f);
-
         Spawner sp = Instantiate(spawner, position, Quaternion.identity);
-        sp.Init(timeBetweenAsteroids, waveCount);
+        sp.Init(alertTime, timeBetweenAsteroids, waveCount);
 
+        yield return new WaitForSeconds(alertTime);
         yield return new WaitForSeconds(timeBetweenWaves);
 
         StartCoroutine(SpawnWave());

@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragSpeed: 0.5
+  selected: 0
 --- !u!114 &7819063478075708561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +186,7 @@ MonoBehaviour:
   shotForce: 1
   shrinkRockPrefab: {fileID: 2762680425495791541, guid: 82fe04a098aec474783b8196abaa3b80, type: 3}
   growthLevel: 0
-  splitThreshold: 5
+  splitThreshold: 20
 --- !u!1001 &2749963216396135377
 PrefabInstance:
   m_ObjectHideFlags: 0
