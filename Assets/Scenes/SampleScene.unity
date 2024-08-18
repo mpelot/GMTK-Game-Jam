@@ -164,12 +164,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 4123538215520549574, guid: 594195e5ffd540f44a6a966a31438cf2, type: 3}
-  timeBetweenWaves: 9
-  alertTime: 5
+  asteroidSpeed: 0.75
   timeBetweenAsteroids: 0.7
-  waveCount: 5
-  asteroidSpeed: 0
   spawnDistance: 20
+  rounds:
+  - startOfRoundTime: 0
+    waves:
+    - startOfWaveTime: 5
+      alertTime: 1
+      numberOfStreams: 2
+      asteroidsPerStream: 5
+      asteroidGrowthLevel: 1
+      spawnNewPlanet: 0
+      waveRepeatCount: 2
+    timeBetweenWaves: 0
+    roundRepeatCount: 0
 --- !u!1 &80153462
 GameObject:
   m_ObjectHideFlags: 0

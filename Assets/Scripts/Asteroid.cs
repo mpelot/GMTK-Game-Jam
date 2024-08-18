@@ -10,7 +10,7 @@ public class Asteroid : MonoBehaviour
 
     private Vector3 startingScale;
     public float scaleRate;
-    private float _growthLevel = 1f;
+    public float _growthLevel = 1f;
     public float growthLevel
     {
         get
@@ -35,7 +35,7 @@ public class Asteroid : MonoBehaviour
     private Core core;
     private TrajectoryLine personalTrajectoryLine;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         core = GameObject.Find("Core").GetComponent<Core>();

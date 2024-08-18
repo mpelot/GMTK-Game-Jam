@@ -7,12 +7,10 @@ public class GameMangager : MonoBehaviour
 {
     private Selectable _selectedObject;
     [SerializeField] private Spawner spawner;
-    [SerializeField] private float timeBetweenWaves;
-    [SerializeField] private float alertTime;
-    [SerializeField] private float timeBetweenAsteroids;
-    [SerializeField] private int waveCount;
     [SerializeField] private float asteroidSpeed;
+    [SerializeField] private float timeBetweenAsteroids;
     [SerializeField] private float spawnDistance;
+    public Round[] rounds;
 
     public Selectable selectedObject {
         get {
@@ -30,32 +28,37 @@ public class GameMangager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnWave());
+        StartCoroutine(StartRounds());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator StartRounds()
     {
-        
-    }
+        foreach (Round round in rounds)
+        {
+            for (int roundRepeat = 0; roundRepeat <= round.roundRepeatCount; roundRepeat++)
+            {
+                yield return new WaitForSeconds(round.startOfRoundTime);
+                foreach (Wave wave in round.waves)
+                {
+                    for (int waveRepeat = 0; waveRepeat <= wave.waveRepeatCount; waveRepeat++)
+                    {
 
-    IEnumerator SpawnWave() {
+                        yield return new WaitForSeconds(wave.startOfWaveTime);
 
-        float angle = Random.Range(0, 360);
-        Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * spawnDistance;
+                        for (int stream = 0; stream < wave.numberOfStreams; stream++)
+                        {
+                            
+                            float angle = Random.Range(0, 360);
+                            Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * spawnDistance;
 
-        Spawner sp = Instantiate(spawner, position, Quaternion.identity);
-        sp.Init(alertTime, timeBetweenAsteroids, waveCount);
+                            Spawner sp = Instantiate(spawner, position, Quaternion.identity);
+                            sp.Init(wave.alertTime, timeBetweenAsteroids, wave.asteroidsPerStream, wave.asteroidGrowthLevel, wave.spawnNewPlanet, asteroidSpeed);
+                        }
 
-        float angle2 = Random.Range(0, 360);
-        Vector3 position2 = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle2), Mathf.Sin(Mathf.Deg2Rad * angle2), 0f) * spawnDistance;
-
-        Spawner sp2 = Instantiate(spawner, position2, Quaternion.identity);
-        sp2.Init(alertTime, timeBetweenAsteroids, waveCount);
-
-        yield return new WaitForSeconds(alertTime);
-        yield return new WaitForSeconds(timeBetweenWaves);
-
-        StartCoroutine(SpawnWave());
+                        yield return new WaitForSeconds(round.timeBetweenWaves);
+                    }
+                }
+            }
+        }
     }
 }
