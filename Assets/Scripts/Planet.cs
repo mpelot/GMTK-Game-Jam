@@ -14,7 +14,7 @@ public class Planet : MonoBehaviour, Selectable
     private Vector3 startingScale;
     public float unstableGrowthThreshold;
     public float slowdownPerGrowthLevel;
-    public float growthRate;
+    public float scaleRate;
     public float _growthLevel = 0;
     public float growthLevel
     {
@@ -29,7 +29,7 @@ public class Planet : MonoBehaviour, Selectable
                 value = 0;
             }
             _growthLevel = value;
-            transform.localScale = new Vector3(startingScale.x + (_growthLevel * growthRate), startingScale.y + (_growthLevel * growthRate), 0f);
+            transform.localScale = new Vector3(startingScale.x + (_growthLevel * scaleRate), startingScale.y + (_growthLevel * scaleRate), 0f);
             movable.dragSpeedMultiplier = 1f - (_growthLevel * slowdownPerGrowthLevel);
             if (_growthLevel >= unstableGrowthThreshold)
             {
@@ -54,13 +54,15 @@ public class Planet : MonoBehaviour, Selectable
     {
         if (collision.gameObject.CompareTag("Asteroid"))
         {
+            Asteroid asteroid = collision.GetComponent<Asteroid>();
             Destroy(collision.gameObject);
-            growthLevel++;
+            growthLevel += asteroid.growthLevel;
         }
         else if (collision.gameObject.CompareTag("ShrinkRock"))
         {
+            ShrinkRock shrinkRock = collision.GetComponent<ShrinkRock>();
             Destroy(collision.gameObject);
-            growthLevel--;
+            growthLevel -= shrinkRock.shinkAmount;
         }
     }
 

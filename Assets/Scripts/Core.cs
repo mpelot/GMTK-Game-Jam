@@ -8,7 +8,7 @@ public class Core : MonoBehaviour, Selectable
     private GameMangager gm;
     private Vector3 startingScale;
     public float growthFromPlanet;
-    public float growthRate;
+    public float scaleRate;
 
     // Every x seconds, a growth event occurs and the growth level increases
     public float secondsBetweenGrowthEvent;
@@ -31,7 +31,7 @@ public class Core : MonoBehaviour, Selectable
                 value = 0;
             }
             _growthLevel = value;
-            transform.localScale = new Vector3(startingScale.x + (_growthLevel * growthRate), startingScale.y + (_growthLevel * growthRate), 0f);
+            transform.localScale = new Vector3(startingScale.x + (_growthLevel * scaleRate), startingScale.y + (_growthLevel * scaleRate), 0f);
         }
     }
     void Start() {
@@ -68,8 +68,9 @@ public class Core : MonoBehaviour, Selectable
     {
         if (collision.gameObject.CompareTag("Asteroid"))
         {
+            Asteroid asteroid = collision.GetComponent<Asteroid>();
             Destroy(collision.gameObject);
-            growthLevel++;
+            growthLevel += asteroid.growthLevel;
         }
         else if (collision.gameObject.CompareTag("Planet") || collision.gameObject.CompareTag("Harvester"))
         {
@@ -78,8 +79,9 @@ public class Core : MonoBehaviour, Selectable
         }
         else if (collision.gameObject.CompareTag("ShrinkRock"))
         {
+            ShrinkRock shrinkRock = collision.GetComponent<ShrinkRock>();
             Destroy(collision.gameObject);
-            growthLevel--;
+            growthLevel -= shrinkRock.shinkAmount;
         }
     }
 

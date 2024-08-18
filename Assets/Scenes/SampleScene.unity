@@ -1305,7 +1305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   growthFromPlanet: 3
-  growthRate: 0.1
+  scaleRate: 0.1
   secondsBetweenGrowthEvent: 5
   growthPerGrowthEvent: 0.5
   growthEventDuration: 0.3

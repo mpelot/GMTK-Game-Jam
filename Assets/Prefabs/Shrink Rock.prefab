@@ -166,3 +166,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coreForce: 0.75
   planetForce: 0.2
+  shinkAmount: 0.25

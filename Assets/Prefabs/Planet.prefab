@@ -256,7 +256,7 @@ MonoBehaviour:
   ring: {fileID: 7191544145778345292}
   unstableGrowthThreshold: 5
   slowdownPerGrowthLevel: 0.1
-  growthRate: 0.1
+  scaleRate: 0.1
   _growthLevel: 0
 --- !u!114 &5366837471315516740
 MonoBehaviour:

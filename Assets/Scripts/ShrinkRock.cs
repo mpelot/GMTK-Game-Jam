@@ -6,6 +6,7 @@ public class ShrinkRock : MonoBehaviour
 {
     public float coreForce;
     public float planetForce;
+    public float shinkAmount;
 
     private Rigidbody2D rb;
     private Core core;

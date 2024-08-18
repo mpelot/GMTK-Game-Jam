@@ -192,7 +192,7 @@ MonoBehaviour:
   splitThreshold: 20
   unstableGrowthLevel: 18
   slowdownPerGrowthLevel: 0.05
-  growthRate: 0.02
+  scaleRate: 0.02
 --- !u!1001 &2749963216396135377
 PrefabInstance:
   m_ObjectHideFlags: 0

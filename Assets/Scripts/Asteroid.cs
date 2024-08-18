@@ -7,6 +7,27 @@ public class Asteroid : MonoBehaviour
     public float coreForce;
     public float planetForce;
     public float maxDistance;
+
+    private Vector3 startingScale;
+    public float scaleRate;
+    private float _growthLevel = 1f;
+    public float growthLevel
+    {
+        get
+        {
+            return _growthLevel;
+        }
+        set
+        {
+            if (value < 0)
+            {
+                value = 0;
+            }
+            _growthLevel = value;
+            transform.localScale = new Vector3(startingScale.x + (_growthLevel * scaleRate), startingScale.y + (_growthLevel * scaleRate), 0f);
+        }
+    }
+
     public TrajectoryLine parentTrajectoryLine;
     public Spawner spawner;
 
@@ -18,6 +39,7 @@ public class Asteroid : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         core = GameObject.Find("Core").GetComponent<Core>();
+        startingScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -61,10 +83,26 @@ public class Asteroid : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("ShrinkRock"))
+        if (collision.gameObject.CompareTag("Asteroid"))
+        {
+            if (gameObject.GetInstanceID() < collision.gameObject.GetInstanceID()) // Compare instanceIDs so that only one of the two objects get's destroyed.
+            {
+                Vector2 otherVelocity = collision.GetComponent<Rigidbody2D>().velocity;
+                Destroy(collision.gameObject);
+                growthLevel++;
+
+                rb.velocity = (rb.velocity + otherVelocity) / 2;
+            }
+        }
+        else if (collision.gameObject.CompareTag("ShrinkRock"))
         {
             Destroy(collision.gameObject);
-            Destroy(gameObject);
+
+            growthLevel--;
+            if (growthLevel <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

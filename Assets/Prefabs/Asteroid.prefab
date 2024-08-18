@@ -131,6 +131,9 @@ MonoBehaviour:
   coreForce: 0.75
   planetForce: 0.2
   maxDistance: 22
+  scaleRate: 0.05
+  parentTrajectoryLine: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!58 &-5763060824989422429
 CircleCollider2D:
   m_ObjectHideFlags: 0

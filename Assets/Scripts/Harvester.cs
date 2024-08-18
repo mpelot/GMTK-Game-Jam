@@ -22,7 +22,7 @@ public class Harvester : MonoBehaviour, Selectable
     private Color32 startingColor;
     public float unstableGrowthLevel;
     public float slowdownPerGrowthLevel;
-    public float growthRate;
+    public float scaleRate;
     private float _growthLevel = 0;
     public float growthLevel
     {
@@ -44,7 +44,7 @@ public class Harvester : MonoBehaviour, Selectable
                 spawnHarvester = true;
             }
             _growthLevel = value;
-            transform.localScale = new Vector3(startingScale.x + (_growthLevel * growthRate), startingScale.y + (_growthLevel * growthRate), 0f);
+            transform.localScale = new Vector3(startingScale.x + (_growthLevel * scaleRate), startingScale.y + (_growthLevel * scaleRate), 0f);
             spriteRenderer.color = new Color32(startingColor.r, (byte)(startingColor.g + (_growthLevel * 10)), startingColor.b, startingColor.a);
             movable.dragSpeedMultiplier = 1f - (_growthLevel * slowdownPerGrowthLevel);
 
@@ -157,13 +157,15 @@ public class Harvester : MonoBehaviour, Selectable
         }
         if (collision.gameObject.CompareTag("Asteroid"))
         {
+            Asteroid asteroid = collision.GetComponent<Asteroid>();
             Destroy(collision.gameObject);
-            growthLevel++;
+            growthLevel += asteroid.growthLevel;
         }
         if (collision.gameObject.CompareTag("ShrinkRock"))
         {
+            ShrinkRock shrinkRock = collision.GetComponent<ShrinkRock>();
             Destroy(collision.gameObject);
-            growthLevel--;
+            growthLevel -= shrinkRock.shinkAmount;
         }
     }
 
