@@ -29,7 +29,85 @@ public class GameMangager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(IntroSequence());
+    }
+
+    IEnumerator IntroSequence()
+    {
+        Harvester harvester = FindFirstObjectByType<Harvester>();
+        harvester.GetComponent<Movable>().enabled = false;
+        Camera.main.GetComponent<CameraMovement>().enabled = false;
+
+        yield return new WaitForSeconds(2f);
+        SpawnAsteroidStream(270f, 10f, 0f, 3, 1.0f);
+
+        yield return new WaitForSeconds(5f);
+
+        SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+
+        yield return new WaitForSeconds(20f);
+
+        
+        while (harvester.growthLevel > 0)
+        {
+            yield return null;
+        }
+        harvester.ClearFiringPath();
+
+        SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+        Planet planet = SpawnPlanet(135f, 15f);
+
+        yield return new WaitForSeconds(5f);
+        Camera.main.GetComponent<CameraMovement>().enabled = true;
+
+        while (planet.growthLevel == planet.unstableGrowthThreshold)
+        {
+            yield return null;
+        }
+
+        while (harvester.growthLevel > 0)
+        {
+            yield return null;
+        }
+
+        harvester.GetComponent<Movable>().enabled = true;
+
+        yield return new WaitForSeconds(2.5f);
+
+        while (harvester.growthLevel == 0)
+        {
+            Spawner sp = SpawnAsteroidStream(180f, spawnDistance, 0f, 5, 1.0f);
+
+            while (sp != null)
+            {
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(1.0f);
+        }
+
         StartCoroutine(StartRounds());
+    }
+
+    // angle of 0 is to the right, 90 is above
+    private Spawner SpawnAsteroidStream(float angle, float spawnDistance, float alertTime, int count, float asteroidGrowthLevel)
+    {
+        Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * spawnDistance;
+
+        Spawner sp = Instantiate(spawner, position, Quaternion.identity);
+        sp.Init(alertTime, timeBetweenAsteroids, count, asteroidGrowthLevel, asteroidSpeed);
+
+        return sp;
+    }
+
+    private Planet SpawnPlanet(float angle, float spawnDistance)
+    {
+        Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * spawnDistance;
+
+        Planet planet = Instantiate(planetPrefab, position, Quaternion.identity);
+        planet.growthLevel = planet.unstableGrowthThreshold;
+
+        return planet;
     }
 
     IEnumerator StartRounds()

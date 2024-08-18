@@ -23,7 +23,7 @@ public class Harvester : MonoBehaviour, Selectable
     public float unstableGrowthLevel;
     public float slowdownPerGrowthLevel;
     public float scaleRate;
-    private float _growthLevel = 0;
+    public float _growthLevel = 0;
     public float growthLevel
     {
         get
@@ -90,11 +90,7 @@ public class Harvester : MonoBehaviour, Selectable
             Vector2 shotVelocity = (transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)) * shotForce;
             if (shotVelocity.magnitude < minimumShotVelocity)
             {
-                trajectoryLine.Hide();
-                if (Input.GetMouseButtonUp(1))
-                {
-                    StopAiming();
-                }
+                ClearFiringPath();
             }
             else
             {
@@ -148,6 +144,17 @@ public class Harvester : MonoBehaviour, Selectable
         if (!isFiringPathSet)
         {
             trajectoryLine.Hide();
+        }
+    }
+
+    public void ClearFiringPath()
+    {
+        isFiringPathSet = false;
+
+        trajectoryLine.Hide();
+        if (Input.GetMouseButtonUp(1))
+        {
+            StopAiming();
         }
     }
 
