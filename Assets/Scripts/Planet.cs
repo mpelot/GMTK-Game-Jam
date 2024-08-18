@@ -10,6 +10,7 @@ public class Planet : MonoBehaviour, Selectable
     private bool selected = false;
     private GameMangager gm;
     private Movable movable;
+    private Animator animator;
 
     private Vector3 startingScale;
     public float unstableGrowthThreshold;
@@ -46,6 +47,7 @@ public class Planet : MonoBehaviour, Selectable
         rb = GetComponent<Rigidbody2D>();
         gm = FindAnyObjectByType<GameMangager>();
         movable = GetComponent<Movable>();
+        animator = GetComponent<Animator>();
         startingScale = transform.localScale;
     }
 
@@ -74,12 +76,14 @@ public class Planet : MonoBehaviour, Selectable
         selected = true;
         movable.selected = true;
         ring.SetActive(true);
+        animator.SetBool("Selected", true);
     }
 
     public void Deselect() {
         selected = false;
         movable.selected = false;
         ring.SetActive(false);
+        animator.SetBool("Selected", false);
     }
 
     private void OnDestroy()
