@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Planet : MonoBehaviour, Selectable
 {
@@ -10,11 +11,55 @@ public class Planet : MonoBehaviour, Selectable
     private GameMangager gm;
     private Movable moveable;
 
+    private Vector3 startingScale;
+    public int unstableGrowthLevel;
+    public float growthRate;
+    public int _growthLevel = 0;
+    public int growthLevel
+    {
+        get
+        {
+            return _growthLevel;
+        }
+        set
+        {
+            if (value < 0)
+            {
+                value = 0;
+            }
+            _growthLevel = value;
+            transform.localScale = new Vector3(startingScale.x + (_growthLevel * growthRate), startingScale.y + (_growthLevel * growthRate), 0f);
+            if (_growthLevel >= unstableGrowthLevel)
+            {
+                moveable.isBeingPulledToCore = true;
+            }
+            else
+            {
+                moveable.isBeingPulledToCore = false;
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         gm = FindAnyObjectByType<GameMangager>();
         moveable = GetComponent<Movable>();
+        startingScale = transform.localScale;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Asteroid"))
+        {
+            Destroy(collision.gameObject);
+            growthLevel++;
+        }
+        else if (collision.gameObject.CompareTag("ShrinkRock"))
+        {
+            Destroy(collision.gameObject);
+            growthLevel--;
+        }
     }
 
     private void OnMouseDown() {

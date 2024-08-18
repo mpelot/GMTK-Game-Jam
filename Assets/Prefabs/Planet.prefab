@@ -100,7 +100,6 @@ GameObject:
   - component: {fileID: 49593013507969878}
   - component: {fileID: 1370430673509114698}
   - component: {fileID: 5366837471315516740}
-  - component: {fileID: 2408713312212914371}
   m_Layer: 6
   m_Name: Planet
   m_TagString: Planet
@@ -255,6 +254,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ring: {fileID: 7191544145778345292}
+  unstableGrowthLevel: 5
+  growthRate: 0.1
+  _growthLevel: 0
 --- !u!114 &5366837471315516740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,20 +270,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragSpeed: 2
---- !u!114 &2408713312212914371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3810498752290098040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff31cc2d802f7374cb7c6d952c693f7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  growthRate: 0.1
-  _growthLevel: 0
+  selected: 0
+  isBeingPulledToCore: 0
+  coreForce: 1
 --- !u!1 &7191544145778345292
 GameObject:
   m_ObjectHideFlags: 0

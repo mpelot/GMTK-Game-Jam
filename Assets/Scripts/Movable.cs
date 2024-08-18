@@ -11,10 +11,14 @@ public class Movable : MonoBehaviour
     private Vector3 targetPos;
     public bool selected;
     private bool mouseDown = false;
+    public bool isBeingPulledToCore;
+    private Core core;
+    public float coreForce;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         cam = Camera.main;
+        core = GameObject.FindFirstObjectByType<Core>();
     }
 
     private void Update() {
@@ -34,11 +38,12 @@ public class Movable : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        Vector2 forceVector = Vector2.zero;
         if (mouseDown) {
             if ((targetPos - transform.position).magnitude < 0.01f) {
                 rb.drag = 10;
             } else {
-                rb.AddForce((targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0f, 1.5f) * dragSpeed, ForceMode2D.Force);
+                forceVector += (Vector2) (targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0f, 1.5f) * dragSpeed;
             }
         }
 
@@ -48,9 +53,20 @@ public class Movable : MonoBehaviour
                 destinationSet = false;
                 rb.drag = 10;
             } else {
-                rb.AddForce((targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0f, 1.5f) * dragSpeed, ForceMode2D.Force);
+                forceVector += (Vector2) (targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0f, 1.5f) * dragSpeed;
             }
         }
+
+        if (isBeingPulledToCore)
+        {
+            Vector2 directionToCore = (core.transform.position - transform.position).normalized;
+            Vector2 projection = (Vector2.Dot(forceVector, directionToCore) / Vector2.Dot(directionToCore, directionToCore)) * directionToCore;
+            Vector2 perpendicular = forceVector - projection;
+
+            forceVector = perpendicular + (directionToCore * coreForce);
+        }
+
+        rb.AddForce(forceVector, ForceMode2D.Force);
     }
 
     private void OnMouseDown() {
