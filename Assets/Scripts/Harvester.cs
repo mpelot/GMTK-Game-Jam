@@ -12,15 +12,46 @@ public class Harvester : MonoBehaviour, Selectable
     public float maximumShotVelocity;
     public float shotForce;
     public GameObject shrinkRockPrefab;
-    public int growthLevel = 0;
     public int splitThreshold;
     private List<Collider2D> ignoredColliders;
+    private SpriteRenderer spriteRenderer;
+    private Vector3 startingScale;
+    private Color32 startingColor;
+    public float growthRate;
+    private int _growthLevel = 0;
+    public int growthLevel
+    {
+        get
+        {
+            return _growthLevel;
+        }
+        set
+        {
+            if (value < 0)
+            {
+                value = 0;
+                Destroy(gameObject);
+            }
+            else if (value > splitThreshold)
+            {
+                value = 0;
+                GameObject spawnedHarvester = Instantiate(gameObject, transform.position, Quaternion.identity);
+                spawnedHarvester.GetComponent<Rigidbody2D>().velocity = new Vector2(0.1f, 0.1f);
+            }
+            _growthLevel = value;
+            transform.localScale = new Vector3(startingScale.x + (_growthLevel * growthRate), startingScale.y + (_growthLevel * growthRate), 0f);
+            spriteRenderer.color = new Color32(startingColor.r, (byte)(startingColor.g + (_growthLevel * 10)), startingColor.b, startingColor.a);
+        }
+    }
 
     void Start()
     {
         gm = FindAnyObjectByType<GameMangager>();
         trajectoryLine.Hide();
         ignoredColliders = new List<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        startingScale = transform.localScale;
+        startingColor = spriteRenderer.color;
     }
 
     void Update()
@@ -95,24 +126,11 @@ public class Harvester : MonoBehaviour, Selectable
         {
             Destroy(collision.gameObject);
             growthLevel++;
-
-            if (growthLevel >= splitThreshold)
-            {
-                growthLevel = 0;
-                GameObject spawnedHarvester = Instantiate(gameObject, transform.position, Quaternion.identity);
-            }
         }
         if (collision.gameObject.CompareTag("ShrinkRock"))
         {
             Destroy(collision.gameObject);
-            if (growthLevel > 0)
-            {
-                growthLevel--;
-            }
-            else
-            {
-                Destroy(this.gameObject);
-            }
+            growthLevel--;
         }
     }
 
