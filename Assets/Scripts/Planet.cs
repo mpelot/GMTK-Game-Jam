@@ -70,6 +70,9 @@ public class Planet : MonoBehaviour, Selectable
     private void OnMouseDown() {
         if (!selected)
             gm.selectedObject = this;
+        else
+            gm.selectedObject = null;
+
     }
 
     public void Select() {

@@ -181,7 +181,7 @@ public class Harvester : MonoBehaviour, Selectable
 
     private void OnMouseDown() {
         if (selected)
-            Deselect();
+            gm.selectedObject = null;
         else
             gm.selectedObject = this;
     }
