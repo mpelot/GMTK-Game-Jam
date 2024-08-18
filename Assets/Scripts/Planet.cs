@@ -72,7 +72,6 @@ public class Planet : MonoBehaviour, Selectable
             gm.selectedObject = this;
         else
             gm.selectedObject = null;
-
     }
 
     public void Select() {
