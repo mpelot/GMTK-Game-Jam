@@ -6,10 +6,10 @@ using UnityEngine;
 public class Wave
 {
     public float startOfWaveTime;
+    public bool spawnNewPlanet = false;
     public float alertTime;
     public int numberOfStreams = 1;
     public int asteroidsPerStream = 5;
     public float asteroidGrowthLevel = 1.0f;
-    public bool spawnNewPlanet = false;
     public int waveRepeatCount;
 }

@@ -34,7 +34,8 @@ public class Asteroid : MonoBehaviour
     private Rigidbody2D rb;
     private Core core;
     private TrajectoryLine personalTrajectoryLine;
-    // Start is called before the first frame update
+
+    
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -108,6 +109,9 @@ public class Asteroid : MonoBehaviour
 
     private void OnDestroy()
     {
-        spawner.RemoveAsteroidFromTrajectoryLine();
+        if (spawner != null)
+        {
+            spawner.RemoveAsteroidFromTrajectoryLine();
+        }
     }
 }

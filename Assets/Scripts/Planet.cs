@@ -42,8 +42,7 @@ public class Planet : MonoBehaviour, Selectable
         }
     }
 
-    // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         rb = GetComponent<Rigidbody2D>();
         gm = FindAnyObjectByType<GameMangager>();
         movable = GetComponent<Movable>();

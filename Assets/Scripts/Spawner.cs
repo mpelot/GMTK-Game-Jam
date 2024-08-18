@@ -10,15 +10,15 @@ public class Spawner : MonoBehaviour
     private float timeBetweenAsteroids;
     private int asteroidsOnTrajectoryLine;
 
-    public void Init(float alertTime, float timeBetweenAsteroids, int count, float asteroidGrowthLevel, bool spawnNewPlanet, float asteroidSpawnSpeed) {
+    public void Init(float alertTime, float timeBetweenAsteroids, int count, float asteroidGrowthLevel, float asteroidSpawnSpeed) {
         this.timeBetweenAsteroids = timeBetweenAsteroids;
         trajectoryLine.startingVelocity = (-transform.position).normalized * asteroidSpawnSpeed;
         trajectoryLine.Show();
         asteroidsOnTrajectoryLine = count;
-        StartCoroutine(SpawnWave(alertTime, timeBetweenAsteroids, count, asteroidGrowthLevel, spawnNewPlanet, asteroidSpawnSpeed));
+        StartCoroutine(SpawnWave(alertTime, timeBetweenAsteroids, count, asteroidGrowthLevel, asteroidSpawnSpeed));
     }
 
-    IEnumerator SpawnWave(float alertTime, float timeBetweenAsteroids, int count, float asteroidGrowthLevel, bool spawnNewPlanet, float asteroidSpawnSpeed)
+    IEnumerator SpawnWave(float alertTime, float timeBetweenAsteroids, int count, float asteroidGrowthLevel, float asteroidSpawnSpeed)
     {
         yield return new WaitForSeconds(alertTime);
         for (int i = 0; i < count; i++)
@@ -38,10 +38,7 @@ public class Spawner : MonoBehaviour
         asteroidsOnTrajectoryLine--;
         if (asteroidsOnTrajectoryLine <= 0)
         {
-            if (gameObject != null)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
     }
 }

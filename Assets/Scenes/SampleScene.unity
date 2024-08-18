@@ -164,18 +164,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 4123538215520549574, guid: 594195e5ffd540f44a6a966a31438cf2, type: 3}
+  planetPrefab: {fileID: 1370430673509114698, guid: 676db081c7e3a7641ab7ffa1d481849b, type: 3}
   asteroidSpeed: 0.75
   timeBetweenAsteroids: 0.7
   spawnDistance: 20
   rounds:
   - startOfRoundTime: 0
     waves:
-    - startOfWaveTime: 5
+    - startOfWaveTime: 0
+      spawnNewPlanet: 1
       alertTime: 1
       numberOfStreams: 2
       asteroidsPerStream: 5
       asteroidGrowthLevel: 1
+      waveRepeatCount: 0
+    - startOfWaveTime: 5
       spawnNewPlanet: 0
+      alertTime: 1
+      numberOfStreams: 2
+      asteroidsPerStream: 5
+      asteroidGrowthLevel: 1
       waveRepeatCount: 2
     timeBetweenWaves: 0
     roundRepeatCount: 0
