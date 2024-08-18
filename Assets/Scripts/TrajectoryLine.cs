@@ -24,7 +24,7 @@ public class TrajectoryLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2[] points = CalculateTrajectoryPoints(1000, 1, circleCastRadius);
+        Vector2[] points = CalculateTrajectoryPoints(1000, 10, circleCastRadius);
 
         Vector3[] convertedPoints = new Vector3[points.Length];
         for (int i = 0; i < points.Length; i++)

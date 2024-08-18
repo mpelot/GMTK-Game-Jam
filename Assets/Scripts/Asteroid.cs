@@ -6,6 +6,7 @@ public class Asteroid : MonoBehaviour
 {
     public float coreForce;
     public float planetForce;
+    public float maxDistance;
 
     private Rigidbody2D rb;
     private Core core;
@@ -19,7 +20,8 @@ public class Asteroid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Mathf.Abs(transform.position.x) > 10f || Mathf.Abs(transform.position.y) > 10f) {
+        if (transform.position.magnitude > maxDistance)
+        {
             Destroy(gameObject);
         }
     }

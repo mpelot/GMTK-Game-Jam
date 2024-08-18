@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
     public TrajectoryLine trajectoryLine;
     private float timeBetweenAsteroids;
     public float asteroidSpawnSpeed;
+    public float lingerTime;
 
     public void Init(float alertTime, float timeBetweenAsteroids, int count) {
         this.timeBetweenAsteroids = timeBetweenAsteroids;
@@ -27,7 +28,7 @@ public class Spawner : MonoBehaviour
 
             yield return new WaitForSeconds(timeBetweenAsteroids);
         }
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(lingerTime);
         Destroy(gameObject);
     }
 }

@@ -165,4 +165,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coreForce: 0.75
-  planetForce: 0.85
+  planetForce: 0.2

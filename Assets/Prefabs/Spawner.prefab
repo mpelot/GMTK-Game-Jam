@@ -48,7 +48,8 @@ MonoBehaviour:
   asteroid: {fileID: 2354696616855961990, guid: d40eb5c35ac0def4d91ae73c42dae24f, type: 3}
   core: {fileID: 0}
   trajectoryLine: {fileID: 4348236201198097972}
-  asteroidSpawnSpeed: 2.25
+  asteroidSpawnSpeed: 0.75
+  lingerTime: 25
 --- !u!1001 &7686015188082505951
 PrefabInstance:
   m_ObjectHideFlags: 0

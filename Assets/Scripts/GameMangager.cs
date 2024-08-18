@@ -12,6 +12,7 @@ public class GameMangager : MonoBehaviour
     [SerializeField] private float timeBetweenAsteroids;
     [SerializeField] private int waveCount;
     [SerializeField] private float asteroidSpeed;
+    [SerializeField] private float spawnDistance;
 
     public Selectable selectedObject {
         get {
@@ -40,10 +41,16 @@ public class GameMangager : MonoBehaviour
     IEnumerator SpawnWave() {
 
         float angle = Random.Range(0, 360);
-        Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * 10f;
+        Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * spawnDistance;
 
         Spawner sp = Instantiate(spawner, position, Quaternion.identity);
         sp.Init(alertTime, timeBetweenAsteroids, waveCount);
+
+        float angle2 = Random.Range(0, 360);
+        Vector3 position2 = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle2), Mathf.Sin(Mathf.Deg2Rad * angle2), 0f) * spawnDistance;
+
+        Spawner sp2 = Instantiate(spawner, position2, Quaternion.identity);
+        sp2.Init(alertTime, timeBetweenAsteroids, waveCount);
 
         yield return new WaitForSeconds(alertTime);
         yield return new WaitForSeconds(timeBetweenWaves);
