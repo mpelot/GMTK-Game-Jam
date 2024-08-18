@@ -81,7 +81,7 @@ public class Planet : MonoBehaviour, Selectable
 
     private void OnDestroy()
     {
-        if (gm.selectedObject == this)
+        if (gm.selectedObject == (Selectable) this)
         {
             gm.selectedObject = null;
             Deselect();

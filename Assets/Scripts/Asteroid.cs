@@ -7,9 +7,12 @@ public class Asteroid : MonoBehaviour
     public float coreForce;
     public float planetForce;
     public float maxDistance;
+    public TrajectoryLine parentTrajectoryLine;
+    public Spawner spawner;
 
     private Rigidbody2D rb;
     private Core core;
+    private TrajectoryLine personalTrajectoryLine;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,23 @@ public class Asteroid : MonoBehaviour
         if (transform.position.magnitude > maxDistance)
         {
             Destroy(gameObject);
+        }
+        if (personalTrajectoryLine == null && parentTrajectoryLine != null)
+        {
+            Vector2 closestPoint = parentTrajectoryLine.FindClosestTrajectoryPoint(transform.position);
+            float distanceToClosestPoint = (closestPoint - (Vector2) transform.position).magnitude;
+            if (distanceToClosestPoint > 0.4f)
+            {
+                personalTrajectoryLine = Instantiate(parentTrajectoryLine, this.transform);
+                Color baseColor = personalTrajectoryLine.GetComponent<LineRenderer>().material.GetColor("_Color");
+                baseColor.a = 0.05f;
+                personalTrajectoryLine.GetComponent<LineRenderer>().material.SetColor("_Color", baseColor);
+                spawner.RemoveAsteroidFromTrajectoryLine();
+            }
+        }
+        if (personalTrajectoryLine != null)
+        {
+            personalTrajectoryLine.startingVelocity = rb.velocity;
         }
     }
 

@@ -12,6 +12,10 @@ public class TrajectoryLine : MonoBehaviour
     public Vector2 startingVelocity;
     public float circleCastRadius;
     private Collider2D[] startingColliders;
+    private Vector2[] trajectoryPoints;
+
+    // Optimizes the FindClosestTrajectoryPoint function by caching the index of the most recent result
+    private int mostRecentClosestPointIndex = 0;
 
     private Core core;
     // Start is called before the first frame update
@@ -24,12 +28,12 @@ public class TrajectoryLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2[] points = CalculateTrajectoryPoints(1000, 10, circleCastRadius);
+        trajectoryPoints = CalculateTrajectoryPoints(1000, 10, circleCastRadius);
 
-        Vector3[] convertedPoints = new Vector3[points.Length];
-        for (int i = 0; i < points.Length; i++)
+        Vector3[] convertedPoints = new Vector3[trajectoryPoints.Length];
+        for (int i = 0; i < trajectoryPoints.Length; i++)
         {
-            convertedPoints[i] = points[i];
+            convertedPoints[i] = trajectoryPoints[i];
         }
         lineRenderer.positionCount = convertedPoints.Length;
         lineRenderer.SetPositions(convertedPoints);
@@ -113,5 +117,62 @@ public class TrajectoryLine : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public Vector2 FindClosestTrajectoryPoint(Vector2 position)
+    {
+        bool isSearchingUp;
+        int i = mostRecentClosestPointIndex;
+
+        if (mostRecentClosestPointIndex <= 0)
+        {
+            isSearchingUp = true;
+            i = 0;
+        }
+        else if (mostRecentClosestPointIndex >= trajectoryPoints.Length - 1)
+        {
+            isSearchingUp = false;
+            i = trajectoryPoints.Length - 1;
+        }
+        else
+        {
+            float distanceDown = (trajectoryPoints[i - 1] - position).magnitude;
+            float distanceUp = (trajectoryPoints[i + 1] - position).magnitude;
+            isSearchingUp = distanceUp < distanceDown;
+        }
+
+        float smallestDistance = (trajectoryPoints[i] - position).magnitude;
+
+        if (isSearchingUp)
+        {
+            while (i < trajectoryPoints.Length - 1)
+            {
+                float distance = (trajectoryPoints[i + 1] - position).magnitude;
+                if (distance > smallestDistance)
+                {
+                    mostRecentClosestPointIndex = i;
+                    return trajectoryPoints[i];
+                }
+                smallestDistance = distance;
+                i++;
+            }
+        }
+        else
+        {
+            while (i > 1)
+            {
+                float distance = (trajectoryPoints[i - 1] - position).magnitude;
+                if (distance > smallestDistance)
+                {
+                    mostRecentClosestPointIndex = i;
+                    return trajectoryPoints[i];
+                }
+                smallestDistance = distance;
+                i--;
+            }
+        }
+
+        mostRecentClosestPointIndex = i;
+        return trajectoryPoints[i];
     }
 }
