@@ -1203,7 +1203,6 @@ GameObject:
   - component: {fileID: 2059460788}
   - component: {fileID: 2059460790}
   - component: {fileID: 2059460791}
-  - component: {fileID: 2059460792}
   m_Layer: 0
   m_Name: Core
   m_TagString: Core
@@ -1293,6 +1292,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a733605abd42e654683eb53e30e7642c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  growthFromPlanet: 3
+  growthRate: 0.1
+  _growthLevel: 0
 --- !u!58 &2059460791
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1329,20 +1331,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &2059460792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059460787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff31cc2d802f7374cb7c6d952c693f7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  growthRate: 0.1
-  _growthLevel: 0
 --- !u!1001 &3110675493782395698
 PrefabInstance:
   m_ObjectHideFlags: 0

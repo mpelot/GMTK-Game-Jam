@@ -12,11 +12,13 @@ public class Harvester : MonoBehaviour, Selectable
     public float maximumShotVelocity;
     public float shotForce;
     public GameObject shrinkRockPrefab;
+    private Movable movable;
     public int splitThreshold;
     private List<Collider2D> ignoredColliders;
     private SpriteRenderer spriteRenderer;
     private Vector3 startingScale;
     private Color32 startingColor;
+    public int unstableGrowthLevel;
     public float growthRate;
     private int _growthLevel = 0;
     public int growthLevel
@@ -32,7 +34,7 @@ public class Harvester : MonoBehaviour, Selectable
                 value = 0;
                 Destroy(gameObject);
             }
-            else if (value > splitThreshold)
+            else if (value >= splitThreshold)
             {
                 value = 0;
                 GameObject spawnedHarvester = Instantiate(gameObject, transform.position, Quaternion.identity);
@@ -41,6 +43,15 @@ public class Harvester : MonoBehaviour, Selectable
             _growthLevel = value;
             transform.localScale = new Vector3(startingScale.x + (_growthLevel * growthRate), startingScale.y + (_growthLevel * growthRate), 0f);
             spriteRenderer.color = new Color32(startingColor.r, (byte)(startingColor.g + (_growthLevel * 10)), startingColor.b, startingColor.a);
+
+            if (_growthLevel >= unstableGrowthLevel)
+            {
+                movable.isBeingPulledToCore = true;
+            }
+            else
+            {
+                movable.isBeingPulledToCore = false;
+            }
         }
     }
 
@@ -52,6 +63,7 @@ public class Harvester : MonoBehaviour, Selectable
         spriteRenderer = GetComponent<SpriteRenderer>();
         startingScale = transform.localScale;
         startingColor = spriteRenderer.color;
+        movable = GetComponent<Movable>();
     }
 
     void Update()

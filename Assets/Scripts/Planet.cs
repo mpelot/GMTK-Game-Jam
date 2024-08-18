@@ -12,7 +12,7 @@ public class Planet : MonoBehaviour, Selectable
     private Movable moveable;
 
     private Vector3 startingScale;
-    public int unstableGrowthLevel;
+    public int unstableGrowthThreshold;
     public float growthRate;
     public int _growthLevel = 0;
     public int growthLevel
@@ -29,7 +29,7 @@ public class Planet : MonoBehaviour, Selectable
             }
             _growthLevel = value;
             transform.localScale = new Vector3(startingScale.x + (_growthLevel * growthRate), startingScale.y + (_growthLevel * growthRate), 0f);
-            if (_growthLevel >= unstableGrowthLevel)
+            if (_growthLevel >= unstableGrowthThreshold)
             {
                 moveable.isBeingPulledToCore = true;
             }
@@ -77,5 +77,14 @@ public class Planet : MonoBehaviour, Selectable
         selected = false;
         moveable.selected = false;
         ring.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        if (gm.selectedObject == this)
+        {
+            gm.selectedObject = null;
+            Deselect();
+        }
     }
 }
