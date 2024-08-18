@@ -7,10 +7,18 @@ public class Core : MonoBehaviour, Selectable
     private bool selected;
     private GameMangager gm;
     private Vector3 startingScale;
-    public int growthFromPlanet;
+    public float growthFromPlanet;
     public float growthRate;
-    public int _growthLevel = 0;
-    public int growthLevel
+
+    // Every x seconds, a growth event occurs and the growth level increases
+    public float secondsBetweenGrowthEvent;
+    public float growthPerGrowthEvent;
+    public float growthEventDuration;
+    private bool isGrowthEventOccuring;
+    private float growthEventTimer;
+    
+    public float _growthLevel = 0;
+    public float growthLevel
     {
         get
         {
@@ -29,6 +37,31 @@ public class Core : MonoBehaviour, Selectable
     void Start() {
         gm = FindAnyObjectByType<GameMangager>();
         startingScale = transform.localScale;
+        growthEventTimer = secondsBetweenGrowthEvent;
+        isGrowthEventOccuring = false;
+    }
+
+    void Update()
+    {
+        growthEventTimer -= Time.deltaTime;
+        if (!isGrowthEventOccuring)
+        {
+            if (growthEventTimer <= 0)
+            {
+                isGrowthEventOccuring = true;
+                growthEventTimer = growthEventDuration;
+            }
+        }
+        else
+        {
+            growthLevel += growthPerGrowthEvent / growthEventDuration * Time.deltaTime;
+            if (growthEventTimer <= 0)
+            {
+                isGrowthEventOccuring = false;
+                growthEventTimer = secondsBetweenGrowthEvent;
+            }
+        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -22,8 +22,8 @@ public class Harvester : MonoBehaviour, Selectable
     private Color32 startingColor;
     public int unstableGrowthLevel;
     public float growthRate;
-    private int _growthLevel = 0;
-    public int growthLevel
+    private float _growthLevel = 0;
+    public float growthLevel
     {
         get
         {

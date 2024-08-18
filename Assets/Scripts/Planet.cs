@@ -12,10 +12,10 @@ public class Planet : MonoBehaviour, Selectable
     private Movable moveable;
 
     private Vector3 startingScale;
-    public int unstableGrowthThreshold;
+    public float unstableGrowthThreshold;
     public float growthRate;
-    public int _growthLevel = 0;
-    public int growthLevel
+    public float _growthLevel = 0;
+    public float growthLevel
     {
         get
         {
