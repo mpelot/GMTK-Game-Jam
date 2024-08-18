@@ -31,6 +31,7 @@ public class Harvester : MonoBehaviour, Selectable
         }
         set
         {
+            bool spawnHarvester = false;
             if (value < 0)
             {
                 value = 0;
@@ -39,8 +40,7 @@ public class Harvester : MonoBehaviour, Selectable
             else if (value >= splitThreshold)
             {
                 value = 0;
-                GameObject spawnedHarvester = Instantiate(gameObject, transform.position, Quaternion.identity);
-                spawnedHarvester.GetComponent<Rigidbody2D>().velocity = new Vector2(0.1f, 0.1f);
+                spawnHarvester = true;
             }
             _growthLevel = value;
             transform.localScale = new Vector3(startingScale.x + (_growthLevel * growthRate), startingScale.y + (_growthLevel * growthRate), 0f);
@@ -53,6 +53,11 @@ public class Harvester : MonoBehaviour, Selectable
             else
             {
                 movable.isBeingPulledToCore = false;
+            }
+            if (spawnHarvester)
+            {
+                GameObject spawnedHarvester = Instantiate(gameObject, transform.position, Quaternion.identity);
+                spawnedHarvester.GetComponent<Rigidbody2D>().velocity = new Vector2(0.1f, 0.1f);
             }
         }
     }

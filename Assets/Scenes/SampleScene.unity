@@ -801,6 +801,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Harvester (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 507900419027450303, guid: 9bf0bb590acdae346b08c1caffc26008, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 579543974815751700, guid: 9bf0bb590acdae346b08c1caffc26008, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.63
@@ -1073,6 +1077,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Harvester (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 507900419027450303, guid: 9bf0bb590acdae346b08c1caffc26008, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 579543974815751700, guid: 9bf0bb590acdae346b08c1caffc26008, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.4
@@ -1137,6 +1145,10 @@ PrefabInstance:
     - target: {fileID: 507900419027450303, guid: 9bf0bb590acdae346b08c1caffc26008, type: 3}
       propertyPath: m_Name
       value: Harvester (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 507900419027450303, guid: 9bf0bb590acdae346b08c1caffc26008, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 579543974815751700, guid: 9bf0bb590acdae346b08c1caffc26008, type: 3}
       propertyPath: m_LocalPosition.x
