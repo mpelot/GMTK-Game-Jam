@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6795388556723819324}
   - component: {fileID: 2356383726598698089}
   - component: {fileID: 7819063478075708561}
+  - component: {fileID: 3016545604663011438}
   m_Layer: 0
   m_Name: Harvester
   m_TagString: Harvester
@@ -193,6 +194,28 @@ MonoBehaviour:
   unstableGrowthLevel: 18
   slowdownPerGrowthLevel: 0.05
   scaleRate: 0.02
+--- !u!95 &3016545604663011438
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507900419027450303}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 67fa840b6545c9949859f8b491d32676, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &2749963216396135377
 PrefabInstance:
   m_ObjectHideFlags: 0
