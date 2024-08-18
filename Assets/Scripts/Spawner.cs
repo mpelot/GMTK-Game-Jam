@@ -38,7 +38,10 @@ public class Spawner : MonoBehaviour
         asteroidsOnTrajectoryLine--;
         if (asteroidsOnTrajectoryLine <= 0)
         {
-            Destroy(gameObject);
+            if (gameObject != null)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

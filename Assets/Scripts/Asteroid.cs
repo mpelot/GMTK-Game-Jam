@@ -67,4 +67,9 @@ public class Asteroid : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnDestroy()
+    {
+        spawner.RemoveAsteroidFromTrajectoryLine();
+    }
 }
