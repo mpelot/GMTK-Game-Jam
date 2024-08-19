@@ -14,6 +14,7 @@ public class Harvester : MonoBehaviour, Selectable
     public float shotCooldown;
     private bool isFiringPathSet;
     public GameObject shrinkRockPrefab;
+    public GameObject warningSymbol;
     private Movable movable;
     public float splitThreshold;
     private List<Collider2D> ignoredColliders;
@@ -58,10 +59,12 @@ public class Harvester : MonoBehaviour, Selectable
             if (_growthLevel >= unstableGrowthLevel)
             {
                 movable.isBeingPulledToCore = true;
+                warningSymbol.SetActive(true);
             }
             else
             {
                 movable.isBeingPulledToCore = false;
+                warningSymbol.SetActive(false);
             }
             if (spawnHarvester)
             {
@@ -98,6 +101,7 @@ public class Harvester : MonoBehaviour, Selectable
         animator = GetComponent<Animator>();
         circleCollider = GetComponent<CircleCollider2D>();
         arrow.gameObject.SetActive(false);
+        warningSymbol.SetActive(false);
     }
 
     private void OnMouseEnter() {

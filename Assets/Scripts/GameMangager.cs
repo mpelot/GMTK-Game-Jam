@@ -86,13 +86,11 @@ public class GameMangager : MonoBehaviour
             yield return null;
         }
 
-        harvester.GetComponent<Movable>().enabled = true;
-
         yield return new WaitForSeconds(2.5f);
         FindAnyObjectByType<Core>().disableGrowing = true;
 
         while (harvester.growthLevel == 0)
-        {
+            {
             Spawner sp = SpawnAsteroidStream(180f, spawnDistance, 10f, 5, 1.0f);
 
             while (sp != null)
@@ -103,8 +101,44 @@ public class GameMangager : MonoBehaviour
             yield return new WaitForSeconds(2.0f);
         }
 
+        while (FindObjectsByType<Harvester>(FindObjectsSortMode.None).Length < 2)
+        {
+            Spawner sp = SpawnAsteroidStream(180f, spawnDistance, 0f, 5, 1.0f);
+
+            while (sp != null)
+            {
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        yield return new WaitForSeconds(3.0f);
+
+        Harvester[] harvesters = FindObjectsByType<Harvester>(FindObjectsSortMode.None);
+
+        foreach (Harvester found_harvester in harvesters)
+        {
+            found_harvester.GetComponent<Movable>().enabled = true;
+        }
+        while (! isPassingThroughOrigin(harvesters[0].transform.position, harvesters[1].transform.position, 1f))
+        {
+            yield return null;
+        }
         FindAnyObjectByType<Core>().disableGrowing = false;
         StartCoroutine(StartRounds());
+    }
+
+    bool isPassingThroughOrigin(Vector2 startPos, Vector2 endPos, float distanceThreshold)
+    {
+        Vector2 lineDir = endPos - startPos;
+        float t = -Vector2.Dot(startPos, lineDir) / Vector2.Dot(lineDir, lineDir);
+        t = Mathf.Clamp01(t);
+
+        Vector2 closestPoint = startPos + t * lineDir;
+        float distance = Vector2.Distance(Vector2.zero, closestPoint);
+
+        return distance <= distanceThreshold;
     }
 
     // angle of 0 is to the right, 90 is above
