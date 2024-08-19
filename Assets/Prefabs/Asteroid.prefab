@@ -128,10 +128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c8af310c8e2124da241ee0bf670dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coreForce: 0.75
-  planetForce: 0.2
+  coreForce: 2.25
+  planetForce: 0.6
   maxDistance: 22
   scaleRate: 0.05
+  _growthLevel: 1
   parentTrajectoryLine: {fileID: 0}
   spawner: {fileID: 0}
 --- !u!58 &-5763060824989422429

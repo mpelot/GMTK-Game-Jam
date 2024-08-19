@@ -194,7 +194,7 @@ MonoBehaviour:
   shrinkRockPrefab: {fileID: 2762680425495791541, guid: 82fe04a098aec474783b8196abaa3b80, type: 3}
   splitThreshold: 20
   unstableGrowthLevel: 18
-  slowdownPerGrowthLevel: 0.05
+  slowdownPerGrowthLevel: 0.025
   scaleRate: 0.02
   _growthLevel: 0
 --- !u!95 &3016545604663011438
@@ -272,9 +272,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6181920857114407098, guid: b2ebca087b168184189e873e26be7e91, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181920857114407098, guid: b2ebca087b168184189e873e26be7e91, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0abe4196de48851458d5f97d6b3965ef, type: 2}
+    - target: {fileID: 6181920857114407098, guid: b2ebca087b168184189e873e26be7e91, type: 3}
+      propertyPath: m_Parameters.textureScale.x
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

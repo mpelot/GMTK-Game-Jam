@@ -7,14 +7,13 @@ public class Spawner : MonoBehaviour
     public Asteroid asteroid;
     public Core core;
     public TrajectoryLine trajectoryLine;
-    private float timeBetweenAsteroids;
     private int asteroidsOnTrajectoryLine;
 
-    public void Init(float alertTime, float timeBetweenAsteroids, int count, float asteroidGrowthLevel, float asteroidSpawnSpeed) {
-        this.timeBetweenAsteroids = timeBetweenAsteroids;
+    public void Init(float alertTime, int count, float asteroidGrowthLevel, float asteroidSpawnSpeed) {
         trajectoryLine.startingVelocity = (-transform.position).normalized * asteroidSpawnSpeed;
         trajectoryLine.Show();
         asteroidsOnTrajectoryLine = count;
+        float timeBetweenAsteroids = 0.525f / asteroidSpawnSpeed;
         StartCoroutine(SpawnWave(alertTime, timeBetweenAsteroids, count, asteroidGrowthLevel, asteroidSpawnSpeed));
     }
 

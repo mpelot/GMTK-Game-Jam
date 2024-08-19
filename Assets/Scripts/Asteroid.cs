@@ -54,7 +54,7 @@ public class Asteroid : MonoBehaviour
         {
             Vector2 closestPoint = parentTrajectoryLine.FindClosestTrajectoryPoint(transform.position);
             float distanceToClosestPoint = (closestPoint - (Vector2) transform.position).magnitude;
-            if (distanceToClosestPoint > 0.4f)
+            if (distanceToClosestPoint > 0.5f)
             {
                 personalTrajectoryLine = Instantiate(parentTrajectoryLine, this.transform);
                 Color baseColor = personalTrajectoryLine.GetComponent<LineRenderer>().material.GetColor("_Color");
