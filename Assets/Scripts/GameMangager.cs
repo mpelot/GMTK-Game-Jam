@@ -84,12 +84,12 @@ public class GameMangager : MonoBehaviour
 
         harvester.GetComponent<Movable>().enabled = true;
 
-        yield return new WaitForSeconds(5.5f);
+        yield return new WaitForSeconds(2.5f);
         FindAnyObjectByType<Core>().disableGrowing = true;
 
         while (harvester.growthLevel == 0)
         {
-            Spawner sp = SpawnAsteroidStream(180f, spawnDistance, 0f, 5, 1.0f);
+            Spawner sp = SpawnAsteroidStream(180f, spawnDistance, 10f, 5, 1.0f);
 
             while (sp != null)
             {
