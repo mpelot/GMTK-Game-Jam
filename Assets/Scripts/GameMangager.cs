@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class GameMangager : MonoBehaviour
 {
@@ -13,6 +13,8 @@ public class GameMangager : MonoBehaviour
     public Round[] rounds;
     [SerializeField] private GUIController guiController;
     public int startingRound;
+    public Text tutorialText;
+    private Coroutine currentTutorialTextCoroutine;
 
     public Selectable selectedObject {
         get {
@@ -31,6 +33,7 @@ public class GameMangager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tutorialText.text = "";
         if (startingRound < 0)
         {
             startingRound = 0;
@@ -49,20 +52,60 @@ public class GameMangager : MonoBehaviour
     IEnumerator IntroSequence()
     {
         Harvester harvester = FindFirstObjectByType<Harvester>();
-        harvester.GetComponent<Movable>().enabled = false;
+        harvester.GetComponent<Movable>().disableInteraction = true;
         Camera.main.GetComponent<CameraMovement>().enabled = false;
 
-        yield return new WaitForSeconds(2f);
+        SetTutorialText("INCOMING ASTEROID\nSTREAMS ARE\nTARGETING THE SUN\nOF A NEARBY\nSOLAR SYSTEM...");
+
+        yield return new WaitForSeconds(4f);
         SpawnAsteroidStream(270f, 10f, 0f, 3, 1.0f);
 
         yield return new WaitForSeconds(5f);
 
+        SpawnAsteroidStream(315f, 10f, 2f, 2, 1.0f);
+        SpawnAsteroidStream(225f, 10f, 2f, 2, 1.0f);
+
+
+        yield return new WaitForSeconds(2f);
+
+        SetTutorialText("THE INCREASED\nMASS IS GROWING\nTHE SUN'S CORE,\nPULLING IN NEARBY\nPLANETS...");
+
+        yield return new WaitForSeconds(5f);
+
+        Planet planet = FindFirstObjectByType<Planet>();
+        planet.growthLevel = planet.unstableGrowthThreshold;
+
+        yield return new WaitForSeconds(10f);
+
+        SetTutorialText("YOU MUST MAKE USE OF THE ALIENTECH TETRADON MACHINES TO INTERCEPT THE ASTEROIDS AND PROTECT THE SUN");
+
+        harvester.GetComponent<Movable>().targetPos = new Vector3(0, 4, 0);
+        harvester.GetComponent<Movable>().destinationSet = true;
+        harvester.GetComponent<Movable>().dragSpeedMultiplier = 8f;
+
+        yield return new WaitForSeconds(11f);
+
+        SetTutorialText("THE ADVANCED TECHNOLOGY OF THE TETRADON MACHINES ALLOWS THEM TO GROW IN SIZE AND POWER AS THEY ABSORB ASTEROIDS");
+
+        yield return new WaitForSeconds(4f);
+
+        harvester.GetComponent<Movable>().dragSpeedMultiplier = 1f;
         SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
 
         while (harvester.growthLevel == 0)
         {
             yield return null;
         }
+
+        SetTutorialText("LEFT CLICK TO SELECT THE TETRADON...");
+
+        while (selectedObject == null || selectedObject.GetType() != typeof(Harvester))
+        {
+            yield return null;
+        }
+
+        SetTutorialText("...THEN DRAG WITH RIGHT CLICK TO FIRE ARDIUM INTO THE SUN'S CORE");
+        
         while (harvester.growthLevel > 0)
         {
             yield return null;
@@ -71,9 +114,10 @@ public class GameMangager : MonoBehaviour
         harvester.ClearFiringPath();
 
         SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
-        Planet planet = SpawnPlanet(135f, 15f);
+        planet = SpawnPlanet(135f, 15f);
 
         yield return new WaitForSeconds(2f);
+        SetTutorialText("FIRE ARDIUM INTO THE INCOMING PLANET TO SAVE IT FROM THE SUN!\n(PAN THE CAMERA WITH MIDDLE MOUSE CLICK).");
         Camera.main.GetComponent<CameraMovement>().enabled = true;
 
         while (planet.growthLevel == planet.unstableGrowthThreshold)
@@ -86,7 +130,17 @@ public class GameMangager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(2.5f);
+        SetTutorialText("GREAT JOB! YOU'VE SAVED THE PLANET. YOU CAN NOW CONTROL THE PLANET BY DRAGGING IT.");
+
+        while (selectedObject == null || selectedObject.GetType() != typeof(Planet))
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(4f);
+
+        SetTutorialText("YOU CAN POSITION THE GRAVITATIONAL PULL OF THE PLANET TO REDIRECT INCOMING ASTEROIDS INTO THE TETRADON!");
+        yield return new WaitForSeconds(4f);
         FindAnyObjectByType<Core>().disableGrowing = true;
 
         while (harvester.growthLevel == 0)
@@ -101,6 +155,8 @@ public class GameMangager : MonoBehaviour
             yield return new WaitForSeconds(2.0f);
         }
 
+        SetTutorialText("CONTINUE TO FEED ASTEROIDS INTO THE TETRADON TO GROW IT TO FULL SIZE");
+
         while (FindObjectsByType<Harvester>(FindObjectsSortMode.None).Length < 2)
         {
             Spawner sp = SpawnAsteroidStream(180f, spawnDistance, 0f, 5, 1.0f);
@@ -113,20 +169,80 @@ public class GameMangager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(1.0f);
+
+        SetTutorialText("TETRADON ARE BIOLOGICAL MACHINES AND HAVE THE ABILITY TO SELF-REPLICATE. THEY WILL GROW IN NUMBER AS THEY ABSORB ASTEROIDS");
+
+        yield return new WaitForSeconds(7f);
+
+        SetTutorialText("BALANCING THE GROWTH OF TETRADONS AND KEEPING THE SUN'S CORE STABLE IS KEY TO SAVING THE SOLAR SYSTEM.");
+
+        yield return new WaitForSeconds(8f);
+
+        SetTutorialText("TO PREPARE FOR THE INCOMING ASTEROID STORM, POSITION YOUR TETRADONS ON EITHER SIDE OF THE SUN TO COVER THE MOST GROUND.");
+
 
         Harvester[] harvesters = FindObjectsByType<Harvester>(FindObjectsSortMode.None);
 
         foreach (Harvester found_harvester in harvesters)
         {
-            found_harvester.GetComponent<Movable>().enabled = true;
+            found_harvester.GetComponent<Movable>().disableInteraction = false;
         }
         while (! isPassingThroughOrigin(harvesters[0].transform.position, harvesters[1].transform.position, 1f))
         {
             yield return null;
         }
         FindAnyObjectByType<Core>().disableGrowing = false;
+
+        SetTutorialText("WARNING: INCOMING ASTEROID STORM DETECTED. PREPARE FOR IMPACT.");
+
+        yield return new WaitForSeconds(5f);
+
+        SetTutorialText("");
+
+        yield return new WaitForSeconds(2f);
+
+        StopCoroutine(currentTutorialTextCoroutine);
+        tutorialText.text = "";
+
         StartCoroutine(StartRounds());
+    }
+
+    void SetTutorialText(string text)
+    {
+        if (currentTutorialTextCoroutine != null)
+        {
+            StopCoroutine(currentTutorialTextCoroutine);
+        }
+        currentTutorialTextCoroutine = StartCoroutine(SetTutorialTextCoroutine(text));
+    }
+
+    IEnumerator SetTutorialTextCoroutine(string text)
+    {
+        string currentText = tutorialText.text;
+        for (int i = 0; i < currentText.Length; i++)
+        {
+            tutorialText.text = currentText.Substring(0, currentText.Length - 1) + "_";
+            yield return new WaitForSeconds(0.01f);
+        }
+        
+        for (int i = 0; i < text.Length; i++)
+        {
+            tutorialText.text = text.Substring(0, i + 1) + "_";
+            yield return new WaitForSeconds(0.02f);
+        }
+
+        
+        // Blinking cursor
+        while (true)
+        {
+            tutorialText.text = text + "_";
+            yield return new WaitForSeconds(0.5f);
+            tutorialText.text = text;
+            yield return new WaitForSeconds(0.5f);
+        }
+        
+
     }
 
     bool isPassingThroughOrigin(Vector2 startPos, Vector2 endPos, float distanceThreshold)

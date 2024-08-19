@@ -7,15 +7,16 @@ public class Movable : MonoBehaviour
     private Rigidbody2D rb;
     public float dragSpeed;
     public float dragSpeedMultiplier = 1f;
-    private bool destinationSet;
+    public bool destinationSet;
     private Camera cam;
-    private Vector3 targetPos;
+    public Vector3 targetPos;
     public bool selected;
     private bool mouseDown = false;
     public bool isBeingPulledToCore;
     private Core core;
     public float coreForce;
     [SerializeField] private Animator boostAnim;
+    public bool disableInteraction = false;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -24,6 +25,8 @@ public class Movable : MonoBehaviour
     }
 
     private void Update() {
+        if (disableInteraction)
+            return;
         if (mouseDown) {
             Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
             targetPos = new Vector3(mousePos.x, mousePos.y);
@@ -42,6 +45,8 @@ public class Movable : MonoBehaviour
     private void FixedUpdate() {
         Vector2 forceVector = Vector2.zero;
         if (mouseDown) {
+            if (disableInteraction)
+                return;
             if ((targetPos - transform.position).magnitude < 0.01f) {
                 rb.drag = 10;
                 boostAnim.SetBool("Boost", false);
@@ -78,6 +83,8 @@ public class Movable : MonoBehaviour
     }
 
     private void OnMouseDown() {
+        if (disableInteraction)
+            return;
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         rb.drag = 2f;
         mouseDown = true;
@@ -85,6 +92,8 @@ public class Movable : MonoBehaviour
     }
 
     private void OnMouseUp() {
+        if (disableInteraction)
+            return;
         rb.drag = 4f;
         mouseDown = false;
     }
