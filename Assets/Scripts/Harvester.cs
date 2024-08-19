@@ -66,6 +66,12 @@ public class Harvester : MonoBehaviour, Selectable
         }
     }
 
+    public GameObject gameObj {
+        get {
+            return gameObject;
+        }
+    }
+
     void Start()
     {
         gm = FindAnyObjectByType<GameMangager>();
@@ -89,7 +95,8 @@ public class Harvester : MonoBehaviour, Selectable
     void Update()
     {
         if (selected && Input.GetMouseButtonDown(0) && !mouseOver) {
-            gm.selectedObject = null;
+            if (gm.selectedObject.Equals(this))
+                gm.selectedObject = null;
             Deselect();
         }
 

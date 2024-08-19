@@ -12,6 +12,12 @@ public class Planet : MonoBehaviour, Selectable
     private Movable movable;
     private Animator animator;
 
+    public GameObject gameObj {
+        get {
+            return gameObject;
+        }
+    }
+
     private Vector3 startingScale;
     public float unstableGrowthThreshold;
     public float slowdownPerGrowthLevel;
@@ -54,7 +60,8 @@ public class Planet : MonoBehaviour, Selectable
 
     private void Update() {
         if (selected && Input.GetMouseButtonDown(0) && !mouseOver) {
-            gm.selectedObject = null;
+            if (gm.selectedObject.Equals(this))
+                gm.selectedObject = null;
             Deselect();
         }
     }

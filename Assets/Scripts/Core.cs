@@ -36,6 +36,13 @@ public class Core : MonoBehaviour, Selectable
             transform.localScale = new Vector3(startingScale.x + (_growthLevel * scaleRate), startingScale.y + (_growthLevel * scaleRate), 0f);
         }
     }
+
+    public GameObject gameObj {
+        get {
+            return gameObject;
+        }
+    }
+
     void Start() {
         gm = FindAnyObjectByType<GameMangager>();
         startingScale = transform.localScale;
@@ -54,7 +61,8 @@ public class Core : MonoBehaviour, Selectable
     void Update()
     {
         if (selected && Input.GetMouseButtonDown(0) && !mouseOver) {
-            gm.selectedObject = null;
+            if (gm.selectedObject.Equals(this))
+                gm.selectedObject = null;
             Deselect();
         }
 

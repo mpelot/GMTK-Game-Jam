@@ -12,6 +12,7 @@ public class GameMangager : MonoBehaviour
     [SerializeField] private float timeBetweenAsteroids;
     [SerializeField] private float spawnDistance;
     public Round[] rounds;
+    [SerializeField] private GUIController guiController;
 
     public Selectable selectedObject {
         get {
@@ -23,6 +24,7 @@ public class GameMangager : MonoBehaviour
             _selectedObject = value;
             if (_selectedObject != null)
                 _selectedObject.Select();
+            guiController.changeSelected(_selectedObject);
         }
     }
 
