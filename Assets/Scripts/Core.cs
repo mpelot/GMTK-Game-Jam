@@ -9,6 +9,7 @@ public class Core : MonoBehaviour, Selectable
     private Vector3 startingScale;
     public float growthFromPlanet;
     public float scaleRate;
+    public bool disableGrowing = false;
 
     // Every x seconds, a growth event occurs and the growth level increases
     public float secondsBetweenGrowthEvent;
@@ -28,6 +29,10 @@ public class Core : MonoBehaviour, Selectable
         }
         set
         {
+            if (disableGrowing)
+            {
+                return;
+            }
             if (value < 0)
             {
                 value = 0;

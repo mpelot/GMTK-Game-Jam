@@ -13,7 +13,7 @@ public class Spawner : MonoBehaviour
         trajectoryLine.startingVelocity = (-transform.position).normalized * asteroidSpawnSpeed;
         trajectoryLine.Show();
         asteroidsOnTrajectoryLine = count;
-        float timeBetweenAsteroids = 0.525f / asteroidSpawnSpeed;
+        float timeBetweenAsteroids = 0.575f / asteroidSpawnSpeed;
         StartCoroutine(SpawnWave(alertTime, timeBetweenAsteroids, count, asteroidGrowthLevel, asteroidSpawnSpeed));
     }
 

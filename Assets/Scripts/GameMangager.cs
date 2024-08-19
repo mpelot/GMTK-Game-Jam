@@ -55,13 +55,15 @@ public class GameMangager : MonoBehaviour
 
         SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
 
-        yield return new WaitForSeconds(20f);
-
-        
+        while (harvester.growthLevel == 0)
+        {
+            yield return null;
+        }
         while (harvester.growthLevel > 0)
         {
             yield return null;
         }
+        yield return new WaitForSeconds(2.0f);
         harvester.ClearFiringPath();
 
         SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
@@ -82,7 +84,8 @@ public class GameMangager : MonoBehaviour
 
         harvester.GetComponent<Movable>().enabled = true;
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(5.5f);
+        FindAnyObjectByType<Core>().disableGrowing = true;
 
         while (harvester.growthLevel == 0)
         {
@@ -96,6 +99,7 @@ public class GameMangager : MonoBehaviour
             yield return new WaitForSeconds(2.0f);
         }
 
+        FindAnyObjectByType<Core>().disableGrowing = false;
         StartCoroutine(StartRounds());
     }
 

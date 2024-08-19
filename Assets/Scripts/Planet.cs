@@ -7,6 +7,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class Planet : MonoBehaviour, Selectable
 {
     public GameObject ring;
+    public GameObject warningSymbol;
     private Rigidbody2D rb;
     private bool selected = false;
     private GameMangager gm;
@@ -45,10 +46,12 @@ public class Planet : MonoBehaviour, Selectable
             if (_growthLevel >= unstableGrowthThreshold)
             {
                 movable.isBeingPulledToCore = true;
+                warningSymbol.SetActive(true);
             }
             else
             {
                 movable.isBeingPulledToCore = false;
+                warningSymbol.SetActive(false);
             }
         }
     }
@@ -59,6 +62,7 @@ public class Planet : MonoBehaviour, Selectable
         movable = GetComponent<Movable>();
         animator = GetComponent<Animator>();
         startingScale = transform.localScale;
+        warningSymbol.SetActive(false);
     }
 
     private void Update() {
