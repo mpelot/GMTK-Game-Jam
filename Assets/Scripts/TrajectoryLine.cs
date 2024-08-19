@@ -10,6 +10,7 @@ public class TrajectoryLine : MonoBehaviour
     public float coreForceMagnitude;
     public float planetForceMagnitude;
     public Vector2 startingVelocity;
+    public float growthLevel = 1f;
     public float circleCastRadius;
     private Collider2D[] startingColliders;
     private Vector2[] trajectoryPoints;
@@ -71,7 +72,11 @@ public class TrajectoryLine : MonoBehaviour
 
             // Calculate gravitational force due to the Core
             Vector2 distanceToCore = (Vector2)core.transform.position - position;
-            Vector2 coreForce = distanceToCore.normalized * (coreForceMagnitude / distanceToCore.sqrMagnitude);
+            Vector2 coreForce = (distanceToCore.normalized * (coreForceMagnitude / distanceToCore.sqrMagnitude) / (growthLevel * growthLevel));
+            if (Mathf.Abs(coreForce.x) == Mathf.Infinity || Mathf.Abs(coreForce.y) == Mathf.Infinity)
+            {
+                coreForce = Vector2.zero;
+            }
             Vector2 totalForce = coreForce;
 
             RaycastHit2D[] hits = Physics2D.CircleCastAll(position, radius, velocity, velocity.magnitude * timeStep);
@@ -84,7 +89,11 @@ public class TrajectoryLine : MonoBehaviour
                         Vector2 directionToPlanet = (hit.collider.transform.position - (Vector3)position).normalized;
                         float distanceToPlanet = Vector2.Distance(position, hit.collider.transform.position);
 
-                        Vector2 gravitationalForce = directionToPlanet * planetForceMagnitude * (2.7f - distanceToPlanet);
+                        Vector2 gravitationalForce = (directionToPlanet * planetForceMagnitude * (2.7f - distanceToPlanet)) / (growthLevel * growthLevel);
+                        if (Mathf.Abs(gravitationalForce.x) == Mathf.Infinity || Mathf.Abs(gravitationalForce.y) == Mathf.Infinity)
+                        {
+                            gravitationalForce = Vector2.zero;
+                        }
                         totalForce += gravitationalForce;
                     }
                     else if (hit.collider.CompareTag("Core") || hit.collider.CompareTag("Planet") || hit.collider.CompareTag("Harvester"))

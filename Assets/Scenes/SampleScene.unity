@@ -254,8 +254,20 @@ MonoBehaviour:
       waveRepeatCount: 0
       endOfWaveTime: 15
     roundRepeatCount: 1
+  - startOfRoundTime: 0
+    waves:
+    - startOfWaveTime: 0
+      spawnNewPlanet: 0
+      alertTime: 0
+      numberOfStreams: 1
+      asteroidsPerStream: 1
+      asteroidGrowthLevel: 10
+      tutorialText: 
+      waveRepeatCount: 0
+      endOfWaveTime: 15
+    roundRepeatCount: 0
   guiController: {fileID: 1544497579}
-  startingRound: -1
+  startingRound: 3
   tutorialText: {fileID: 1187603482}
   screenFade: {fileID: 1945893335}
   centerText: {fileID: 641231241}

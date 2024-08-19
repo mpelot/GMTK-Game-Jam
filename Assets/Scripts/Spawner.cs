@@ -10,7 +10,9 @@ public class Spawner : MonoBehaviour
     private int asteroidsOnTrajectoryLine;
 
     public void Init(float alertTime, int count, float asteroidGrowthLevel, float asteroidSpawnSpeed) {
+        asteroidSpawnSpeed = asteroidSpawnSpeed / asteroidGrowthLevel;
         trajectoryLine.startingVelocity = (-transform.position).normalized * asteroidSpawnSpeed;
+        //trajectoryLine.growthLevel = asteroidGrowthLevel;
         trajectoryLine.Show();
         asteroidsOnTrajectoryLine = count;
         float timeBetweenAsteroids = 0.575f / asteroidSpawnSpeed;

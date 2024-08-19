@@ -73,12 +73,22 @@ public class Asteroid : MonoBehaviour
     {
         // Add gravitational force due to core
         Vector2 distanceToCore = core.transform.position - transform.position;
-        rb.AddForce(distanceToCore.normalized * (coreForce / distanceToCore.sqrMagnitude), ForceMode2D.Force);
+        Vector2 coreForce = distanceToCore.normalized * (this.coreForce / distanceToCore.sqrMagnitude) / (growthLevel * growthLevel);
+        if (Mathf.Abs(coreForce.x) == Mathf.Infinity || Mathf.Abs(coreForce.y) == Mathf.Infinity)
+        {
+            coreForce = Vector2.zero;
+        }
+        rb.AddForce(coreForce, ForceMode2D.Force);
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
         if (collision.CompareTag("Gravity")) {
-            rb.AddForce((collision.gameObject.transform.position - transform.position).normalized * planetForce * (2.7f - (collision.gameObject.transform.position - transform.position).magnitude), ForceMode2D.Force);
+            Vector2 gravitationalForce = ((collision.gameObject.transform.position - transform.position).normalized * planetForce * (2.7f - (collision.gameObject.transform.position - transform.position).magnitude)) / (growthLevel * growthLevel);
+            if (Mathf.Abs(gravitationalForce.x) == Mathf.Infinity || Mathf.Abs(gravitationalForce.y) == Mathf.Infinity)
+            {
+                gravitationalForce = Vector2.zero;
+            }
+            rb.AddForce(gravitationalForce, ForceMode2D.Force);
         }
     }
 
