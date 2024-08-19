@@ -15,6 +15,8 @@ public class GameMangager : MonoBehaviour
     [SerializeField] private GUIController guiController;
     public int startingRound;
     public Text tutorialText;
+    public Image screenFade;
+    public Text centerText;
     private Coroutine currentTutorialTextCoroutine;
     public Planet tutorialPlanet;
     public Harvester tutorialHarvester;
@@ -106,6 +108,43 @@ public class GameMangager : MonoBehaviour
     {
         tutorialHarvester.GetComponent<Movable>().disableInteraction = true;
         Camera.main.GetComponent<CameraMovement>().enabled = false;
+        
+
+        screenFade.enabled = true;
+        screenFade.color = new Color(0, 0, 0, 1);
+        centerText.enabled = true;
+        centerText.text = "SOMEWHERE IN A DISTANT GALAXY...";
+        centerText.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+
+        yield return new WaitForSeconds(1f);
+
+        GetComponent<AudioSource>().Play();
+
+        for (float a = 4; a >= 0; a -= Time.deltaTime)
+        {
+            centerText.color = new Color(1.0f, 1.0f, 1.0f, 1.0f - (a / 4.0f));
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        for (float a = 2; a >= 0; a -= Time.deltaTime)
+        {
+            centerText.color = new Color(1.0f, 1.0f, 1.0f, a / 2.0f);
+            yield return null;
+        }
+
+        centerText.enabled = false;
+
+        for (float a = 4; a >= 0; a -= Time.deltaTime)
+        {
+            screenFade.color = new Color(0, 0, 0, a / 4.0f);
+            yield return null;
+        }
+
+        screenFade.enabled = false;
+
+        yield return new WaitForSeconds(1f);
 
         SetTutorialText("INCOMING ASTEROID\nSTREAMS ARE\nTARGETING THE SUN\nOF A NEARBY\nSOLAR SYSTEM...");
 
@@ -162,6 +201,8 @@ public class GameMangager : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(2.0f);
+        SetTutorialText("TETRADON MACHINES CONSUME MATTER AND SYNTHESIZE ARDIUM. ARDIUM CAN BE FIRED INTO DIFFERENT OBJECTS TO SHRINK THEM.");
+        yield return new WaitForSeconds(8.0f);
         tutorialHarvester.ClearFiringPath();
 
         SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
@@ -217,7 +258,7 @@ public class GameMangager : MonoBehaviour
                 yield return null;
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
         }
 
         yield return new WaitForSeconds(1.0f);
