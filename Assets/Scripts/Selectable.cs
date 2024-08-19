@@ -6,4 +6,5 @@ public interface Selectable {
     void Select();
     void Deselect();
     GameObject gameObj { get; }
+    int percentage { get; }
 }

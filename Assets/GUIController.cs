@@ -31,30 +31,24 @@ public class GUIController : MonoBehaviour
             description.text = "";
             percentage.text = "";
             border.SetActive(false);
-        } else if (selectedObject.gameObj.tag.Equals("Planet")) {
-            selectedName.sprite = planetName;
+        } else {
             selectedName.enabled = true;
             description.enabled = true;
             percentage.enabled = true;
-            description.text = "CAN REDIRECT INCOMING ASTEROIDS";
-            percentage.text = "";
-            ChangeBorderColor(planetColor);
-        } else if (selectedObject.gameObj.tag.Equals("Harvester")) {
-            selectedName.sprite = tetradonName;
-            selectedName.enabled = true;
-            description.enabled = true;
-            percentage.enabled = true;
-            description.text = "CAN HARVEST ARDIUM";
-            percentage.text = "";
-            ChangeBorderColor(tetradonColor);
-        } else if (selectedObject.gameObj.tag.Equals("Core")) {
-            selectedName.sprite = sunName;
-            selectedName.enabled = true;
-            description.enabled = true;
-            percentage.enabled = true;
-            description.text = "PROTECT AT ALL COSTS";
-            percentage.text = "";
-            ChangeBorderColor(sunColor);
+            percentage.text = selectedObject.percentage + "%";
+            if (selectedObject.gameObj.tag.Equals("Planet")) {
+                selectedName.sprite = planetName;
+                description.text = "CAN REDIRECT INCOMING ASTEROIDS";
+                ChangeBorderColor(planetColor);
+            } else if (selectedObject.gameObj.tag.Equals("Harvester")) {
+                selectedName.sprite = tetradonName;
+                description.text = "CAN HARVEST ARDIUM";
+                ChangeBorderColor(tetradonColor);
+            } else if (selectedObject.gameObj.tag.Equals("Core")) {
+                selectedName.sprite = sunName;
+                description.text = "PROTECT AT ALL COSTS";
+                ChangeBorderColor(sunColor);
+            }
         }
     }
 

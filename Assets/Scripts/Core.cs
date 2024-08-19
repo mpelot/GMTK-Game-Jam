@@ -8,6 +8,8 @@ public class Core : MonoBehaviour, Selectable
     private GameMangager gm;
     private Vector3 startingScale;
     public float growthFromPlanet;
+    public float growthLimit;
+    private int _percentage;
     public float scaleRate;
     public bool disableGrowing = false;
 
@@ -39,12 +41,22 @@ public class Core : MonoBehaviour, Selectable
             }
             _growthLevel = value;
             transform.localScale = new Vector3(startingScale.x + (_growthLevel * scaleRate), startingScale.y + (_growthLevel * scaleRate), 0f);
+
+            _percentage = (int)(growthLevel / growthLimit * 100);
+            if (selected)
+                gm.updateUI(this);
         }
     }
 
     public GameObject gameObj {
         get {
             return gameObject;
+        }
+    }
+
+    public int percentage {
+        get {
+            return _percentage;
         }
     }
 

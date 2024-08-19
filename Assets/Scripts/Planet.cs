@@ -25,6 +25,7 @@ public class Planet : MonoBehaviour, Selectable
     public float slowdownPerGrowthLevel;
     public float scaleRate;
     public float _growthLevel = 0;
+    public int _percentage = 0;
     private bool mouseOver = false;
     private float mouseDownTimer = 0f;
     private float ignoreDeselectTimer = 0f;
@@ -53,6 +54,15 @@ public class Planet : MonoBehaviour, Selectable
                 movable.isBeingPulledToCore = false;
                 warningSymbol.SetActive(false);
             }
+            _percentage = (int)(growthLevel / unstableGrowthThreshold * 100);
+            if (selected)
+                gm.updateUI(this);
+        }
+    }
+
+    public int percentage {
+        get {
+            return _percentage;
         }
     }
 
