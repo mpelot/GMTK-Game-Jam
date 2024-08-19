@@ -195,7 +195,7 @@ MonoBehaviour:
       endOfWaveTime: 19
     - startOfWaveTime: 3
       spawnNewPlanet: 0
-      alertTime: 10
+      alertTime: 14
       numberOfStreams: 1
       asteroidsPerStream: 5
       asteroidGrowthLevel: 1
@@ -261,13 +261,13 @@ MonoBehaviour:
       alertTime: 0
       numberOfStreams: 1
       asteroidsPerStream: 1
-      asteroidGrowthLevel: 10
+      asteroidGrowthLevel: 25
       tutorialText: 
       waveRepeatCount: 0
       endOfWaveTime: 15
     roundRepeatCount: 0
   guiController: {fileID: 1544497579}
-  startingRound: 3
+  startingRound: -1
   tutorialText: {fileID: 1187603482}
   screenFade: {fileID: 1945893335}
   centerText: {fileID: 641231241}

@@ -32,6 +32,7 @@ public class Harvester : MonoBehaviour, Selectable
     private float ignoreDeselectTimer = 0f;
     private CircleCollider2D circleCollider;
     public Arrow arrow;
+    private Rigidbody2D rb;
     public float growthLevel
     {
         get
@@ -40,16 +41,10 @@ public class Harvester : MonoBehaviour, Selectable
         }
         set
         {
-            bool spawnHarvester = false;
             if (value < 0)
             {
                 value = 0;
                 Destroy(gameObject);
-            }
-            else if (value >= splitThreshold)
-            {
-                value = 0;
-                spawnHarvester = true;
             }
             _growthLevel = value;
             transform.localScale = new Vector3(startingScale.x + (_growthLevel * scaleRate), startingScale.y + (_growthLevel * scaleRate), 0f);
@@ -65,11 +60,6 @@ public class Harvester : MonoBehaviour, Selectable
             {
                 movable.isBeingPulledToCore = false;
                 warningSymbol.SetActive(false);
-            }
-            if (spawnHarvester)
-            {
-                GameObject spawnedHarvester = Instantiate(gameObject, transform.position, Quaternion.identity);
-                spawnedHarvester.GetComponent<Rigidbody2D>().velocity = new Vector2(0.1f, 0.1f);
             }
             _percentage = (int)(growthLevel / unstableGrowthLevel * 100);
             if (selected)
@@ -102,6 +92,7 @@ public class Harvester : MonoBehaviour, Selectable
         circleCollider = GetComponent<CircleCollider2D>();
         arrow.gameObject.SetActive(false);
         warningSymbol.SetActive(false);
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void OnMouseEnter() {
@@ -137,6 +128,11 @@ public class Harvester : MonoBehaviour, Selectable
                     gm.selectedObject = null;
                 Deselect();
             }
+        }
+
+        if (rb.velocity.magnitude > 0.1f && growthLevel >= splitThreshold)
+        {
+            SplitHarvester();
         }
 
 
@@ -190,6 +186,14 @@ public class Harvester : MonoBehaviour, Selectable
                 }
             }
         }
+    }
+
+    void SplitHarvester()
+    {
+        growthLevel = (growthLevel - splitThreshold) / 2;
+        Harvester spawnedHarvester = Instantiate(this, transform.position, Quaternion.identity);
+        spawnedHarvester.GetComponent<Rigidbody2D>().velocity = rb.velocity * -1;
+        spawnedHarvester.growthLevel = growthLevel;
     }
 
     void SetFiringPath(Vector2 shotVelocity)

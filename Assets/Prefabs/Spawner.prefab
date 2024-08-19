@@ -149,8 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465a8a01fb7aba84cacbf6539ae13818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentObject: {fileID: 0}
-  mainCamera: {fileID: 0}
 --- !u!58 &5819393346392119431
 CircleCollider2D:
   m_ObjectHideFlags: 0

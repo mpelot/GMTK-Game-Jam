@@ -208,7 +208,7 @@ public class GameMangager : MonoBehaviour
         SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
         tutorialPlanet = SpawnPlanet(135f, 15f);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         SetTutorialText("FIRE ARDIUM INTO THE INCOMING PLANET TO SAVE IT FROM THE SUN!\n(PAN THE CAMERA WITH MIDDLE MOUSE CLICK).");
         Camera.main.GetComponent<CameraMovement>().enabled = true;
 
@@ -249,7 +249,7 @@ public class GameMangager : MonoBehaviour
 
         SetTutorialText("CONTINUE TO FEED ASTEROIDS INTO THE TETRADON TO GROW IT TO FULL SIZE");
 
-        while (FindObjectsByType<Harvester>(FindObjectsSortMode.None).Length < 2)
+        while (tutorialHarvester.growthLevel < tutorialHarvester.splitThreshold)
         {
             Spawner sp = SpawnAsteroidStream(180f, spawnDistance, 0f, 5, 1.0f);
 
@@ -263,23 +263,25 @@ public class GameMangager : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        SetTutorialText("TETRADON ARE BIOLOGICAL MACHINES AND HAVE THE ABILITY TO SELF-REPLICATE. THEY WILL GROW IN NUMBER AS THEY ABSORB ASTEROIDS");
+        SetTutorialText("TETRADON ARE BIOLOGICAL MACHINES AND HAVE THE ABILITY TO SELF-REPLICATE. PULL ON THE FILLED TETRADON TO SPLIT IT.");
 
-        yield return new WaitForSeconds(7f);
+        tutorialHarvester.GetComponent<Movable>().disableInteraction = false;
+
+        while (FindObjectsByType<Harvester>(FindObjectsSortMode.None).Length < 2)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1f);
 
         SetTutorialText("BALANCING THE GROWTH OF TETRADONS AND KEEPING THE SUN'S CORE STABLE IS KEY TO SAVING THE SOLAR SYSTEM.");
 
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(9f);
 
         SetTutorialText("TO PREPARE FOR THE INCOMING ASTEROID STORM, POSITION YOUR TETRADONS ON EITHER SIDE OF THE SUN TO COVER THE MOST GROUND.");
 
 
         Harvester[] harvesters = FindObjectsByType<Harvester>(FindObjectsSortMode.None);
-
-        foreach (Harvester harvester in harvesters)
-        {
-            harvester.GetComponent<Movable>().disableInteraction = false;
-        }
         while (! isPassingThroughOrigin(harvesters[0].transform.position, harvesters[1].transform.position, 1f))
         {
             yield return null;
