@@ -15,6 +15,7 @@ public class Movable : MonoBehaviour
     public bool isBeingPulledToCore;
     private Core core;
     public float coreForce;
+    [SerializeField] private Animator boostAnim;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -43,19 +44,25 @@ public class Movable : MonoBehaviour
         if (mouseDown) {
             if ((targetPos - transform.position).magnitude < 0.01f) {
                 rb.drag = 10;
+                boostAnim.SetBool("Boost", false);
             } else {
                 forceVector += (Vector2) (targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0f, 1.5f) * (dragSpeed * dragSpeedMultiplier);
+                transform.right = (targetPos - transform.position).normalized;
+                boostAnim.SetBool("Boost", true);
             }
-        }
-
-        if (destinationSet) {
+        } else if (destinationSet) {
             if ((targetPos - transform.position).magnitude < 0.01f) {
                 transform.position = targetPos;
                 destinationSet = false;
                 rb.drag = 10;
+                boostAnim.SetBool("Boost", false);
             } else {
                 forceVector += (Vector2) (targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0f, 1.5f) * (dragSpeed * dragSpeedMultiplier);
+                transform.right = (targetPos - transform.position).normalized;
+                boostAnim.SetBool("Boost", true);
             }
+        } else {
+            boostAnim.SetBool("Boost", false);
         }
 
         if (isBeingPulledToCore)

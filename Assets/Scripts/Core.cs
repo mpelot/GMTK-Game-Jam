@@ -16,7 +16,9 @@ public class Core : MonoBehaviour, Selectable
     public float growthEventDuration;
     private bool isGrowthEventOccuring;
     private float growthEventTimer;
-    
+    private bool mouseOver = false;
+
+
     public float _growthLevel = 0;
     public float growthLevel
     {
@@ -41,8 +43,22 @@ public class Core : MonoBehaviour, Selectable
         isGrowthEventOccuring = false;
     }
 
+    private void OnMouseEnter() {
+        mouseOver = true;
+    }
+
+    private void OnMouseExit() {
+        mouseOver = false;
+    }
+
     void Update()
     {
+        if (selected && Input.GetMouseButtonDown(0) && !mouseOver) {
+            gm.selectedObject = null;
+            Deselect();
+        }
+
+
         growthEventTimer -= Time.deltaTime;
         if (!isGrowthEventOccuring)
         {

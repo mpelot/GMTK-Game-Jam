@@ -17,8 +17,8 @@ public class GameMangager : MonoBehaviour
             return _selectedObject;
         }
         set {
-            if (_selectedObject != null)
-                _selectedObject.Deselect();
+/*            if (_selectedObject != null)
+                _selectedObject.Deselect();*/
             _selectedObject = value;
             if (_selectedObject != null)
                 _selectedObject.Select();
