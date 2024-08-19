@@ -280,11 +280,13 @@ public class Harvester : MonoBehaviour, Selectable
 
     public void Select() {
         selected = true;
+        movable.selected = true;
         animator.SetBool("Selected", true);
     }
 
     public void Deselect() {
         selected = false;
+        movable.selected = false;
         animator.SetBool("Selected", false);
     }
 }
