@@ -13,13 +13,14 @@ public class Movable : MonoBehaviour
     public Vector3 targetPos;
     public bool selected;
     private bool mouseDown = false;
-    private bool mouseOver = false;
     public bool isBeingPulledToCore;
     private Core core;
+    private bool clickInterrupt = false;
     public float coreForce;
     [SerializeField] private Animator boostAnim;
     public bool disableInteraction = false;
-    public Collider2D targetPositionMarkerCollider;
+    [SerializeField] private Collider2D coll;
+    [SerializeField] private Collider2D targetPositionMarkerCollider;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -30,17 +31,36 @@ public class Movable : MonoBehaviour
     private void Update() {
         if (disableInteraction)
             return;
+
+        Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
+        if (Input.GetMouseButtonDown(0) && coll.OverlapPoint(mousePos)) {
+            clickInterrupt = false;
+            StartCoroutine(ClickWait());
+        }
+
+        if (Input.GetMouseButtonUp(0)) {
+            if (disableInteraction)
+                return;
+            if (!destinationSet)
+                rb.drag = 4f;
+            mouseDown = false;
+            clickInterrupt = true;
+        }
+
         if (mouseDown) {
-            Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
             targetPos = new Vector3(mousePos.x, mousePos.y);
         }
 
         if (selected) {
-            if (Input.GetMouseButtonDown(1) && !mouseOver) {
+            if (Input.GetMouseButtonDown(1) && !coll.OverlapPoint(mousePos)) {
                 destinationSet = true;
                 rb.drag = 2;
-                Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
                 targetPos = new Vector3(mousePos.x, mousePos.y);
+            }
+            if (Input.GetMouseButtonDown(1) && targetPositionMarkerCollider.OverlapPoint(mousePos)) {
+                destinationSet = false;
+                rb.drag = 4;
             }
         }
 
@@ -93,27 +113,13 @@ public class Movable : MonoBehaviour
         rb.AddForce(forceVector, ForceMode2D.Force);
     }
 
-    private void OnMouseDown() {
-        if (disableInteraction)
-            return;
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        rb.drag = 2f;
-        mouseDown = true;
-        destinationSet = false;
-    }
-
-    private void OnMouseUp() {
-        if (disableInteraction)
-            return;
-        rb.drag = 4f;
-        mouseDown = false;
-    }
-
-    private void OnMouseEnter() {
-        mouseOver = true;
-    }
-
-    private void OnMouseExit() {
-        mouseOver = false;
+    IEnumerator ClickWait() {
+        yield return new WaitForSeconds(.1f);
+        if (!clickInterrupt) {
+            mouseDown = true;
+            destinationSet = false;
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            rb.drag = 2f;
+        }
     }
 }

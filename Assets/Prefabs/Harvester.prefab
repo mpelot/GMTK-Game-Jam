@@ -181,6 +181,7 @@ MonoBehaviour:
   coreForce: 1
   boostAnim: {fileID: 3701489790110230124}
   disableInteraction: 0
+  coll: {fileID: 6795388556723819324}
   targetPositionMarkerCollider: {fileID: 1606847455171361}
 --- !u!114 &7819063478075708561
 MonoBehaviour:
@@ -572,7 +573,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 4
 --- !u!1 &8669568352981776668
 GameObject:
   m_ObjectHideFlags: 0
