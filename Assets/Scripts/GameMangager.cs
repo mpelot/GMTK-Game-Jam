@@ -9,7 +9,6 @@ public class GameMangager : MonoBehaviour
     [SerializeField] private Spawner spawner;
     public Planet planetPrefab;
     [SerializeField] private float asteroidSpeed;
-    [SerializeField] private float timeBetweenAsteroids;
     [SerializeField] private float spawnDistance;
     public Round[] rounds;
 
@@ -57,7 +56,7 @@ public class GameMangager : MonoBehaviour
         SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
         Planet planet = SpawnPlanet(135f, 15f);
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
         Camera.main.GetComponent<CameraMovement>().enabled = true;
 
         while (planet.growthLevel == planet.unstableGrowthThreshold)
@@ -83,7 +82,7 @@ public class GameMangager : MonoBehaviour
                 yield return null;
             }
 
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(2.0f);
         }
 
         StartCoroutine(StartRounds());
@@ -95,7 +94,7 @@ public class GameMangager : MonoBehaviour
         Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * spawnDistance;
 
         Spawner sp = Instantiate(spawner, position, Quaternion.identity);
-        sp.Init(alertTime, timeBetweenAsteroids, count, asteroidGrowthLevel, asteroidSpeed);
+        sp.Init(alertTime, count, asteroidGrowthLevel, asteroidSpeed);
 
         return sp;
     }
@@ -133,10 +132,10 @@ public class GameMangager : MonoBehaviour
                                 Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * spawnDistance;
 
                                 Spawner sp = Instantiate(spawner, position, Quaternion.identity);
-                                sp.Init(wave.alertTime, timeBetweenAsteroids, wave.asteroidsPerStream, wave.asteroidGrowthLevel, asteroidSpeed);
+                                sp.Init(wave.alertTime, wave.asteroidsPerStream, wave.asteroidGrowthLevel, asteroidSpeed);
                             }
 
-                            yield return new WaitForSeconds(round.timeBetweenWaves);
+                            yield return new WaitForSeconds(wave.endOfWaveTime);
                         }
                     }
                     else
@@ -148,6 +147,8 @@ public class GameMangager : MonoBehaviour
 
                         Planet planet = Instantiate(planetPrefab, position, Quaternion.identity);
                         planet.growthLevel = planet.unstableGrowthThreshold;
+
+                        yield return new WaitForSeconds(wave.endOfWaveTime);
                     }
                     
                 }
