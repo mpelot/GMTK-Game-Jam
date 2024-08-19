@@ -17,6 +17,7 @@ public class Planet : MonoBehaviour, Selectable
     public float slowdownPerGrowthLevel;
     public float scaleRate;
     public float _growthLevel = 0;
+    private bool mouseOver = false;
     public float growthLevel
     {
         get
@@ -51,6 +52,21 @@ public class Planet : MonoBehaviour, Selectable
         startingScale = transform.localScale;
     }
 
+    private void Update() {
+        if (selected && Input.GetMouseButtonDown(0) && !mouseOver) {
+            gm.selectedObject = null;
+            Deselect();
+        }
+    }
+
+    private void OnMouseEnter() {
+        mouseOver = true;
+    }
+
+    private void OnMouseExit() {
+        mouseOver = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Asteroid"))
@@ -70,8 +86,8 @@ public class Planet : MonoBehaviour, Selectable
     private void OnMouseDown() {
         if (!selected)
             gm.selectedObject = this;
-        else
-            gm.selectedObject = null;
+        /*else
+            gm.selectedObject = null;*/
     }
 
     public void Select() {

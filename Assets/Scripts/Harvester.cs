@@ -20,6 +20,7 @@ public class Harvester : MonoBehaviour, Selectable
     private SpriteRenderer spriteRenderer;
     private Vector3 startingScale;
     private Color32 startingColor;
+    private bool mouseOver = false;
     public float unstableGrowthLevel;
     public float slowdownPerGrowthLevel;
     public float scaleRate;
@@ -77,8 +78,22 @@ public class Harvester : MonoBehaviour, Selectable
         animator = GetComponent<Animator>();
     }
 
+    private void OnMouseEnter() {
+        mouseOver = true;
+    }
+
+    private void OnMouseExit() {
+        mouseOver = false;
+    }
+
     void Update()
     {
+        if (selected && Input.GetMouseButtonDown(0) && !mouseOver) {
+            gm.selectedObject = null;
+            Deselect();
+        }
+
+
         if (Input.GetMouseButtonDown(1))
         {
             if (selected)
@@ -182,9 +197,7 @@ public class Harvester : MonoBehaviour, Selectable
     }
 
     private void OnMouseDown() {
-        if (selected)
-            gm.selectedObject = null;
-        else
+        if (!selected)
             gm.selectedObject = this;
     }
 
