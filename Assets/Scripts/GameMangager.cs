@@ -8,6 +8,7 @@ public class GameMangager : MonoBehaviour
     private Selectable _selectedObject;
     [SerializeField] private Spawner spawner;
     public Planet planetPrefab;
+    public Harvester harvesterPrefab;
     [SerializeField] private float asteroidSpeed;
     [SerializeField] private float spawnDistance;
     public Round[] rounds;
@@ -15,6 +16,8 @@ public class GameMangager : MonoBehaviour
     public int startingRound;
     public Text tutorialText;
     private Coroutine currentTutorialTextCoroutine;
+    public Planet tutorialPlanet;
+    public Harvester tutorialHarvester;
 
     public Selectable selectedObject {
         get {
@@ -34,15 +37,65 @@ public class GameMangager : MonoBehaviour
     void Start()
     {
         tutorialText.text = "";
+        tutorialPlanet = GetComponentInChildren<Planet>();
+        tutorialHarvester = GetComponentInChildren<Harvester>();
         if (startingRound < 0)
         {
+            tutorialPlanet.gameObject.SetActive(true);
+            tutorialHarvester.gameObject.SetActive(true);
             startingRound = 0;
             StartCoroutine(IntroSequence());
         }
         else
         {
+            tutorialPlanet.gameObject.SetActive(false);
+            tutorialHarvester.gameObject.SetActive(false);
+            SpawnInMissingObjects();
             StartCoroutine(StartRounds());
         }
+    }
+
+    private void SpawnInMissingObjects()
+    {
+        int planetsToSpawn = 1;
+        float totalGrowth = 0;
+
+        for (int round = 0; round < startingRound; round++)
+        {
+            for (int roundRepeat = 0; roundRepeat <= rounds[round].roundRepeatCount; roundRepeat++)
+            {
+                for (int wave = 0; wave < rounds[round].waves.Length; wave++)
+                {
+                    for (int waveRepeat = 0; waveRepeat <= rounds[round].waves[wave].waveRepeatCount; waveRepeat++)
+                    {
+                        if (rounds[round].waves[wave].spawnNewPlanet)
+                        {
+                            planetsToSpawn++;
+                        }
+                        else
+                        {
+                            totalGrowth += rounds[round].waves[wave].asteroidGrowthLevel * rounds[round].waves[wave].asteroidsPerStream * rounds[round].waves[wave].numberOfStreams;
+                        }
+                    }
+                }
+            }
+        }
+
+        int harvestersToSpawn = Mathf.FloorToInt((totalGrowth / harvesterPrefab.splitThreshold) * 0.5f) + 2;
+
+        for (int i = 0; i < planetsToSpawn; i++)
+        {
+            SpawnPlanet(Random.Range(0, 360), Random.Range(4, 7), false);
+        }
+
+        for (int i = 0; i < harvestersToSpawn; i++)
+        {
+            SpawnHarvester(Random.Range(0, 360), Random.Range(4, 7));
+        }
+
+
+
+
     }
 
     public void updateUI(Selectable s) {
@@ -51,8 +104,7 @@ public class GameMangager : MonoBehaviour
 
     IEnumerator IntroSequence()
     {
-        Harvester harvester = FindFirstObjectByType<Harvester>();
-        harvester.GetComponent<Movable>().disableInteraction = true;
+        tutorialHarvester.GetComponent<Movable>().disableInteraction = true;
         Camera.main.GetComponent<CameraMovement>().enabled = false;
 
         SetTutorialText("INCOMING ASTEROID\nSTREAMS ARE\nTARGETING THE SUN\nOF A NEARBY\nSOLAR SYSTEM...");
@@ -71,17 +123,16 @@ public class GameMangager : MonoBehaviour
         SetTutorialText("THE INCREASED\nMASS IS GROWING\nTHE SUN'S CORE,\nPULLING IN NEARBY\nPLANETS...");
 
         yield return new WaitForSeconds(5f);
-
-        Planet planet = FindFirstObjectByType<Planet>();
-        planet.growthLevel = planet.unstableGrowthThreshold;
+        
+        tutorialPlanet.growthLevel = tutorialPlanet.unstableGrowthThreshold;
 
         yield return new WaitForSeconds(10f);
 
         SetTutorialText("YOU MUST MAKE USE OF THE ALIENTECH TETRADON MACHINES TO INTERCEPT THE ASTEROIDS AND PROTECT THE SUN");
 
-        harvester.GetComponent<Movable>().targetPos = new Vector3(0, 4, 0);
-        harvester.GetComponent<Movable>().destinationSet = true;
-        harvester.GetComponent<Movable>().dragSpeedMultiplier = 8f;
+        tutorialHarvester.GetComponent<Movable>().targetPos = new Vector3(0, 4, 0);
+        tutorialHarvester.GetComponent<Movable>().destinationSet = true;
+        tutorialHarvester.GetComponent<Movable>().dragSpeedMultiplier = 8f;
 
         yield return new WaitForSeconds(11f);
 
@@ -89,10 +140,10 @@ public class GameMangager : MonoBehaviour
 
         yield return new WaitForSeconds(4f);
 
-        harvester.GetComponent<Movable>().dragSpeedMultiplier = 1f;
+        tutorialHarvester.GetComponent<Movable>().dragSpeedMultiplier = 1f;
         SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
 
-        while (harvester.growthLevel == 0)
+        while (tutorialHarvester.growthLevel == 0)
         {
             yield return null;
         }
@@ -106,26 +157,26 @@ public class GameMangager : MonoBehaviour
 
         SetTutorialText("...THEN DRAG WITH RIGHT CLICK TO FIRE ARDIUM INTO THE SUN'S CORE");
         
-        while (harvester.growthLevel > 0)
+        while (tutorialHarvester.growthLevel > 0)
         {
             yield return null;
         }
         yield return new WaitForSeconds(2.0f);
-        harvester.ClearFiringPath();
+        tutorialHarvester.ClearFiringPath();
 
         SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
-        planet = SpawnPlanet(135f, 15f);
+        tutorialPlanet = SpawnPlanet(135f, 15f);
 
         yield return new WaitForSeconds(2f);
         SetTutorialText("FIRE ARDIUM INTO THE INCOMING PLANET TO SAVE IT FROM THE SUN!\n(PAN THE CAMERA WITH MIDDLE MOUSE CLICK).");
         Camera.main.GetComponent<CameraMovement>().enabled = true;
 
-        while (planet.growthLevel == planet.unstableGrowthThreshold)
+        while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold)
         {
             yield return null;
         }
 
-        while (harvester.growthLevel > 0)
+        while (tutorialHarvester.growthLevel > 0)
         {
             yield return null;
         }
@@ -143,7 +194,7 @@ public class GameMangager : MonoBehaviour
         yield return new WaitForSeconds(4f);
         FindAnyObjectByType<Core>().disableGrowing = true;
 
-        while (harvester.growthLevel == 0)
+        while (tutorialHarvester.growthLevel == 0)
             {
             Spawner sp = SpawnAsteroidStream(180f, spawnDistance, 10f, 5, 1.0f);
 
@@ -184,9 +235,9 @@ public class GameMangager : MonoBehaviour
 
         Harvester[] harvesters = FindObjectsByType<Harvester>(FindObjectsSortMode.None);
 
-        foreach (Harvester found_harvester in harvesters)
+        foreach (Harvester harvester in harvesters)
         {
-            found_harvester.GetComponent<Movable>().disableInteraction = false;
+            harvester.GetComponent<Movable>().disableInteraction = false;
         }
         while (! isPassingThroughOrigin(harvesters[0].transform.position, harvesters[1].transform.position, 1f))
         {
@@ -268,14 +319,31 @@ public class GameMangager : MonoBehaviour
         return sp;
     }
 
-    private Planet SpawnPlanet(float angle, float spawnDistance)
+    private Planet SpawnPlanet(float angle, float spawnDistance, bool isUnstable = true)
     {
         Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * spawnDistance;
 
         Planet planet = Instantiate(planetPrefab, position, Quaternion.identity);
-        planet.growthLevel = planet.unstableGrowthThreshold;
+        if (isUnstable)
+        {
+            planet.growthLevel = planet.unstableGrowthThreshold;
+        }
+        else
+        {
+            planet.growthLevel = 0f;
+        }
+            
 
         return planet;
+    }
+
+    private Harvester SpawnHarvester(float angle, float spawnDistance)
+    {
+        Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * spawnDistance;
+
+        Harvester harvester = Instantiate(harvesterPrefab, position, Quaternion.identity);
+
+        return harvester;
     }
 
     IEnumerator StartRounds()
@@ -285,13 +353,15 @@ public class GameMangager : MonoBehaviour
             for (int roundRepeat = 0; roundRepeat <= rounds[round].roundRepeatCount; roundRepeat++)
             {
                 yield return new WaitForSeconds(rounds[round].startOfRoundTime);
-                foreach (Wave wave in rounds[round].waves)
+                for (int currentWave = 0; currentWave < rounds[round].waves.Length; currentWave++)
                 {
+                    Wave wave = rounds[round].waves[currentWave];
                     if (! wave.spawnNewPlanet)
                     {
                         for (int waveRepeat = 0; waveRepeat <= wave.waveRepeatCount; waveRepeat++)
                         {
-
+                            Debug.Log("Round: " + round + "(" + roundRepeat + "/" + rounds[round].roundRepeatCount + ")" +
+                            ", Wave: " + currentWave + "(" + waveRepeat + "/" + wave.waveRepeatCount + ")");
                             yield return new WaitForSeconds(wave.startOfWaveTime);
 
                             for (int stream = 0; stream < wave.numberOfStreams; stream++)
