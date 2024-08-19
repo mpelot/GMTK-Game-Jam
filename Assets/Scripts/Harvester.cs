@@ -33,6 +33,7 @@ public class Harvester : MonoBehaviour, Selectable
     private CircleCollider2D circleCollider;
     public Arrow arrow;
     private Rigidbody2D rb;
+    public GameObject chargeIndicator;
     public float growthLevel
     {
         get
@@ -60,8 +61,12 @@ public class Harvester : MonoBehaviour, Selectable
             {
                 movable.isBeingPulledToCore = false;
                 warningSymbol.SetActive(false);
+
+                float chargeIndicatorScale = growthLevel / splitThreshold;
+                chargeIndicatorScale = Mathf.Clamp(chargeIndicatorScale, 0, 0.9f);
+                chargeIndicator.transform.localScale = new Vector3(chargeIndicatorScale, chargeIndicatorScale, 1);
             }
-            _percentage = (int)(growthLevel / unstableGrowthLevel * 100);
+            _percentage = (int)(growthLevel / splitThreshold * 100);
             if (selected)
                 gm.updateUI(this);
         }
@@ -93,6 +98,7 @@ public class Harvester : MonoBehaviour, Selectable
         arrow.gameObject.SetActive(false);
         warningSymbol.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
+        chargeIndicator.transform.localScale = new Vector3(0, 0, 1);
     }
 
     private void OnMouseEnter() {
