@@ -562,6 +562,10 @@ MonoBehaviour:
   zoomStep: 1
   minSize: 1
   maxSize: 10
+  minX: -20
+  maxX: 20
+  minY: -20
+  maxY: 20
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
