@@ -29,6 +29,7 @@ public class Harvester : MonoBehaviour, Selectable
     private float mouseDownTimer = 0f;
     private float ignoreDeselectTimer = 0f;
     private CircleCollider2D circleCollider;
+    public Arrow arrow;
     public float growthLevel
     {
         get
@@ -86,6 +87,7 @@ public class Harvester : MonoBehaviour, Selectable
         movable = GetComponent<Movable>();
         animator = GetComponent<Animator>();
         circleCollider = GetComponent<CircleCollider2D>();
+        arrow.gameObject.SetActive(false);
     }
 
     private void OnMouseEnter() {
@@ -146,6 +148,7 @@ public class Harvester : MonoBehaviour, Selectable
             if (shotVelocity.magnitude < minimumShotVelocity)
             {
                 ClearFiringPath();
+                arrow.gameObject.SetActive(false);
             }
             else
             {
@@ -155,6 +158,10 @@ public class Harvester : MonoBehaviour, Selectable
                 }
                 trajectoryLine.Show();
                 trajectoryLine.startingVelocity = shotVelocity;
+
+                arrow.gameObject.SetActive(true);
+                arrow.SetSize(shotVelocity.magnitude / 4.25f);
+                arrow.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(shotVelocity.y, shotVelocity.x) * Mathf.Rad2Deg);
 
                 float shotVelcoityScale = (shotVelocity.magnitude - minimumShotVelocity) / (maximumShotVelocity - minimumShotVelocity);
                 trajectoryLine.lineRenderer.textureScale = new Vector2((-5f * shotVelcoityScale) + 8, 1f);
@@ -203,6 +210,7 @@ public class Harvester : MonoBehaviour, Selectable
         {
             trajectoryLine.Hide();
         }
+        arrow.gameObject.SetActive(false);
     }
 
     public void ClearFiringPath()
