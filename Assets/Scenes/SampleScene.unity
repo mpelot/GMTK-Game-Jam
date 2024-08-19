@@ -1609,6 +1609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   growthFromPlanet: 3
+  growthLimit: 30
   scaleRate: 0.1
   disableGrowing: 0
   secondsBetweenGrowthEvent: 5

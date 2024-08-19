@@ -25,6 +25,7 @@ public class Harvester : MonoBehaviour, Selectable
     public float slowdownPerGrowthLevel;
     public float scaleRate;
     public float _growthLevel = 0;
+    private int _percentage = 0;
     private Animator animator;
     private float mouseDownTimer = 0f;
     private float ignoreDeselectTimer = 0f;
@@ -66,12 +67,21 @@ public class Harvester : MonoBehaviour, Selectable
                 GameObject spawnedHarvester = Instantiate(gameObject, transform.position, Quaternion.identity);
                 spawnedHarvester.GetComponent<Rigidbody2D>().velocity = new Vector2(0.1f, 0.1f);
             }
+            _percentage = (int)(growthLevel / unstableGrowthLevel * 100);
+            if (selected)
+                gm.updateUI(this);
         }
     }
 
     public GameObject gameObj {
         get {
             return gameObject;
+        }
+    }
+
+    public int percentage {
+        get {
+            return _percentage;
         }
     }
 

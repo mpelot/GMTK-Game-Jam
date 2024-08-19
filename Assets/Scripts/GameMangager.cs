@@ -42,6 +42,10 @@ public class GameMangager : MonoBehaviour
         }
     }
 
+    public void updateUI(Selectable s) {
+        guiController.changeSelected(s);
+    }
+
     IEnumerator IntroSequence()
     {
         Harvester harvester = FindFirstObjectByType<Harvester>();
