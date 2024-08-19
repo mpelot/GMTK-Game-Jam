@@ -13,8 +13,8 @@ public class WarningSymbol : MonoBehaviour
         parentObject = transform.parent;
         mainCamera = Camera.main;
         circleCollider = GetComponent<CircleCollider2D>();
-        initialRotation = transform.rotation;
-        initialOffset = transform.position - parentObject.position;
+        initialRotation = Quaternion.Euler(Vector3.zero);
+        initialOffset = new Vector2(0, 1.61f);
     }
 
     void Update()

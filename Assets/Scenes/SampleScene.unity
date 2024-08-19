@@ -203,7 +203,7 @@ MonoBehaviour:
       numberOfStreams: 1
       asteroidsPerStream: 5
       asteroidGrowthLevel: 1
-      waveRepeatCount: 1
+      waveRepeatCount: 2
       endOfWaveTime: 10
     - startOfWaveTime: 3
       spawnNewPlanet: 0
@@ -218,11 +218,11 @@ MonoBehaviour:
     waves:
     - startOfWaveTime: 3
       spawnNewPlanet: 1
-      alertTime: 8
-      numberOfStreams: 1
-      asteroidsPerStream: 5
-      asteroidGrowthLevel: 1
-      waveRepeatCount: 1
+      alertTime: 0
+      numberOfStreams: 0
+      asteroidsPerStream: 0
+      asteroidGrowthLevel: 0
+      waveRepeatCount: 0
       endOfWaveTime: 15
     - startOfWaveTime: 3
       spawnNewPlanet: 0
@@ -230,7 +230,15 @@ MonoBehaviour:
       numberOfStreams: 1
       asteroidsPerStream: 5
       asteroidGrowthLevel: 2
-      waveRepeatCount: 1
+      waveRepeatCount: 0
+      endOfWaveTime: 15
+    - startOfWaveTime: 3
+      spawnNewPlanet: 0
+      alertTime: 12
+      numberOfStreams: 2
+      asteroidsPerStream: 5
+      asteroidGrowthLevel: 2
+      waveRepeatCount: 0
       endOfWaveTime: 15
     roundRepeatCount: 1
   guiController: {fileID: 1544497579}
