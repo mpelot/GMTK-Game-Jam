@@ -245,16 +245,9 @@ public class GameMangager : MonoBehaviour
         }
         FindAnyObjectByType<Core>().disableGrowing = false;
 
-        SetTutorialText("WARNING: INCOMING ASTEROID STORM DETECTED. PREPARE FOR IMPACT.");
+        SetTutorialText("WARNING: INCOMING ASTEROID STORM DETECTED. PREPARE FOR IMPACT.", 5.0f);
 
-        yield return new WaitForSeconds(5f);
-
-        SetTutorialText("");
-
-        yield return new WaitForSeconds(2f);
-
-        StopCoroutine(currentTutorialTextCoroutine);
-        tutorialText.text = "";
+        yield return new WaitForSeconds(7.0f);
 
         StartCoroutine(StartRounds());
     }
@@ -266,6 +259,16 @@ public class GameMangager : MonoBehaviour
             StopCoroutine(currentTutorialTextCoroutine);
         }
         currentTutorialTextCoroutine = StartCoroutine(SetTutorialTextCoroutine(text));
+    }
+
+    void SetTutorialText(string text, float duration)
+    {
+        if (currentTutorialTextCoroutine != null)
+        {
+            StopCoroutine(currentTutorialTextCoroutine);
+        }
+        currentTutorialTextCoroutine = StartCoroutine(SetTutorialTextCoroutine(text));
+        StartCoroutine(ClearTutorialTextCoroutine(duration));
     }
 
     IEnumerator SetTutorialTextCoroutine(string text)
@@ -294,6 +297,19 @@ public class GameMangager : MonoBehaviour
         }
         
 
+    }
+
+    IEnumerator ClearTutorialTextCoroutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        if (currentTutorialTextCoroutine != null)
+        {
+            StopCoroutine(currentTutorialTextCoroutine);
+        }
+        currentTutorialTextCoroutine = StartCoroutine(SetTutorialTextCoroutine(""));
+        yield return new WaitForSeconds(2.0f);
+        StopCoroutine(currentTutorialTextCoroutine);
+        tutorialText.text = "";
     }
 
     bool isPassingThroughOrigin(Vector2 startPos, Vector2 endPos, float distanceThreshold)
@@ -356,12 +372,19 @@ public class GameMangager : MonoBehaviour
                 for (int currentWave = 0; currentWave < rounds[round].waves.Length; currentWave++)
                 {
                     Wave wave = rounds[round].waves[currentWave];
+                    if (wave.tutorialText != "")
+                    {
+                        SetTutorialText(wave.tutorialText);
+                    }
+
                     if (! wave.spawnNewPlanet)
                     {
                         for (int waveRepeat = 0; waveRepeat <= wave.waveRepeatCount; waveRepeat++)
                         {
                             Debug.Log("Round: " + round + "(" + roundRepeat + "/" + rounds[round].roundRepeatCount + ")" +
                             ", Wave: " + currentWave + "(" + waveRepeat + "/" + wave.waveRepeatCount + ")");
+                            
+                                
                             yield return new WaitForSeconds(wave.startOfWaveTime);
 
                             for (int stream = 0; stream < wave.numberOfStreams; stream++)
@@ -375,6 +398,7 @@ public class GameMangager : MonoBehaviour
                             }
 
                             yield return new WaitForSeconds(wave.endOfWaveTime);
+                            
                         }
                     }
                     else
@@ -391,10 +415,15 @@ public class GameMangager : MonoBehaviour
                             Planet planet = Instantiate(planetPrefab, position, Quaternion.identity);
                             planet.growthLevel = planet.unstableGrowthThreshold;
 
+                            
+
                             yield return new WaitForSeconds(wave.endOfWaveTime);
                         }
                     }
-                    
+
+                    if (wave.tutorialText != "")
+                        StartCoroutine(ClearTutorialTextCoroutine(0.0f));
+
                 }
             }
         }

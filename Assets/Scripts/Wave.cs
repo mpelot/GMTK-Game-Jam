@@ -11,6 +11,7 @@ public class Wave
     public int numberOfStreams = 1;
     public int asteroidsPerStream = 5;
     public float asteroidGrowthLevel = 1.0f;
+    public string tutorialText;
     public int waveRepeatCount;
     public float endOfWaveTime;
 }
