@@ -245,7 +245,7 @@ MonoBehaviour:
       endOfWaveTime: 15
     roundRepeatCount: 1
   guiController: {fileID: 1544497579}
-  startingRound: 1
+  startingRound: 2
   tutorialText: {fileID: 1187603482}
   tutorialPlanet: {fileID: 0}
   tutorialHarvester: {fileID: 0}

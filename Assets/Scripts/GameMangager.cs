@@ -379,15 +379,20 @@ public class GameMangager : MonoBehaviour
                     }
                     else
                     {
-                        yield return new WaitForSeconds(wave.startOfWaveTime);
+                        for (int waveRepeat = 0; waveRepeat <= wave.waveRepeatCount; waveRepeat++)
+                        {
+                            Debug.Log("Round: " + round + "(" + roundRepeat + "/" + rounds[round].roundRepeatCount + ")" +
+                            ", Wave: " + currentWave + "(" + waveRepeat + "/" + wave.waveRepeatCount + ") (New Planet!)");
+                            yield return new WaitForSeconds(wave.startOfWaveTime);
 
-                        float angle = Random.Range(0, 360);
-                        Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * spawnDistance;
+                            float angle = Random.Range(0, 360);
+                            Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * spawnDistance;
 
-                        Planet planet = Instantiate(planetPrefab, position, Quaternion.identity);
-                        planet.growthLevel = planet.unstableGrowthThreshold;
+                            Planet planet = Instantiate(planetPrefab, position, Quaternion.identity);
+                            planet.growthLevel = planet.unstableGrowthThreshold;
 
-                        yield return new WaitForSeconds(wave.endOfWaveTime);
+                            yield return new WaitForSeconds(wave.endOfWaveTime);
+                        }
                     }
                     
                 }

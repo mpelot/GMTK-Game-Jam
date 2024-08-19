@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c8af310c8e2124da241ee0bf670dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coreForce: 2.25
+  coreForce: 3.2
   planetForce: 0.6
   maxDistance: 22
   scaleRate: 0.1
