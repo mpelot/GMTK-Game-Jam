@@ -26,6 +26,8 @@ public class Harvester : MonoBehaviour, Selectable
     public float scaleRate;
     public float _growthLevel = 0;
     private Animator animator;
+    private float mouseDownTimer = 0f;
+    private float ignoreDeselectTimer = 0f;
     public float growthLevel
     {
         get
@@ -94,10 +96,29 @@ public class Harvester : MonoBehaviour, Selectable
 
     void Update()
     {
-        if (selected && Input.GetMouseButtonDown(0) && !mouseOver) {
-            if (gm.selectedObject.Equals(this))
-                gm.selectedObject = null;
-            Deselect();
+        mouseDownTimer += Time.deltaTime;
+        ignoreDeselectTimer += Time.deltaTime;
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (mouseDownTimer < 0.2f && ignoreDeselectTimer > 0.3f)
+            {
+                if (selected)
+                {
+                    if (gm.selectedObject.Equals(this))
+                        gm.selectedObject = null;
+                    Deselect();
+                }
+            }
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            mouseDownTimer = 0f;
+            if (selected && !mouseOver)
+            {
+                if (gm.selectedObject.Equals(this))
+                    gm.selectedObject = null;
+                Deselect();
+            }
         }
 
 
@@ -205,7 +226,11 @@ public class Harvester : MonoBehaviour, Selectable
 
     private void OnMouseDown() {
         if (!selected)
+        {
             gm.selectedObject = this;
+            ignoreDeselectTimer = 0.0f;
+        }
+            
     }
 
     public void Select() {
