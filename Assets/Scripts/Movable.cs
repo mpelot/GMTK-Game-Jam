@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Movable : MonoBehaviour
 {
@@ -12,11 +13,13 @@ public class Movable : MonoBehaviour
     public Vector3 targetPos;
     public bool selected;
     private bool mouseDown = false;
+    private bool mouseOver = false;
     public bool isBeingPulledToCore;
     private Core core;
     public float coreForce;
     [SerializeField] private Animator boostAnim;
     public bool disableInteraction = false;
+    public Collider2D targetPositionMarkerCollider;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -33,12 +36,20 @@ public class Movable : MonoBehaviour
         }
 
         if (selected) {
-            if (Input.GetMouseButtonDown(1)) {
+            if (Input.GetMouseButtonDown(1) && !mouseOver) {
                 destinationSet = true;
                 rb.drag = 2;
                 Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
                 targetPos = new Vector3(mousePos.x, mousePos.y);
             }
+        }
+
+        if (destinationSet && selected) {
+            targetPositionMarkerCollider.transform.position = targetPos;
+            targetPositionMarkerCollider.transform.rotation = Quaternion.identity;
+            targetPositionMarkerCollider.gameObject.SetActive(true);
+        } else {
+            targetPositionMarkerCollider.gameObject.SetActive(false);
         }
     }
 
@@ -48,10 +59,10 @@ public class Movable : MonoBehaviour
             if (disableInteraction)
                 return;
             if ((targetPos - transform.position).magnitude < 0.01f) {
-                rb.drag = 10;
+                rb.drag = rb.velocity.magnitude * 3f;
                 boostAnim.SetBool("Boost", false);
             } else {
-                forceVector += (Vector2) (targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0f, 1.5f) * (dragSpeed * dragSpeedMultiplier);
+                forceVector += (Vector2) (targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0.5f, 1.5f) * (dragSpeed * dragSpeedMultiplier);
                 transform.right = (targetPos - transform.position).normalized;
                 boostAnim.SetBool("Boost", true);
             }
@@ -62,7 +73,7 @@ public class Movable : MonoBehaviour
                 rb.drag = 10;
                 boostAnim.SetBool("Boost", false);
             } else {
-                forceVector += (Vector2) (targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0f, 1.5f) * (dragSpeed * dragSpeedMultiplier);
+                forceVector += (Vector2) (targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0.5f, 1.5f) * (dragSpeed * dragSpeedMultiplier);
                 transform.right = (targetPos - transform.position).normalized;
                 boostAnim.SetBool("Boost", true);
             }
@@ -96,5 +107,13 @@ public class Movable : MonoBehaviour
             return;
         rb.drag = 4f;
         mouseDown = false;
+    }
+
+    private void OnMouseEnter() {
+        mouseOver = true;
+    }
+
+    private void OnMouseExit() {
+        mouseOver = false;
     }
 }
