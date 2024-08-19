@@ -28,6 +28,7 @@ public class Harvester : MonoBehaviour, Selectable
     private Animator animator;
     private float mouseDownTimer = 0f;
     private float ignoreDeselectTimer = 0f;
+    private CircleCollider2D circleCollider;
     public float growthLevel
     {
         get
@@ -74,7 +75,7 @@ public class Harvester : MonoBehaviour, Selectable
         }
     }
 
-    void Start()
+    void Awake()
     {
         gm = FindAnyObjectByType<GameMangager>();
         trajectoryLine.Hide();
@@ -84,6 +85,7 @@ public class Harvester : MonoBehaviour, Selectable
         startingColor = spriteRenderer.color;
         movable = GetComponent<Movable>();
         animator = GetComponent<Animator>();
+        circleCollider = GetComponent<CircleCollider2D>();
     }
 
     private void OnMouseEnter() {
@@ -126,7 +128,15 @@ public class Harvester : MonoBehaviour, Selectable
         {
             if (selected)
             {
-                isAiming = true;
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (circleCollider.OverlapPoint(mousePos))
+                {
+                    StartAiming();
+                }
+                else
+                {
+                    StopAiming();
+                }
             }
         }
         if (isAiming)
@@ -170,17 +180,20 @@ public class Harvester : MonoBehaviour, Selectable
 
     public IEnumerator FireLoop(Vector2 shotVelocity)
     {
-        while (isFiringPathSet)
+        while (growthLevel > 0 && isFiringPathSet)
         {
-            if (growthLevel > 0)
-            {
-                GameObject spawnedShrinkRock = Instantiate(shrinkRockPrefab, transform.position, Quaternion.identity);
-                spawnedShrinkRock.GetComponent<Rigidbody2D>().velocity = shotVelocity;
-                ignoredColliders.Add(spawnedShrinkRock.GetComponent<Collider2D>());
-                growthLevel--;
-            }
+            GameObject spawnedShrinkRock = Instantiate(shrinkRockPrefab, transform.position, Quaternion.identity);
+            spawnedShrinkRock.GetComponent<Rigidbody2D>().velocity = shotVelocity;
+            ignoredColliders.Add(spawnedShrinkRock.GetComponent<Collider2D>());
+            growthLevel--;
             yield return new WaitForSeconds(shotCooldown);
         }
+        ClearFiringPath();
+    }
+
+    void StartAiming()
+    {
+        isAiming = true;
     }
 
     void StopAiming()

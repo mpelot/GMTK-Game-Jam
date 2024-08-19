@@ -5,12 +5,16 @@ public class WarningSymbol : MonoBehaviour
     private Transform parentObject;
     private Camera mainCamera;
     private CircleCollider2D circleCollider;
+    private Quaternion initialRotation;
+    private Vector2 initialOffset;
 
     private void Start()
     {
         parentObject = transform.parent;
         mainCamera = Camera.main;
         circleCollider = GetComponent<CircleCollider2D>();
+        initialRotation = transform.rotation;
+        initialOffset = transform.position - parentObject.position;
     }
 
     void Update()
@@ -19,6 +23,7 @@ public class WarningSymbol : MonoBehaviour
 
         // Convert parent's position to screen space
         Vector3 parentScreenPosition = mainCamera.WorldToScreenPoint(parentObject.position);
+        parentScreenPosition += (Vector3)initialOffset;
 
         // Calculate the collider radius in screen space
         float radiusInWorldUnits = circleCollider.radius * transform.localScale.x; // assuming uniform scaling
@@ -31,7 +36,7 @@ public class WarningSymbol : MonoBehaviour
         if (isOnScreen)
         {
             // If the parent is on screen, follow the parent
-            transform.position = parentObject.position;
+            transform.position = parentObject.position + (Vector3)initialOffset;
         }
         else
         {
@@ -49,6 +54,9 @@ public class WarningSymbol : MonoBehaviour
             // Update the position of the StayOnScreen object
             transform.position = worldPosition;
         }
+
+        // Always retain the original rotation
+        transform.rotation = initialRotation;
     }
 
     private Vector3 FindIntersectionWithScreenEdges(Vector3 origin, Vector3 direction, float radiusInScreenUnits)
