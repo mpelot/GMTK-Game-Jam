@@ -12,6 +12,7 @@ public class GameMangager : MonoBehaviour
     [SerializeField] private float spawnDistance;
     public Round[] rounds;
     [SerializeField] private GUIController guiController;
+    public int startingRound;
 
     public Selectable selectedObject {
         get {
@@ -30,7 +31,15 @@ public class GameMangager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(StartRounds());
+        if (startingRound < 0)
+        {
+            startingRound = 0;
+            StartCoroutine(IntroSequence());
+        }
+        else
+        {
+            StartCoroutine(StartRounds());
+        }
     }
 
     IEnumerator IntroSequence()
@@ -113,12 +122,12 @@ public class GameMangager : MonoBehaviour
 
     IEnumerator StartRounds()
     {
-        foreach (Round round in rounds)
+        for (int round = startingRound; round < rounds.Length; round++)
         {
-            for (int roundRepeat = 0; roundRepeat <= round.roundRepeatCount; roundRepeat++)
+            for (int roundRepeat = 0; roundRepeat <= rounds[round].roundRepeatCount; roundRepeat++)
             {
-                yield return new WaitForSeconds(round.startOfRoundTime);
-                foreach (Wave wave in round.waves)
+                yield return new WaitForSeconds(rounds[round].startOfRoundTime);
+                foreach (Wave wave in rounds[round].waves)
                 {
                     if (! wave.spawnNewPlanet)
                     {

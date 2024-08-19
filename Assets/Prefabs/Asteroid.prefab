@@ -131,7 +131,7 @@ MonoBehaviour:
   coreForce: 2.25
   planetForce: 0.6
   maxDistance: 22
-  scaleRate: 0.05
+  scaleRate: 0.1
   _growthLevel: 1
   parentTrajectoryLine: {fileID: 0}
   spawner: {fileID: 0}
