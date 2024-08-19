@@ -166,7 +166,6 @@ MonoBehaviour:
   spawner: {fileID: 4123538215520549574, guid: 594195e5ffd540f44a6a966a31438cf2, type: 3}
   planetPrefab: {fileID: 1370430673509114698, guid: 676db081c7e3a7641ab7ffa1d481849b, type: 3}
   asteroidSpeed: 0.75
-  timeBetweenAsteroids: 0.7
   spawnDistance: 20
   rounds:
   - startOfRoundTime: 0
@@ -178,7 +177,7 @@ MonoBehaviour:
       asteroidsPerStream: 5
       asteroidGrowthLevel: 1
       waveRepeatCount: 5
-    timeBetweenWaves: 0
+      endOfWaveTime: 0
     roundRepeatCount: 0
   guiController: {fileID: 769519367}
 --- !u!1 &80153462
@@ -1279,8 +1278,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 450, y: -150}
-  m_SizeDelta: {x: 800, y: 800}
+  m_AnchoredPosition: {x: 220, y: -80}
+  m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1913855124
 GameObject:
@@ -1299,7 +1298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1913855125
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1578,7 +1577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2094655803
 MonoBehaviour:
   m_ObjectHideFlags: 0
