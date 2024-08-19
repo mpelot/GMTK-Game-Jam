@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class GUIController : MonoBehaviour
 {
     [SerializeField] private Image selectedName;
-    [SerializeField] private TMPro.TextMeshProUGUI description;
-    [SerializeField] private TMPro.TextMeshProUGUI percentage;
+    [SerializeField] private Text description;
+    [SerializeField] private Text percentage;
 
     [SerializeField] private Sprite planetName;
     [SerializeField] private Sprite tetradonName;
@@ -22,22 +22,30 @@ public class GUIController : MonoBehaviour
     public void changeSelected(Selectable selectedObject) {
         if (selectedObject == null) {
             selectedName.enabled = false;
+            description.enabled = false;
+            percentage.enabled = false;
             description.text = "";
             percentage.text = "";
         } else if (selectedObject.gameObj.tag.Equals("Planet")) {
             selectedName.sprite = planetName;
             selectedName.enabled = true;
-            description.text = "";
+            description.enabled = true;
+            percentage.enabled = true;
+            description.text = "CAN REDIRECT INCOMING ASTEROIDS";
             percentage.text = "";
         } else if (selectedObject.gameObj.tag.Equals("Harvester")) {
             selectedName.sprite = tetradonName;
             selectedName.enabled = true;
-            description.text = "";
+            description.enabled = true;
+            percentage.enabled = true;
+            description.text = "CAN HARVEST ARDIUM";
             percentage.text = "";
         } else if (selectedObject.gameObj.tag.Equals("Core")) {
             selectedName.sprite = sunName;
             selectedName.enabled = true;
-            description.text = "";
+            description.enabled = true;
+            percentage.enabled = true;
+            description.text = "PROTECT AT ALL COSTS";
             percentage.text = "";
         }
     }
