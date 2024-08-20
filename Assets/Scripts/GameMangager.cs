@@ -20,6 +20,7 @@ public class GameMangager : MonoBehaviour
     private Coroutine currentTutorialTextCoroutine;
     public Planet tutorialPlanet;
     public Harvester tutorialHarvester;
+    public TutorialPositionMarker tutorialPositionMarker;
     private Core core;
 
     public Selectable selectedObject {
@@ -42,6 +43,8 @@ public class GameMangager : MonoBehaviour
         tutorialText.text = "";
         tutorialPlanet = GetComponentInChildren<Planet>();
         tutorialHarvester = GetComponentInChildren<Harvester>();
+        tutorialPositionMarker = GetComponentInChildren<TutorialPositionMarker>();
+        tutorialPositionMarker.gameObject.SetActive(false);
         core = FindFirstObjectByType<Core>();
         if (startingRound < 0)
         {
@@ -305,25 +308,9 @@ public class GameMangager : MonoBehaviour
 
         SetTutorialText("YOU CAN POSITION THE GRAVITATIONAL PULL OF THE PLANET TO REDIRECT INCOMING ASTEROIDS INTO THE TETRADON!");
         yield return new WaitForSeconds(4f);
+        tutorialPositionMarker.gameObject.SetActive(true);
 
-        while (tutorialPlanet == null)
-        {
-            SetTutorialText("BE CAREFUL NOT TO LET PLANETS FALL INTO THE SUN! SHRINK THEM WITH ARDIUM TO PREVENT THIS.");
-            SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
-            tutorialPlanet = SpawnPlanet(135f, 15f);
-            while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
-            {
-                yield return null;
-                if (tutorialHarvester.growthLevel == 0)
-                {
-                    SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
-                    yield return new WaitForSeconds(5f);
-                }
-            }
-            yield return new WaitForSeconds(1f);
-            SetTutorialText("YOU CAN POSITION THE GRAVITATIONAL PULL OF THE PLANET TO REDIRECT INCOMING ASTEROIDS INTO THE TETRADON!");
-        }
-
+        
         FindAnyObjectByType<Core>().disableGrowing = true;
 
         while (tutorialHarvester.growthLevel == 0)
@@ -335,6 +322,7 @@ public class GameMangager : MonoBehaviour
                 yield return null;
                 while (tutorialPlanet == null)
                 {
+                    tutorialPositionMarker.gameObject.SetActive(false);
                     SetTutorialText("BE CAREFUL NOT TO LET PLANETS FALL INTO THE SUN! SHRINK THEM WITH ARDIUM TO PREVENT THIS.");
                     SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
                     tutorialPlanet = SpawnPlanet(135f, 15f);
@@ -348,17 +336,21 @@ public class GameMangager : MonoBehaviour
                         }
                     }
                     yield return new WaitForSeconds(1f);
+                    SetTutorialText("YOU CAN POSITION THE GRAVITATIONAL PULL OF THE PLANET TO REDIRECT INCOMING ASTEROIDS INTO THE TETRADON!");
+                    tutorialPositionMarker.gameObject.SetActive(true);
                 }
             }
 
             yield return new WaitForSeconds(2.0f);
         }
 
+        tutorialPositionMarker.gameObject.SetActive(false);
+
         SetTutorialText("CONTINUE TO FEED ASTEROIDS INTO THE TETRADON TO GROW IT TO FULL SIZE");
 
         while (tutorialHarvester.growthLevel < tutorialHarvester.splitThreshold)
         {
-            Spawner sp = SpawnAsteroidStream(180f, spawnDistance, 0f, 5, 1.0f);
+            Spawner sp = SpawnAsteroidStream(180f - Random.Range(-20f, 20f) , spawnDistance, 7f, 5, 1.0f);
 
             while (sp != null)
             {
@@ -382,7 +374,7 @@ public class GameMangager : MonoBehaviour
                 }
             }
 
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(7f);
         }
 
         yield return new WaitForSeconds(1.0f);
@@ -408,16 +400,19 @@ public class GameMangager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        tutorialHarvester.GetComponent<Movable>().disableInteraction = false;
+        Harvester[] harvesters = FindObjectsByType<Harvester>(FindObjectsSortMode.None);
+
+        foreach (Harvester harvester in harvesters)
+        {
+            harvester.GetComponent<Movable>().disableInteraction = false;
+        }
 
         SetTutorialText("BALANCING THE GROWTH OF TETRADONS AND KEEPING THE SUN'S CORE STABLE IS KEY TO SAVING THE SOLAR SYSTEM.");
 
         yield return new WaitForSeconds(9f);
 
         SetTutorialText("TO PREPARE FOR THE INCOMING ASTEROID STORM, POSITION YOUR TETRADONS ON EITHER SIDE OF THE SUN TO COVER THE MOST GROUND.");
-
-
-        Harvester[] harvesters = FindObjectsByType<Harvester>(FindObjectsSortMode.None);
+        
         while (! isPassingThroughOrigin(harvesters[0].transform.position, harvesters[1].transform.position, 1f) && FindObjectsByType<Harvester>(FindObjectsSortMode.None).Length > 1)
         {
             yield return null;
