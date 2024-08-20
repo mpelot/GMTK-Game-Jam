@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
     public Asteroid asteroid;
     public Core core;
     public TrajectoryLine trajectoryLine;
+    public WarningSymbol warningSymbol;
     private int asteroidsOnTrajectoryLine;
 
     public void Init(float alertTime, int count, float asteroidGrowthLevel, float asteroidSpawnSpeed) {
@@ -15,6 +16,8 @@ public class Spawner : MonoBehaviour
         trajectoryLine.growthLevel = asteroidGrowthLevel;
         trajectoryLine.Show();
         asteroidsOnTrajectoryLine = count;
+        Vector3 initialWarningSymbolScale = warningSymbol.transform.localScale;
+        warningSymbol.transform.localScale = initialWarningSymbolScale * ((asteroidGrowthLevel * 0.1f) + 0.9f);
         float timeBetweenAsteroids = 0.7f / asteroidSpawnSpeed;
         StartCoroutine(SpawnWave(alertTime, timeBetweenAsteroids, count, asteroidGrowthLevel, asteroidSpawnSpeed));
     }

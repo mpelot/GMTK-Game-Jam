@@ -49,6 +49,7 @@ MonoBehaviour:
   asteroid: {fileID: 2354696616855961990, guid: d40eb5c35ac0def4d91ae73c42dae24f, type: 3}
   core: {fileID: 0}
   trajectoryLine: {fileID: 4348236201198097972}
+  warningSymbol: {fileID: 6049568019679679255}
 --- !u!1 &9167426660552765945
 GameObject:
   m_ObjectHideFlags: 0
