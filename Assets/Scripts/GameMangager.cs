@@ -13,6 +13,7 @@ public class GameMangager : MonoBehaviour
     [SerializeField] private float spawnDistance;
     public Round[] rounds;
     [SerializeField] private GUIController guiController;
+    [SerializeField] private GameObject loseScreen;
     public int startingRound;
     public Text tutorialText;
     public Image screenFade;
@@ -480,9 +481,11 @@ public class GameMangager : MonoBehaviour
     }
 
     IEnumerator LoseSequence() {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
-        //guiController.showLoseScreen();
+        loseScreen.SetActive(true);
+        Time.timeScale = 0f;
+        guiController.gameObject.SetActive(false);
     }
 
     IEnumerator ClearTutorialTextCoroutine(float duration)

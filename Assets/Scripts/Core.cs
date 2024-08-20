@@ -12,6 +12,7 @@ public class Core : MonoBehaviour, Selectable
     private int _percentage;
     public float scaleRate;
     public bool disableGrowing = false;
+    private Animator animator;
 
     // Every x seconds, a growth event occurs and the growth level increases
     public float secondsBetweenGrowthEvent;
@@ -42,6 +43,12 @@ public class Core : MonoBehaviour, Selectable
             _growthLevel = value;
             transform.localScale = new Vector3(startingScale.x + (_growthLevel * scaleRate), startingScale.y + (_growthLevel * scaleRate), 0f);
 
+            if (growthLevel >= growthLimit) {
+                animator.SetBool("Lose", true);
+                gm.Lose();
+            }
+
+
             _percentage = (int)(growthLevel / growthLimit * 100);
             if (selected)
                 gm.updateUI(this);
@@ -62,6 +69,7 @@ public class Core : MonoBehaviour, Selectable
 
     void Start() {
         gm = FindAnyObjectByType<GameMangager>();
+        animator = GetComponent<Animator>();
         startingScale = transform.localScale;
         growthEventTimer = secondsBetweenGrowthEvent;
         isGrowthEventOccuring = false;
