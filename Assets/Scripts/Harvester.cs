@@ -116,6 +116,12 @@ public class Harvester : MonoBehaviour, Selectable
         ignoreDeselectTimer += Time.deltaTime;
         doubleClickTimer += Time.deltaTime;
 
+        if (growthLevel >= splitThreshold)
+        {
+            float size = (Mathf.PingPong(Time.time, 0.5f) / 2.0f) + 0.8f;
+            chargeIndicator.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f) * size;
+        }
+
         if (Input.GetMouseButtonUp(0))
         {
             if (mouseDownTimer < 0.2f && ignoreDeselectTimer > 0.3f)
