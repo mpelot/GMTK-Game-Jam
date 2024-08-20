@@ -10,11 +10,13 @@ public class Pause : MonoBehaviour
 
     public void pauseNow() {
         if (!paused) {
+            SFXPlayer.instance.PlaySFX("MenuHover");
             pauseScreen.SetActive(true);
             pauseOption.SetActive(true);
             paused = true;
             Time.timeScale = 0f;
         } else {
+            SFXPlayer.instance.PlaySFX("MenuHover");
             pauseScreen.SetActive(false);
             pauseOption.SetActive(false);
             paused = false;
