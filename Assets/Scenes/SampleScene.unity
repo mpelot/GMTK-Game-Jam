@@ -279,7 +279,7 @@ MonoBehaviour:
     roundRepeatCount: 0
   guiController: {fileID: 1544497579}
   loseScreen: {fileID: 1355579230}
-  startingRound: -1
+  startingRound: 0
   tutorialText: {fileID: 1187603482}
   screenFade: {fileID: 1945893335}
   centerText: {fileID: 641231241}
