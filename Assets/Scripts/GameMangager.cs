@@ -654,6 +654,7 @@ public class GameMangager : MonoBehaviour
 
     IEnumerator EndlessMode()
     {
+        int alertTime = 10;
         while (true)
         {
             yield return new WaitForSeconds(5.0f);
@@ -662,7 +663,14 @@ public class GameMangager : MonoBehaviour
             Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * spawnDistance;
 
             Spawner sp = Instantiate(spawner, position, Quaternion.identity);
-            sp.Init(0.5f, 5, 0.5f, asteroidSpeed);
+
+            int random = Random.Range(0, alertTime * 8);
+            if (random == 0) {
+                sp.Init(0, 1, 25f, asteroidSpeed);
+            } else {
+                sp.Init(alertTime, 5, 1f, asteroidSpeed);
+            }
+            if (alertTime > 3) alertTime--;
         }
     }
 }
