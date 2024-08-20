@@ -690,6 +690,9 @@ public class GameMangager : MonoBehaviour
             int random = Random.Range(0, alertTime * 8);
             if (random == 0) {
                 sp.Init(0, 1, 25f, asteroidSpeed);
+            } else if (random == 1) {
+                Planet planet = Instantiate(planetPrefab, position, Quaternion.identity);
+                planet.growthLevel = planet.unstableGrowthThreshold;
             } else {
                 sp.Init(alertTime, 5, 1f, asteroidSpeed);
             }
