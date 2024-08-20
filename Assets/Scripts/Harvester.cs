@@ -37,6 +37,11 @@ public class Harvester : MonoBehaviour, Selectable
     public GameObject chargeIndicator;
     public bool isInvincible = false;
     public bool allowSplitting = true;
+    public AudioSource audioSource;
+
+    private float consumeTimer = 0;
+    private int consumeStreak = 0;
+    
     public float growthLevel
     {
         get
@@ -124,6 +129,7 @@ public class Harvester : MonoBehaviour, Selectable
         mouseDownTimer += Time.deltaTime;
         ignoreDeselectTimer += Time.deltaTime;
         doubleClickTimer += Time.deltaTime;
+        consumeTimer += Time.deltaTime;
 
         if (growthLevel >= splitThreshold)
         {
@@ -295,6 +301,7 @@ public class Harvester : MonoBehaviour, Selectable
             {
                 Destroy(collision.gameObject);
                 growthLevel += asteroid.growthLevel;
+                PlayConsumedSound();
             }
             else
             {
@@ -308,13 +315,35 @@ public class Harvester : MonoBehaviour, Selectable
             ShrinkRock shrinkRock = collision.GetComponent<ShrinkRock>();
             Destroy(collision.gameObject);
             growthLevel += shrinkRock.shinkAmount;
+            PlayConsumedSound();
         }
         else if (collision.gameObject.CompareTag("Planet"))
         {
             Planet planet = collision.GetComponent<Planet>();
             growthLevel += planet.growthLevel + 15;
             Destroy(planet.gameObject);
+            PlayConsumedSound();
         }
+    }
+
+    private void PlayConsumedSound()
+    {
+        if (consumeTimer < 0.5f)
+        {
+            consumeStreak++;
+        }
+        else
+        {
+            consumeStreak = 0;
+        }
+
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+        audioSource.pitch = (0.10f) + (0.05f * consumeStreak);
+        audioSource.Play();
+        consumeTimer = 0.0f;
     }
 
     private void OnMouseDown() {
