@@ -42,7 +42,7 @@ public class GUIController : MonoBehaviour
                 ChangeBorderColor(planetColor);
             } else if (selectedObject.gameObj.tag.Equals("Harvester")) {
                 selectedName.sprite = tetradonName;
-                description.text = "CAN HARVEST ARDIUM";
+                description.text = "CAN CONVERT ASTEROIDS INTO ARDIUM";
                 ChangeBorderColor(tetradonColor);
             } else if (selectedObject.gameObj.tag.Equals("Core")) {
                 selectedName.sprite = sunName;
