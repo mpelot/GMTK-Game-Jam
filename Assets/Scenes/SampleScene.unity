@@ -702,7 +702,7 @@ MonoBehaviour:
   cam: {fileID: 519420031}
   zoomStep: 1
   minSize: 1
-  maxSize: 10
+  maxSize: 7
   minX: -15
   maxX: 15
   minY: -15
