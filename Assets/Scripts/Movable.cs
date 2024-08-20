@@ -20,7 +20,7 @@ public class Movable : MonoBehaviour
     [SerializeField] private Animator boostAnim;
     public bool disableInteraction = false;
     [SerializeField] private Collider2D coll;
-    [SerializeField] private Collider2D targetPositionMarkerCollider;
+    [SerializeField] public Collider2D targetPositionMarkerCollider;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
