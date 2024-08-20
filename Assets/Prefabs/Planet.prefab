@@ -411,6 +411,7 @@ MonoBehaviour:
   disableInteraction: 0
   coll: {fileID: 49593013507969878}
   targetPositionMarkerCollider: {fileID: 5317769799306251903}
+  audioSource: {fileID: 1665770826684635170}
 --- !u!95 &5626150466587610678
 Animator:
   serializedVersion: 7

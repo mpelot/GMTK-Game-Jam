@@ -21,13 +21,12 @@ public class Movable : MonoBehaviour
     public bool disableInteraction = false;
     [SerializeField] private Collider2D coll;
     [SerializeField] public Collider2D targetPositionMarkerCollider;
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         cam = Camera.main;
         core = GameObject.FindFirstObjectByType<Core>();
-        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update() {
