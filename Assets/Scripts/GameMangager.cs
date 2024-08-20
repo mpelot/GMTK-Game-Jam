@@ -312,6 +312,7 @@ public class GameMangager : MonoBehaviour
                 }
             }
             yield return new WaitForSeconds(1f);
+            SetTutorialText("YOU CAN POSITION THE GRAVITATIONAL PULL OF THE PLANET TO REDIRECT INCOMING ASTEROIDS INTO THE TETRADON!");
         }
 
         FindAnyObjectByType<Core>().disableGrowing = true;
@@ -368,6 +369,7 @@ public class GameMangager : MonoBehaviour
                         }
                     }
                     yield return new WaitForSeconds(1f);
+                    SetTutorialText("CONTINUE TO FEED ASTEROIDS INTO THE TETRADON TO GROW IT TO FULL SIZE");
                 }
             }
 
