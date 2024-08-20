@@ -73,7 +73,7 @@ public class Asteroid : MonoBehaviour
     {
         // Add gravitational force due to core
         Vector2 distanceToCore = core.transform.position - transform.position;
-        Vector2 coreForce = distanceToCore.normalized * (this.coreForce / distanceToCore.sqrMagnitude) / (growthLevel * growthLevel);
+        Vector2 coreForce = distanceToCore.normalized * (this.coreForce / distanceToCore.sqrMagnitude);
         if (Mathf.Abs(coreForce.x) == Mathf.Infinity || Mathf.Abs(coreForce.y) == Mathf.Infinity)
         {
             coreForce = Vector2.zero;

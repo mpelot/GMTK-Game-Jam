@@ -29,7 +29,7 @@ public class TrajectoryLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        trajectoryPoints = CalculateTrajectoryPoints(1000, 10, circleCastRadius);
+        trajectoryPoints = CalculateTrajectoryPoints(1000, 10 * growthLevel, circleCastRadius);
 
         Vector3[] convertedPoints = new Vector3[trajectoryPoints.Length];
         for (int i = 0; i < trajectoryPoints.Length; i++)
@@ -72,7 +72,7 @@ public class TrajectoryLine : MonoBehaviour
 
             // Calculate gravitational force due to the Core
             Vector2 distanceToCore = (Vector2)core.transform.position - position;
-            Vector2 coreForce = (distanceToCore.normalized * (coreForceMagnitude / distanceToCore.sqrMagnitude) / (growthLevel * growthLevel));
+            Vector2 coreForce = (distanceToCore.normalized * (coreForceMagnitude / distanceToCore.sqrMagnitude));
             if (Mathf.Abs(coreForce.x) == Mathf.Infinity || Mathf.Abs(coreForce.y) == Mathf.Infinity)
             {
                 coreForce = Vector2.zero;
