@@ -20,6 +20,7 @@ public class Spawner : MonoBehaviour
         warningSymbol.transform.localScale = initialWarningSymbolScale * ((asteroidGrowthLevel * 0.1f) + 0.9f);
         float timeBetweenAsteroids = 0.7f / asteroidSpawnSpeed;
         StartCoroutine(SpawnWave(alertTime, timeBetweenAsteroids, count, asteroidGrowthLevel, asteroidSpawnSpeed));
+        SFXPlayer.instance.PlaySFX("Danger");
     }
 
     IEnumerator SpawnWave(float alertTime, float timeBetweenAsteroids, int count, float asteroidGrowthLevel, float asteroidSpawnSpeed)
