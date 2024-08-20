@@ -25,6 +25,11 @@ public class GameMangager : MonoBehaviour
     public AudioSource typingAudioSource;
     private Core core;
 
+    public AudioClip regularMusic;
+    public AudioClip bossMusic;
+
+    public AudioSource musicAudioSource;
+
 
     public Selectable selectedObject
     {
@@ -51,6 +56,9 @@ public class GameMangager : MonoBehaviour
         tutorialHarvester = GetComponentInChildren<Harvester>();
         tutorialPositionMarker = GetComponentInChildren<TutorialPositionMarker>();
         tutorialPositionMarker.gameObject.SetActive(false);
+        musicAudioSource = GetComponent<AudioSource>();
+        musicAudioSource.clip = regularMusic;
+        musicAudioSource.Play();
         core = FindFirstObjectByType<Core>();
         if (startingRound < 0)
         {
@@ -593,6 +601,13 @@ public class GameMangager : MonoBehaviour
                         SetTutorialText(wave.tutorialText);
                     }
 
+                    if (wave.flag == 1)
+                    {
+                        musicAudioSource.Stop();
+                        musicAudioSource.clip = bossMusic;
+                        musicAudioSource.Play();
+                    }
+
                     if (!wave.spawnNewPlanet)
                     {
                         for (int waveRepeat = 0; waveRepeat <= wave.waveRepeatCount; waveRepeat++)
@@ -648,6 +663,10 @@ public class GameMangager : MonoBehaviour
         {
             yield return null;
         }
+
+        musicAudioSource.Stop();
+        musicAudioSource.clip = regularMusic;
+        musicAudioSource.Play();
 
         StartCoroutine(EndlessMode());
     }

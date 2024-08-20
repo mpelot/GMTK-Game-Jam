@@ -183,6 +183,7 @@ MonoBehaviour:
       asteroidsPerStream: 4
       asteroidGrowthLevel: 1
       tutorialText: 
+      flag: 0
       waveRepeatCount: 2
       endOfWaveTime: 19
     - startOfWaveTime: 0
@@ -193,6 +194,7 @@ MonoBehaviour:
       asteroidGrowthLevel: 1
       tutorialText: 'TIP: YOU CAN DRAG UNSTABLE PLANETS SIDE TO SIDE AS THEY COME
         IN.'
+      flag: 0
       waveRepeatCount: 0
       endOfWaveTime: 19
     - startOfWaveTime: 3
@@ -202,6 +204,7 @@ MonoBehaviour:
       asteroidsPerStream: 4
       asteroidGrowthLevel: 1
       tutorialText: 
+      flag: 0
       waveRepeatCount: 1
       endOfWaveTime: 17
     roundRepeatCount: 0
@@ -214,6 +217,7 @@ MonoBehaviour:
       asteroidsPerStream: 4
       asteroidGrowthLevel: 1
       tutorialText: 
+      flag: 0
       waveRepeatCount: 2
       endOfWaveTime: 12
     - startOfWaveTime: 3
@@ -223,6 +227,7 @@ MonoBehaviour:
       asteroidsPerStream: 4
       asteroidGrowthLevel: 1
       tutorialText: 
+      flag: 0
       waveRepeatCount: 0
       endOfWaveTime: 20
     roundRepeatCount: 1
@@ -235,6 +240,7 @@ MonoBehaviour:
       asteroidsPerStream: 0
       asteroidGrowthLevel: 0
       tutorialText: 
+      flag: 0
       waveRepeatCount: 0
       endOfWaveTime: 15
     - startOfWaveTime: 3
@@ -244,6 +250,7 @@ MonoBehaviour:
       asteroidsPerStream: 5
       asteroidGrowthLevel: 2
       tutorialText: 
+      flag: 0
       waveRepeatCount: 0
       endOfWaveTime: 15
     - startOfWaveTime: 3
@@ -253,6 +260,7 @@ MonoBehaviour:
       asteroidsPerStream: 3
       asteroidGrowthLevel: 2
       tutorialText: 
+      flag: 0
       waveRepeatCount: 0
       endOfWaveTime: 15
     roundRepeatCount: 1
@@ -266,6 +274,7 @@ MonoBehaviour:
       asteroidGrowthLevel: 25
       tutorialText: 'WARNING: LARGE ASTEROID DETECTED! TETRADONS ARE NOT DESIGNED
         TO INGEST ASTEROIDS THIS LARGE.'
+      flag: 1
       waveRepeatCount: 0
       endOfWaveTime: 15
     - startOfWaveTime: 5
@@ -275,12 +284,13 @@ MonoBehaviour:
       asteroidsPerStream: 5
       asteroidGrowthLevel: 1
       tutorialText: 
+      flag: 0
       waveRepeatCount: 5
       endOfWaveTime: 17
     roundRepeatCount: 0
   guiController: {fileID: 1544497579}
   loseScreen: {fileID: 1355579230}
-  startingRound: 0
+  startingRound: 3
   tutorialText: {fileID: 1187603482}
   screenFade: {fileID: 1945893335}
   centerText: {fileID: 641231241}
@@ -288,6 +298,9 @@ MonoBehaviour:
   tutorialHarvester: {fileID: 0}
   tutorialPositionMarker: {fileID: 0}
   typingAudioSource: {fileID: 51138263}
+  regularMusic: {fileID: 8300000, guid: 5f23a5dcb9313df43ae7a64cd5747e15, type: 3}
+  bossMusic: {fileID: 8300000, guid: 8f420c31578e9ef42ae62ba9c11d5dfa, type: 3}
+  musicAudioSource: {fileID: 51138262}
 --- !u!82 &51138262
 AudioSource:
   m_ObjectHideFlags: 0
