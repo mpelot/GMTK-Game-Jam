@@ -296,7 +296,7 @@ public class Harvester : MonoBehaviour, Selectable
         {
             ShrinkRock shrinkRock = collision.GetComponent<ShrinkRock>();
             Destroy(collision.gameObject);
-            growthLevel -= shrinkRock.shinkAmount;
+            growthLevel += shrinkRock.shinkAmount;
         }
         else if (collision.gameObject.CompareTag("Planet"))
         {
