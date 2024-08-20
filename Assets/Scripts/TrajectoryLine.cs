@@ -74,7 +74,7 @@ public class TrajectoryLine : MonoBehaviour
 
             // Calculate gravitational force due to the Core
             Vector2 distanceToCore = (Vector2)core.transform.position - position;
-            Vector2 coreForce = (distanceToCore.normalized * (coreForceMagnitude / distanceToCore.sqrMagnitude));
+            Vector2 coreForce = (distanceToCore.normalized * (coreForceMagnitude / distanceToCore.sqrMagnitude) / (growthLevel * growthLevel));
             if (Mathf.Abs(coreForce.x) == Mathf.Infinity || Mathf.Abs(coreForce.y) == Mathf.Infinity)
             {
                 coreForce = Vector2.zero;
@@ -93,6 +93,10 @@ public class TrajectoryLine : MonoBehaviour
 
                         Vector2 gravitationalForce = (directionToPlanet * planetForceMagnitude * (2.7f - distanceToPlanet)) / (growthLevel * growthLevel);
                         if (Mathf.Abs(gravitationalForce.x) == Mathf.Infinity || Mathf.Abs(gravitationalForce.y) == Mathf.Infinity)
+                        {
+                            gravitationalForce = Vector2.zero;
+                        }
+                        if (growthLevel > 5)
                         {
                             gravitationalForce = Vector2.zero;
                         }

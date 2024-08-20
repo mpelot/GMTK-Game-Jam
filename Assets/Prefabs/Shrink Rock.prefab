@@ -167,4 +167,4 @@ MonoBehaviour:
   coreForce: 3.2
   planetForce: 0.8
   shinkAmount: 0.5
-  maxDistance: 22
+  maxDistance: 35
