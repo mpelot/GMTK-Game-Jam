@@ -59,12 +59,19 @@ public class GameMangager : MonoBehaviour
             startingRound = 0;
             StartCoroutine(IntroSequence());
         }
-        else
+        else if (startingRound < 100)
         {
             tutorialPlanet.gameObject.SetActive(false);
             tutorialHarvester.gameObject.SetActive(false);
             SpawnInMissingObjects();
             StartCoroutine(StartRounds());
+        }
+        else
+        {
+            tutorialPlanet.gameObject.SetActive(false);
+            tutorialHarvester.gameObject.SetActive(false);
+            SpawnInMissingObjects();
+            StartCoroutine(EndlessMode());
         }
     }
 
@@ -73,7 +80,7 @@ public class GameMangager : MonoBehaviour
         int planetsToSpawn = 1;
         float totalGrowth = 0;
 
-        for (int round = 0; round < startingRound; round++)
+        for (int round = 0; round < startingRound && round < rounds.Length; round++)
         {
             for (int roundRepeat = 0; roundRepeat <= rounds[round].roundRepeatCount; roundRepeat++)
             {
