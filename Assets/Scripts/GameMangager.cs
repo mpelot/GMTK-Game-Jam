@@ -387,16 +387,28 @@ public class GameMangager : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        SetTutorialText("TETRADON ARE BIOLOGICAL MACHINES AND HAVE THE ABILITY TO SELF-REPLICATE. PULL ON THE FILLED TETRADON TO SPLIT IT.");
+        SetTutorialText("TETRADON ARE BIOLOGICAL MACHINES AND HAVE THE ABILITY TO SELF-REPLICATE. DOUBLE CLICK ON THE FILLED TETRADON TO SPLIT IT.");
 
-        tutorialHarvester.GetComponent<Movable>().disableInteraction = false;
+        
 
         while (FindObjectsByType<Harvester>(FindObjectsSortMode.None).Length < 2)
         {
             yield return null;
+
+            if (tutorialHarvester.growthLevel == 0)
+            {
+                yield return new WaitForSeconds(0.25f);
+                if (FindObjectsByType<Harvester>(FindObjectsSortMode.None).Length < 2)
+                {
+                    SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+                    yield return new WaitForSeconds(5f);
+                }
+            }
         }
 
         yield return new WaitForSeconds(1f);
+
+        tutorialHarvester.GetComponent<Movable>().disableInteraction = false;
 
         SetTutorialText("BALANCING THE GROWTH OF TETRADONS AND KEEPING THE SUN'S CORE STABLE IS KEY TO SAVING THE SOLAR SYSTEM.");
 

@@ -30,6 +30,7 @@ public class Harvester : MonoBehaviour, Selectable
     private Animator animator;
     private float mouseDownTimer = 0f;
     private float ignoreDeselectTimer = 0f;
+    private float doubleClickTimer = 0f;
     private CircleCollider2D circleCollider;
     public Arrow arrow;
     private Rigidbody2D rb;
@@ -113,6 +114,8 @@ public class Harvester : MonoBehaviour, Selectable
     {
         mouseDownTimer += Time.deltaTime;
         ignoreDeselectTimer += Time.deltaTime;
+        doubleClickTimer += Time.deltaTime;
+
         if (Input.GetMouseButtonUp(0))
         {
             if (mouseDownTimer < 0.2f && ignoreDeselectTimer > 0.3f)
@@ -134,11 +137,17 @@ public class Harvester : MonoBehaviour, Selectable
                     gm.selectedObject = null;
                 Deselect();
             }
-        }
-
-        if (rb.velocity.magnitude > 0.1f && growthLevel >= splitThreshold)
-        {
-            SplitHarvester();
+            if (mouseOver)
+            {
+                if (doubleClickTimer < 0.5f)
+                {
+                    if (growthLevel >= splitThreshold)
+                    {
+                        SplitHarvester();
+                    }
+                }
+                doubleClickTimer = 0f;
+            }
         }
 
 
@@ -198,7 +207,7 @@ public class Harvester : MonoBehaviour, Selectable
     {
         growthLevel = (growthLevel - splitThreshold) / 2;
         Harvester spawnedHarvester = Instantiate(this, transform.position, Quaternion.identity);
-        spawnedHarvester.GetComponent<Rigidbody2D>().velocity = rb.velocity * -1;
+        spawnedHarvester.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0);
         spawnedHarvester.growthLevel = growthLevel;
     }
 
@@ -216,7 +225,14 @@ public class Harvester : MonoBehaviour, Selectable
             GameObject spawnedShrinkRock = Instantiate(shrinkRockPrefab, transform.position, Quaternion.identity);
             spawnedShrinkRock.GetComponent<Rigidbody2D>().velocity = shotVelocity;
             ignoredColliders.Add(spawnedShrinkRock.GetComponent<Collider2D>());
-            growthLevel--;
+            if (growthLevel < 1.0)
+            {
+                growthLevel = 0;
+            }
+            else
+            {
+                growthLevel -= 1.0f;
+            }
             yield return new WaitForSeconds(shotCooldown);
         }
         ClearFiringPath();
