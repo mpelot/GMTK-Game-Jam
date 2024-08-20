@@ -58,7 +58,6 @@ public class GameMangager : MonoBehaviour
         tutorialPositionMarker.gameObject.SetActive(false);
         musicAudioSource = GetComponent<AudioSource>();
         musicAudioSource.clip = regularMusic;
-        musicAudioSource.Play();
         core = FindFirstObjectByType<Core>();
         if (startingRound < 0)
         {
@@ -603,7 +602,6 @@ public class GameMangager : MonoBehaviour
 
                     if (wave.flag == 1)
                     {
-                        musicAudioSource.Stop();
                         musicAudioSource.clip = bossMusic;
                         musicAudioSource.Play();
                     }
@@ -665,8 +663,7 @@ public class GameMangager : MonoBehaviour
         {
             yield return null;
         }
-
-        musicAudioSource.Stop();
+        
         musicAudioSource.clip = regularMusic;
         musicAudioSource.Play();
 
