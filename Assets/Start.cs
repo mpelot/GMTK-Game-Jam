@@ -10,6 +10,7 @@ public class Start : MonoBehaviour
 
     private void OnMouseEnter() {
         sr.color = hoverColor;
+        SFXPlayer.instance.PlaySFX("MenuHover");
     }
 
     private void OnMouseExit() {

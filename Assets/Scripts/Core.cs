@@ -120,17 +120,20 @@ public class Core : MonoBehaviour, Selectable
             Asteroid asteroid = collision.GetComponent<Asteroid>();
             Destroy(collision.gameObject);
             growthLevel += asteroid.growthLevel;
+            SFXPlayer.instance.PlaySFX("HitSun");
         }
         else if (collision.gameObject.CompareTag("Planet") || collision.gameObject.CompareTag("Harvester"))
         {
             Destroy(collision.gameObject);
             growthLevel += growthFromPlanet;
+            SFXPlayer.instance.PlaySFX("HitSun");
         }
         else if (collision.gameObject.CompareTag("ShrinkRock"))
         {
             ShrinkRock shrinkRock = collision.GetComponent<ShrinkRock>();
             Destroy(collision.gameObject);
             growthLevel -= shrinkRock.shinkAmount;
+            SFXPlayer.instance.PlaySFX("HitSun");
         }
     }
 

@@ -21,11 +21,13 @@ public class Movable : MonoBehaviour
     public bool disableInteraction = false;
     [SerializeField] private Collider2D coll;
     [SerializeField] public Collider2D targetPositionMarkerCollider;
+    private AudioSource audioSource;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         cam = Camera.main;
         core = GameObject.FindFirstObjectByType<Core>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -81,10 +83,13 @@ public class Movable : MonoBehaviour
             if ((targetPos - transform.position).magnitude < 0.01f) {
                 rb.drag = rb.velocity.magnitude * 3f;
                 boostAnim.SetBool("Boost", false);
+                audioSource.Pause();
             } else {
                 forceVector += (Vector2) (targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0.5f, 1.5f) * (dragSpeed * dragSpeedMultiplier);
                 transform.right = (targetPos - transform.position).normalized;
                 boostAnim.SetBool("Boost", true);
+                if (!audioSource.isPlaying)
+                    audioSource.Play();
             }
         } else if (destinationSet) {
             if ((targetPos - transform.position).magnitude < 0.01f) {
@@ -92,13 +97,18 @@ public class Movable : MonoBehaviour
                 destinationSet = false;
                 rb.drag = 10;
                 boostAnim.SetBool("Boost", false);
-            } else {
+                audioSource.Pause();
+            }
+            else {
                 forceVector += (Vector2) (targetPos - transform.position).normalized * Mathf.Clamp((targetPos - transform.position).magnitude, 0.5f, 1.5f) * (dragSpeed * dragSpeedMultiplier);
                 transform.right = (targetPos - transform.position).normalized;
                 boostAnim.SetBool("Boost", true);
+                if (!audioSource.isPlaying)
+                    audioSource.Play();
             }
         } else {
             boostAnim.SetBool("Boost", false);
+            audioSource.Pause();
         }
 
         if (isBeingPulledToCore)

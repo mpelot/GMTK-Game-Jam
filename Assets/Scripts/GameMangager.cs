@@ -22,6 +22,7 @@ public class GameMangager : MonoBehaviour
     public Planet tutorialPlanet;
     public Harvester tutorialHarvester;
     public TutorialPositionMarker tutorialPositionMarker;
+    public AudioSource typingAudioSource;
     private Core core;
 
 
@@ -461,17 +462,22 @@ public class GameMangager : MonoBehaviour
         string currentText = tutorialText.text;
         for (int i = 0; i < currentText.Length; i++)
         {
-            tutorialText.text = currentText.Substring(0, currentText.Length - 1) + "_";
+            tutorialText.text = currentText.Substring(0, currentText.Length - i) + "_";
             yield return new WaitForSeconds(0.01f);
         }
-        
+
+        if (!typingAudioSource.isPlaying)
+            typingAudioSource.Play();
+
         for (int i = 0; i < text.Length; i++)
         {
             tutorialText.text = text.Substring(0, i + 1) + "_";
             yield return new WaitForSeconds(0.02f);
         }
 
-        
+        typingAudioSource.Stop();
+
+
         // Blinking cursor
         while (true)
         {
