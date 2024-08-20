@@ -166,6 +166,7 @@ public class GameMangager : MonoBehaviour
         yield return new WaitForSeconds(5f);
         
         tutorialPlanet.growthLevel = tutorialPlanet.unstableGrowthThreshold;
+        selectedObject = tutorialPlanet;
 
         yield return new WaitForSeconds(10f);
 
@@ -216,19 +217,39 @@ public class GameMangager : MonoBehaviour
         SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
         tutorialPlanet = SpawnPlanet(135f, 15f);
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(5f);
         SetTutorialText("FIRE ARDIUM INTO THE INCOMING PLANET TO SAVE IT FROM THE SUN!\n(PAN THE CAMERA WITH MIDDLE MOUSE CLICK).");
         Camera.main.GetComponent<CameraMovement>().enabled = true;
 
-        while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold)
+        while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
         {
             yield return null;
+            if (tutorialHarvester.growthLevel == 0)
+            {
+                SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+                yield return new WaitForSeconds(5f);
+            }
         }
 
-        while (tutorialHarvester.growthLevel > 0)
+        while (tutorialPlanet == null)
         {
-            yield return null;
+            SetTutorialText("BE CAREFUL NOT TO LET PLANETS FALL INTO THE SUN! SHRINK THEM WITH ARDIUM TO PREVENT THIS.");
+            SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+            tutorialPlanet = SpawnPlanet(135f, 15f);
+            while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
+            {
+                yield return null;
+                if (tutorialHarvester.growthLevel == 0)
+                {
+                    SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+                    yield return new WaitForSeconds(5f);
+                }
+            }
+            yield return new WaitForSeconds(1f);
         }
+
+        yield return new WaitForSeconds(2f);
+        
 
         SetTutorialText("GREAT JOB! YOU'VE SAVED THE PLANET. YOU CAN NOW CONTROL THE PLANET BY DRAGGING IT.");
 
@@ -237,10 +258,62 @@ public class GameMangager : MonoBehaviour
             yield return null;
         }
 
+        while (tutorialPlanet == null)
+        {
+            SetTutorialText("BE CAREFUL NOT TO LET PLANETS FALL INTO THE SUN! SHRINK THEM WITH ARDIUM TO PREVENT THIS.");
+            SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+            tutorialPlanet = SpawnPlanet(135f, 15f);
+            while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
+            {
+                yield return null;
+                if (tutorialHarvester.growthLevel == 0)
+                {
+                    SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+                    yield return new WaitForSeconds(5f);
+                }
+            }
+            yield return new WaitForSeconds(1f);
+        }
+
         yield return new WaitForSeconds(4f);
+
+        while (tutorialPlanet == null)
+        {
+            SetTutorialText("BE CAREFUL NOT TO LET PLANETS FALL INTO THE SUN! SHRINK THEM WITH ARDIUM TO PREVENT THIS.");
+            SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+            tutorialPlanet = SpawnPlanet(135f, 15f);
+            while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
+            {
+                yield return null;
+                if (tutorialHarvester.growthLevel == 0)
+                {
+                    SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+                    yield return new WaitForSeconds(5f);
+                }
+            }
+            yield return new WaitForSeconds(1f);
+        }
 
         SetTutorialText("YOU CAN POSITION THE GRAVITATIONAL PULL OF THE PLANET TO REDIRECT INCOMING ASTEROIDS INTO THE TETRADON!");
         yield return new WaitForSeconds(4f);
+
+        while (tutorialPlanet == null)
+        {
+            SetTutorialText("BE CAREFUL NOT TO LET PLANETS FALL INTO THE SUN! SHRINK THEM WITH ARDIUM TO PREVENT THIS.");
+            SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+            tutorialPlanet = SpawnPlanet(135f, 15f);
+            while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
+            {
+                yield return null;
+                if (tutorialHarvester.growthLevel == 0)
+                {
+                    SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+                    yield return new WaitForSeconds(5f);
+                }
+            }
+            yield return new WaitForSeconds(1f);
+        }
+
         FindAnyObjectByType<Core>().disableGrowing = true;
 
         while (tutorialHarvester.growthLevel == 0)
@@ -250,6 +323,22 @@ public class GameMangager : MonoBehaviour
             while (sp != null)
             {
                 yield return null;
+                while (tutorialPlanet == null)
+                {
+                    SetTutorialText("BE CAREFUL NOT TO LET PLANETS FALL INTO THE SUN! SHRINK THEM WITH ARDIUM TO PREVENT THIS.");
+                    SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+                    tutorialPlanet = SpawnPlanet(135f, 15f);
+                    while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
+                    {
+                        yield return null;
+                        if (tutorialHarvester.growthLevel == 0)
+                        {
+                            SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+                            yield return new WaitForSeconds(5f);
+                        }
+                    }
+                    yield return new WaitForSeconds(1f);
+                }
             }
 
             yield return new WaitForSeconds(2.0f);
@@ -264,6 +353,22 @@ public class GameMangager : MonoBehaviour
             while (sp != null)
             {
                 yield return null;
+                while (tutorialPlanet == null)
+                {
+                    SetTutorialText("BE CAREFUL NOT TO LET PLANETS FALL INTO THE SUN! SHRINK THEM WITH ARDIUM TO PREVENT THIS.");
+                    SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+                    tutorialPlanet = SpawnPlanet(135f, 15f);
+                    while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
+                    {
+                        yield return null;
+                        if (tutorialHarvester.growthLevel == 0)
+                        {
+                            SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+                            yield return new WaitForSeconds(5f);
+                        }
+                    }
+                    yield return new WaitForSeconds(1f);
+                }
             }
 
             yield return new WaitForSeconds(0.2f);
@@ -290,7 +395,7 @@ public class GameMangager : MonoBehaviour
 
 
         Harvester[] harvesters = FindObjectsByType<Harvester>(FindObjectsSortMode.None);
-        while (! isPassingThroughOrigin(harvesters[0].transform.position, harvesters[1].transform.position, 1f))
+        while (! isPassingThroughOrigin(harvesters[0].transform.position, harvesters[1].transform.position, 1f) && FindObjectsByType<Harvester>(FindObjectsSortMode.None).Length > 1)
         {
             yield return null;
         }
