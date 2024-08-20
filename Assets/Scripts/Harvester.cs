@@ -286,11 +286,17 @@ public class Harvester : MonoBehaviour, Selectable
             }
             
         }
-        if (collision.gameObject.CompareTag("ShrinkRock"))
+        else if (collision.gameObject.CompareTag("ShrinkRock"))
         {
             ShrinkRock shrinkRock = collision.GetComponent<ShrinkRock>();
             Destroy(collision.gameObject);
             growthLevel -= shrinkRock.shinkAmount;
+        }
+        else if (collision.gameObject.CompareTag("Planet"))
+        {
+            Planet planet = collision.GetComponent<Planet>();
+            growthLevel += planet.growthLevel + 15;
+            Destroy(planet.gameObject);
         }
     }
 
