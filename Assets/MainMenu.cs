@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public void MainMenuNow() {
+        SFXPlayer.instance.PlaySFX("MenuHover");
         SceneManager.LoadSceneAsync(0);
         SceneManager.UnloadSceneAsync(1);
     }
