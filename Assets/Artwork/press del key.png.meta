@@ -1,0 +1,927 @@
+fileFormatVersion: 2
+guid: b9581742eb703e445aa6940e0b6bacc3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -543908184956558943
+    second: press del key_0
+  - first:
+      213: 2804247762815558963
+    second: press del key_1
+  - first:
+      213: -5006320218777146230
+    second: press del key_2
+  - first:
+      213: 8217960457862571170
+    second: press del key_3
+  - first:
+      213: 7408469390550681996
+    second: press del key_4
+  - first:
+      213: -6180635629449809469
+    second: press del key_5
+  - first:
+      213: 8559316697780215538
+    second: press del key_6
+  - first:
+      213: 8366101250989915404
+    second: press del key_7
+  - first:
+      213: -1871121813116189944
+    second: press del key_8
+  - first:
+      213: -3365077902517501539
+    second: press del key_9
+  - first:
+      213: -1484586098386159735
+    second: press del key_10
+  - first:
+      213: 2941064544518856871
+    second: press del key_11
+  - first:
+      213: -8730663255634818672
+    second: press del key_12
+  - first:
+      213: 7614312716117698265
+    second: press del key_13
+  - first:
+      213: -3855487199858269642
+    second: press del key_14
+  - first:
+      213: 4012874224449618752
+    second: press del key_15
+  - first:
+      213: 8499941720059599573
+    second: press del key_16
+  - first:
+      213: 2672019249652710403
+    second: press del key_17
+  - first:
+      213: -734227167529518855
+    second: press del key_18
+  - first:
+      213: -7826614728239369113
+    second: press del key_19
+  - first:
+      213: 2845170744295242813
+    second: press del key_20
+  - first:
+      213: -4780662902071831857
+    second: press del key_21
+  - first:
+      213: 2912833238240667643
+    second: press del key_22
+  - first:
+      213: 7771260654095488490
+    second: press del key_23
+  - first:
+      213: -5389785875128850527
+    second: press del key_24
+  - first:
+      213: -4438916703115045543
+    second: press del key_25
+  - first:
+      213: 1491358684384081897
+    second: press del key_26
+  - first:
+      213: 4322708130674423765
+    second: press del key_27
+  - first:
+      213: -7749538398441681227
+    second: press del key_28
+  - first:
+      213: 6429292032288537907
+    second: press del key_29
+  - first:
+      213: -4315710812926816121
+    second: press del key_30
+  - first:
+      213: -4817037042157470098
+    second: press del key_31
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: press del key_0
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 74
+        width: 20
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a1ac353366a378f0800000000000000
+      internalID: -543908184956558943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_1
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3352ec49b70bae620800000000000000
+      internalID: 2804247762815558963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_2
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8caeef194af58ab0800000000000000
+      internalID: -5006320218777146230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_3
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a4ea1dee7f0c0270800000000000000
+      internalID: 8217960457862571170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_4
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c89c021b8ab20d660800000000000000
+      internalID: 7408469390550681996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_5
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c1758434a8f93aa0800000000000000
+      internalID: -6180635629449809469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_6
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fe524bff2dc8c670800000000000000
+      internalID: 8559316697780215538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_7
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0d743423cc5a1470800000000000000
+      internalID: 8366101250989915404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_8
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80389b5ef907806e0800000000000000
+      internalID: -1871121813116189944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_9
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d918de20a77dc41d0800000000000000
+      internalID: -3365077902517501539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_10
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 987b5372fc0b56be0800000000000000
+      internalID: -1484586098386159735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_11
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a0ea8dee92c0d820800000000000000
+      internalID: 2941064544518856871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_12
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 74
+        width: 29
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 099c45aa60476d680800000000000000
+      internalID: -8730663255634818672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_13
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d66feca2197ba960800000000000000
+      internalID: 7614312716117698265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_14
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 632e168a1de8e7ac0800000000000000
+      internalID: -3855487199858269642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_15
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04304a498d790b730800000000000000
+      internalID: 4012874224449618752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_16
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dadca3b5fbd5f570800000000000000
+      internalID: 8499941720059599573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_17
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30c3e80c95be41520800000000000000
+      internalID: 2672019249652710403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_18
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f836fef7408fc5f0800000000000000
+      internalID: -734227167529518855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_19
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 764b3713f57426390800000000000000
+      internalID: -7826614728239369113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_20
+      rect:
+        serializedVersion: 2
+        x: 915
+        y: 74
+        width: 29
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3c3d03b7b31c7720800000000000000
+      internalID: 2845170744295242813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_21
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc2de1b6b6ca7adb0800000000000000
+      internalID: -4780662902071831857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_22
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf72947b5667c6820800000000000000
+      internalID: 2912833238240667643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_23
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 74
+        width: 29
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae5d458146019db60800000000000000
+      internalID: 7771260654095488490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_24
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a7e6898d42a335b0800000000000000
+      internalID: -5389785875128850527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_25
+      rect:
+        serializedVersion: 2
+        x: 1108
+        y: 74
+        width: 29
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9559743e6ccc562c0800000000000000
+      internalID: -4438916703115045543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_26
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e7386762de52b410800000000000000
+      internalID: 1491358684384081897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_27
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d7ba8464285dfb30800000000000000
+      internalID: 4322708130674423765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_28
+      rect:
+        serializedVersion: 2
+        x: 1212
+        y: 74
+        width: 11
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5be42aba2eb147490800000000000000
+      internalID: -7749538398441681227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_29
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33dbecd1a0f693950800000000000000
+      internalID: 6429292032288537907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_30
+      rect:
+        serializedVersion: 2
+        x: 1261
+        y: 74
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7805f2a91e38b14c0800000000000000
+      internalID: -4315710812926816121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: press del key_31
+      rect:
+        serializedVersion: 2
+        x: 1297
+        y: 74
+        width: 20
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6e3e48f452762db0800000000000000
+      internalID: -4817037042157470098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      press del key_0: -543908184956558943
+      press del key_1: 2804247762815558963
+      press del key_10: -1484586098386159735
+      press del key_11: 2941064544518856871
+      press del key_12: -8730663255634818672
+      press del key_13: 7614312716117698265
+      press del key_14: -3855487199858269642
+      press del key_15: 4012874224449618752
+      press del key_16: 8499941720059599573
+      press del key_17: 2672019249652710403
+      press del key_18: -734227167529518855
+      press del key_19: -7826614728239369113
+      press del key_2: -5006320218777146230
+      press del key_20: 2845170744295242813
+      press del key_21: -4780662902071831857
+      press del key_22: 2912833238240667643
+      press del key_23: 7771260654095488490
+      press del key_24: -5389785875128850527
+      press del key_25: -4438916703115045543
+      press del key_26: 1491358684384081897
+      press del key_27: 4322708130674423765
+      press del key_28: -7749538398441681227
+      press del key_29: 6429292032288537907
+      press del key_3: 8217960457862571170
+      press del key_30: -4315710812926816121
+      press del key_31: -4817037042157470098
+      press del key_4: 7408469390550681996
+      press del key_5: -6180635629449809469
+      press del key_6: 8559316697780215538
+      press del key_7: 8366101250989915404
+      press del key_8: -1871121813116189944
+      press del key_9: -3365077902517501539
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

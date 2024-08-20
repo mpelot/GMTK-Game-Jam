@@ -315,6 +315,37 @@ public class GameMangager : MonoBehaviour
 
         yield return new WaitForSeconds(4f);
 
+        SetTutorialText("YOU CAN CONTINUE TO FIRE ARDIUM INTO THE PLANET TO SHRINK IT. SMALLER PLANETS MOVE FASTER.");
+
+        while (tutorialPlanet.growthLevel > 0)
+        {
+            yield return null;
+            while (tutorialHarvester.growthLevel == 0)
+            {
+                SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+                yield return new WaitForSeconds(5f);
+            }
+
+            while (tutorialPlanet == null)
+            {
+                SetTutorialText("BE CAREFUL NOT TO LET PLANETS FALL INTO THE SUN! SHRINK THEM WITH ARDIUM TO PREVENT THIS.");
+                SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+                tutorialPlanet = SpawnPlanet(135f, 15f);
+                while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
+                {
+                    yield return null;
+                    if (tutorialHarvester.growthLevel == 0)
+                    {
+                        SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+                        yield return new WaitForSeconds(5f);
+                    }
+                }
+                yield return new WaitForSeconds(1f);
+            }
+        }
+
+        yield return new WaitForSeconds(2f);
+
         SetTutorialText("WHILE THE PLANET IS SELECTED, RIGHT-CLICK TO SET A TARGET POSITION");
 
         while (!tutorialPlanet.GetComponent<Movable>().targetPositionMarkerCollider.gameObject.activeInHierarchy)
