@@ -35,6 +35,8 @@ public class Harvester : MonoBehaviour, Selectable
     public Arrow arrow;
     private Rigidbody2D rb;
     public GameObject chargeIndicator;
+    public bool isInvincible = false;
+    public bool allowSplitting = true;
     public float growthLevel
     {
         get
@@ -45,8 +47,15 @@ public class Harvester : MonoBehaviour, Selectable
         {
             if (value < 0)
             {
-                value = 0;
-                Destroy(gameObject);
+                if (isInvincible)
+                {
+                    value = 0;
+                }
+                else
+                {
+                    value = 0;
+                    Destroy(gameObject);
+                }
             }
             _growthLevel = value;
             transform.localScale = new Vector3(startingScale.x + (_growthLevel * scaleRate), startingScale.y + (_growthLevel * scaleRate), 0f);
@@ -211,6 +220,8 @@ public class Harvester : MonoBehaviour, Selectable
 
     void SplitHarvester()
     {
+        if (!allowSplitting)
+            return;
         growthLevel = (growthLevel - splitThreshold) / 2;
         Harvester spawnedHarvester = Instantiate(this, transform.position, Quaternion.identity);
         spawnedHarvester.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0);

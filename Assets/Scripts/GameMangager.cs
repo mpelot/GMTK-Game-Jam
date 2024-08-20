@@ -114,6 +114,8 @@ public class GameMangager : MonoBehaviour
     IEnumerator IntroSequence()
     {
         tutorialHarvester.GetComponent<Movable>().disableInteraction = true;
+        tutorialHarvester.isInvincible = true;
+        tutorialHarvester.allowSplitting = false;
         Camera.main.GetComponent<CameraMovement>().enabled = false;
         
 
@@ -156,7 +158,9 @@ public class GameMangager : MonoBehaviour
         SetTutorialText("INCOMING ASTEROID\nSTREAMS ARE\nTARGETING THE SUN\nOF A NEARBY\nSOLAR SYSTEM...");
 
         yield return new WaitForSeconds(4f);
+
         SpawnAsteroidStream(270f, 10f, 0f, 3, 1.0f);
+        selectedObject = core;
 
         yield return new WaitForSeconds(5f);
 
@@ -171,6 +175,7 @@ public class GameMangager : MonoBehaviour
         yield return new WaitForSeconds(5f);
         
         tutorialPlanet.growthLevel = tutorialPlanet.unstableGrowthThreshold;
+        core.Deselect();
         selectedObject = tutorialPlanet;
 
         yield return new WaitForSeconds(10f);
@@ -384,7 +389,9 @@ public class GameMangager : MonoBehaviour
 
         SetTutorialText("TETRADON ARE BIOLOGICAL MACHINES AND HAVE THE ABILITY TO SELF-REPLICATE. DOUBLE CLICK ON THE FILLED TETRADON TO SPLIT IT.");
 
-        
+        tutorialHarvester.allowSplitting = true;
+
+
 
         while (FindObjectsByType<Harvester>(FindObjectsSortMode.None).Length < 2)
         {
@@ -408,6 +415,7 @@ public class GameMangager : MonoBehaviour
         foreach (Harvester harvester in harvesters)
         {
             harvester.GetComponent<Movable>().disableInteraction = false;
+            harvester.isInvincible = false;
         }
 
         SetTutorialText("BALANCING THE GROWTH OF TETRADONS AND KEEPING THE SUN'S CORE STABLE IS KEY TO SAVING THE SOLAR SYSTEM.");
