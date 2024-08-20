@@ -165,6 +165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coreForce: 3.2
-  planetForce: 0.6
+  planetForce: 0.8
   shinkAmount: 0.5
   maxDistance: 22
