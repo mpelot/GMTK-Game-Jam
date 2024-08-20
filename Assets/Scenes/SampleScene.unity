@@ -290,7 +290,11 @@ MonoBehaviour:
     roundRepeatCount: 0
   guiController: {fileID: 1544497579}
   loseScreen: {fileID: 1355579230}
+<<<<<<< Updated upstream
   startingRound: 3
+=======
+  startingRound: 100
+>>>>>>> Stashed changes
   tutorialText: {fileID: 1187603482}
   screenFade: {fileID: 1945893335}
   centerText: {fileID: 641231241}
@@ -1693,6 +1697,87 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &995061644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 995061645}
+  - component: {fileID: 995061647}
+  - component: {fileID: 995061646}
+  m_Layer: 5
+  m_Name: Year
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &995061645
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995061644}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1544497583}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 40, y: 30}
+  m_SizeDelta: {x: 500, y: 100}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &995061646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995061644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
+    m_FontSize: 74
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 261
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 0.7
+  m_Text: 'Year 0
+
+'
+--- !u!222 &995061647
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995061644}
+  m_CullTransparentMesh: 1
 --- !u!4 &1042343819 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 579543974815751700, guid: 9bf0bb590acdae346b08c1caffc26008, type: 3}
@@ -2523,6 +2608,7 @@ MonoBehaviour:
   description: {fileID: 620520041}
   percentage: {fileID: 1246249035}
   border: {fileID: 1104808024}
+  year: {fileID: 995061646}
   planetName: {fileID: 21300000, guid: b095f878408dc9a4c927a2709070a82a, type: 3}
   planetColor: {r: 0.52156866, g: 0.7411765, b: 0.92549026, a: 1}
   tetradonName: {fileID: 21300000, guid: b49ea3814ca8f8e4db3949c9e88ca782, type: 3}
@@ -2613,6 +2699,7 @@ RectTransform:
   - {fileID: 641231240}
   - {fileID: 1526948843}
   - {fileID: 1512223136}
+  - {fileID: 995061645}
   - {fileID: 1788812914}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

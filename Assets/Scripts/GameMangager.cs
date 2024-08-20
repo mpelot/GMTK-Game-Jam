@@ -615,6 +615,7 @@ public class GameMangager : MonoBehaviour
                             Debug.Log("Round: " + round + "(" + roundRepeat + "/" + rounds[round].roundRepeatCount + ")" +
                             ", Wave: " + currentWave + "(" + waveRepeat + "/" + wave.waveRepeatCount + ")");
 
+                            guiController.IncrementYear();
 
                             yield return new WaitForSeconds(wave.startOfWaveTime);
 
@@ -638,6 +639,7 @@ public class GameMangager : MonoBehaviour
                         {
                             Debug.Log("Round: " + round + "(" + roundRepeat + "/" + rounds[round].roundRepeatCount + ")" +
                             ", Wave: " + currentWave + "(" + waveRepeat + "/" + wave.waveRepeatCount + ") (New Planet!)");
+                            guiController.IncrementYear();
                             yield return new WaitForSeconds(wave.startOfWaveTime);
 
                             float angle = Random.Range(0, 360);
@@ -674,6 +676,8 @@ public class GameMangager : MonoBehaviour
     IEnumerator EndlessMode()
     {
         int alertTime = 10;
+        int waveTimer = 2;
+
         while (true)
         {
             yield return new WaitForSeconds(5.0f);
@@ -688,6 +692,11 @@ public class GameMangager : MonoBehaviour
                 sp.Init(0, 1, 25f, asteroidSpeed);
             } else {
                 sp.Init(alertTime, 5, 1f, asteroidSpeed);
+            }
+            waveTimer--;
+            if (waveTimer <= 0) {
+                guiController.IncrementYear();
+                waveTimer = 2;
             }
             if (alertTime > 3) alertTime--;
         }

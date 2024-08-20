@@ -9,6 +9,7 @@ public class GUIController : MonoBehaviour
     [SerializeField] private Text description;
     [SerializeField] private Text percentage;
     [SerializeField] private GameObject border;
+    [SerializeField] private Text year;
 
     [SerializeField] private Sprite planetName;
     [SerializeField] private Color planetColor;
@@ -16,6 +17,8 @@ public class GUIController : MonoBehaviour
     [SerializeField] private Color tetradonColor;
     [SerializeField] private Sprite sunName;
     [SerializeField] private Color sunColor;
+
+    private int yearNum = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -61,4 +64,8 @@ public class GUIController : MonoBehaviour
         }
     }
 
+    public void IncrementYear() {
+        yearNum++;
+        year.text = "Year " + yearNum;
+    }
 }

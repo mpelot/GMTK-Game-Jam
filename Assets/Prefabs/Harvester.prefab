@@ -215,6 +215,7 @@ MonoBehaviour:
   isInvincible: 0
   allowSplitting: 1
   audioSource: {fileID: 6312446532099305741}
+  harvester: {fileID: 7819063478075708561}
 --- !u!95 &3016545604663011438
 Animator:
   serializedVersion: 7

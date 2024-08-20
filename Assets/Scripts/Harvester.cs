@@ -38,6 +38,7 @@ public class Harvester : MonoBehaviour, Selectable
     public bool isInvincible = false;
     public bool allowSplitting = true;
     public AudioSource audioSource;
+    [SerializeField] Harvester harvester;
 
     private float consumeTimer = 0;
     private int consumeStreak = 0;
@@ -229,7 +230,7 @@ public class Harvester : MonoBehaviour, Selectable
         if (!allowSplitting)
             return;
         growthLevel = (growthLevel - splitThreshold) / 2;
-        Harvester spawnedHarvester = Instantiate(this, transform.position, Quaternion.identity);
+        Harvester spawnedHarvester = Instantiate(harvester, transform.position, Quaternion.identity);
         spawnedHarvester.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0);
         spawnedHarvester.growthLevel = growthLevel;
     }
