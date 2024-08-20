@@ -10,6 +10,7 @@ TagManager:
   - Harvester
   - ShrinkRock
   - Asteroid
+  - PositionTarget
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Gravity
   - Asteroid
   - Post Processing
-  - 
+  - Position Target
   - 
   - 
   - 

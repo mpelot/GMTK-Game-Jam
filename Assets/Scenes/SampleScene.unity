@@ -267,7 +267,7 @@ MonoBehaviour:
       endOfWaveTime: 15
     roundRepeatCount: 0
   guiController: {fileID: 1544497579}
-  startingRound: 0
+  startingRound: -1
   tutorialText: {fileID: 1187603482}
   screenFade: {fileID: 1945893335}
   centerText: {fileID: 641231241}

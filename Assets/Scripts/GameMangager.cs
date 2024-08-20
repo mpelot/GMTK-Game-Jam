@@ -20,6 +20,7 @@ public class GameMangager : MonoBehaviour
     private Coroutine currentTutorialTextCoroutine;
     public Planet tutorialPlanet;
     public Harvester tutorialHarvester;
+    private Core core;
 
     public Selectable selectedObject {
         get {
@@ -37,10 +38,11 @@ public class GameMangager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
         tutorialText.text = "";
         tutorialPlanet = GetComponentInChildren<Planet>();
         tutorialHarvester = GetComponentInChildren<Harvester>();
+        core = FindFirstObjectByType<Core>();
         if (startingRound < 0)
         {
             tutorialPlanet.gameObject.SetActive(true);
@@ -175,31 +177,37 @@ public class GameMangager : MonoBehaviour
 
         yield return new WaitForSeconds(11f);
 
-        SetTutorialText("THE ADVANCED TECHNOLOGY OF THE TETRADON MACHINES ALLOWS THEM TO GROW IN SIZE AND POWER AS THEY ABSORB ASTEROIDS");
+        float currentCoreGrowthLevel = core.growthLevel;
 
-        yield return new WaitForSeconds(4f);
-
-        tutorialHarvester.GetComponent<Movable>().dragSpeedMultiplier = 1f;
-        SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
-
-        while (tutorialHarvester.growthLevel == 0)
+        while (core.growthLevel == currentCoreGrowthLevel)
         {
-            yield return null;
+            SetTutorialText("THE ADVANCED TECHNOLOGY OF THE TETRADON MACHINES ALLOWS THEM TO GROW IN SIZE AND POWER AS THEY ABSORB ASTEROIDS");
+
+            yield return new WaitForSeconds(4f);
+
+            tutorialHarvester.GetComponent<Movable>().dragSpeedMultiplier = 1f;
+            SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
+
+            while (tutorialHarvester.growthLevel == 0)
+            {
+                yield return null;
+            }
+
+            SetTutorialText("LEFT CLICK TO SELECT THE TETRADON...");
+
+            while (selectedObject == null || selectedObject.GetType() != typeof(Harvester))
+            {
+                yield return null;
+            }
+
+            SetTutorialText("...THEN DRAG WITH RIGHT CLICK TO FIRE ARDIUM INTO THE SUN'S CORE");
+
+            while (tutorialHarvester.growthLevel > 0)
+            {
+                yield return null;
+            }
         }
-
-        SetTutorialText("LEFT CLICK TO SELECT THE TETRADON...");
-
-        while (selectedObject == null || selectedObject.GetType() != typeof(Harvester))
-        {
-            yield return null;
-        }
-
-        SetTutorialText("...THEN DRAG WITH RIGHT CLICK TO FIRE ARDIUM INTO THE SUN'S CORE");
         
-        while (tutorialHarvester.growthLevel > 0)
-        {
-            yield return null;
-        }
         yield return new WaitForSeconds(2.0f);
         SetTutorialText("TETRADON MACHINES CONSUME MATTER AND SYNTHESIZE ARDIUM. ARDIUM CAN BE FIRED INTO DIFFERENT OBJECTS TO SHRINK THEM.");
         yield return new WaitForSeconds(8.0f);
