@@ -313,8 +313,9 @@ public class GameMangager : MonoBehaviour
         
         FindAnyObjectByType<Core>().disableGrowing = true;
 
-        while (tutorialHarvester.growthLevel == 0)
-            {
+        float growthLevel = tutorialHarvester.growthLevel;
+        while (tutorialHarvester.growthLevel == growthLevel)
+        {
             Spawner sp = SpawnAsteroidStream(180f, spawnDistance, 10f, 5, 1.0f);
 
             while (sp != null)
