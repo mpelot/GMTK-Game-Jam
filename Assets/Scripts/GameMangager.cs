@@ -23,6 +23,7 @@ public class GameMangager : MonoBehaviour
     public TutorialPositionMarker tutorialPositionMarker;
     private Core core;
 
+
     public Selectable selectedObject {
         get {
             return _selectedObject;
@@ -471,6 +472,16 @@ public class GameMangager : MonoBehaviour
         }
         
 
+    }
+
+    public void Lose() {
+        StartCoroutine(LoseSequence());
+    }
+
+    IEnumerator LoseSequence() {
+        yield return new WaitForSeconds(3f);
+
+        //guiController.showLoseScreen();
     }
 
     IEnumerator ClearTutorialTextCoroutine(float duration)

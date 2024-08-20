@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Core : MonoBehaviour, Selectable
 {
@@ -12,6 +13,7 @@ public class Core : MonoBehaviour, Selectable
     private int _percentage;
     public float scaleRate;
     public bool disableGrowing = false;
+    public CinemachineImpulseSource cis;
 
     // Every x seconds, a growth event occurs and the growth level increases
     public float secondsBetweenGrowthEvent;
@@ -42,6 +44,8 @@ public class Core : MonoBehaviour, Selectable
             _growthLevel = value;
             transform.localScale = new Vector3(startingScale.x + (_growthLevel * scaleRate), startingScale.y + (_growthLevel * scaleRate), 0f);
 
+
+            cis.GenerateImpulse(1);
             _percentage = (int)(growthLevel / growthLimit * 100);
             if (selected)
                 gm.updateUI(this);
