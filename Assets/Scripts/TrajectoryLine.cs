@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class TrajectoryLine : MonoBehaviour
 {
     public LineRenderer lineRenderer;
+    public GameObject redx;
     public float coreForceMagnitude;
     public float planetForceMagnitude;
     public Vector2 startingVelocity;
@@ -24,6 +25,7 @@ public class TrajectoryLine : MonoBehaviour
     {
         core = FindFirstObjectByType<Core>();
         startingColliders = Physics2D.OverlapCircleAll(transform.position, circleCastRadius);
+        redx.SetActive(false);
     }
 
     // Update is called once per frame
@@ -96,14 +98,36 @@ public class TrajectoryLine : MonoBehaviour
                         }
                         totalForce += gravitationalForce;
                     }
-                    else if (hit.collider.CompareTag("Core") || hit.collider.CompareTag("Planet") || hit.collider.CompareTag("Harvester"))
+                    else if (hit.collider.CompareTag("Core") || hit.collider.CompareTag("Planet"))
                     {
                         if (!IsInStartingColliders(hit.collider))
                         {
                             endEarly = true;
                             break;
                         }
-                        
+
+                    }
+                    else if (hit.collider.CompareTag("Harvester"))
+                    {
+                        if (growthLevel > 5)
+                        {
+                            redx.SetActive(true);
+                            redx.transform.position = hit.point;
+                        }
+                        else
+                        {
+                            redx.SetActive(false);
+                        }
+
+                        if (!IsInStartingColliders(hit.collider))
+                        {
+                            endEarly = true;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        redx.SetActive(false);
                     }
                 }
             }

@@ -263,6 +263,16 @@ MonoBehaviour:
       numberOfStreams: 1
       asteroidsPerStream: 1
       asteroidGrowthLevel: 25
+      tutorialText: 'WARNING: LARGE ASTEROID DETECTED! TETRADONS ARE NOT DESIGNED
+        TO INGEST ASTEROIDS THIS LARGE.'
+      waveRepeatCount: 0
+      endOfWaveTime: 15
+    - startOfWaveTime: 5
+      spawnNewPlanet: 0
+      alertTime: 10
+      numberOfStreams: 2
+      asteroidsPerStream: 5
+      asteroidGrowthLevel: 1
       tutorialText: 
       waveRepeatCount: 0
       endOfWaveTime: 15

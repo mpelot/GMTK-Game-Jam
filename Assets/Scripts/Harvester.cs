@@ -274,8 +274,17 @@ public class Harvester : MonoBehaviour, Selectable
         if (collision.gameObject.CompareTag("Asteroid"))
         {
             Asteroid asteroid = collision.GetComponent<Asteroid>();
-            Destroy(collision.gameObject);
-            growthLevel += asteroid.growthLevel;
+            if (asteroid.growthLevel <= 5.0f)
+            {
+                Destroy(collision.gameObject);
+                growthLevel += asteroid.growthLevel;
+            }
+            else
+            {
+                asteroid.growthLevel -= 5.0f;
+                Destroy(this.gameObject);
+            }
+            
         }
         if (collision.gameObject.CompareTag("ShrinkRock"))
         {
