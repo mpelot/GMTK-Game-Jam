@@ -26,6 +26,10 @@ public class TrajectoryLine : MonoBehaviour
         core = FindFirstObjectByType<Core>();
         startingColliders = Physics2D.OverlapCircleAll(transform.position, circleCastRadius);
         redx.SetActive(false);
+        if (growthLevel > 5)
+        {
+            lineRenderer.material.SetColor("_Color", Color.red);
+        }
     }
 
     // Update is called once per frame

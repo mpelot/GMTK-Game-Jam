@@ -202,8 +202,8 @@ MonoBehaviour:
   shotCooldown: 0.7
   shrinkRockPrefab: {fileID: 2762680425495791541, guid: 82fe04a098aec474783b8196abaa3b80, type: 3}
   warningSymbol: {fileID: 2772741151127113448}
-  splitThreshold: 20
-  unstableGrowthLevel: 30
+  splitThreshold: 25
+  unstableGrowthLevel: 33
   slowdownPerGrowthLevel: 0.025
   scaleRate: 0.02
   _growthLevel: 0
