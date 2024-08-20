@@ -129,8 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coreForce: 3.2
-  planetForce: 0.6
-  maxDistance: 22
+  planetForce: 0.8
+  maxDistance: 35
   scaleRate: 0.1
   _growthLevel: 1
   parentTrajectoryLine: {fileID: 0}

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 6181920857114407098}
   coreForceMagnitude: 3.2
-  planetForceMagnitude: 0.6
+  planetForceMagnitude: 0.8
   startingVelocity: {x: 0, y: 0}
   growthLevel: 1
   circleCastRadius: 0.2

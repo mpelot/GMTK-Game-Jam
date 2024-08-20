@@ -170,8 +170,8 @@ MonoBehaviour:
   spawner: {fileID: 4123538215520549574, guid: 594195e5ffd540f44a6a966a31438cf2, type: 3}
   planetPrefab: {fileID: 1370430673509114698, guid: 676db081c7e3a7641ab7ffa1d481849b, type: 3}
   harvesterPrefab: {fileID: 7819063478075708561, guid: 9bf0bb590acdae346b08c1caffc26008, type: 3}
-  asteroidSpeed: 2.25
-  spawnDistance: 20
+  asteroidSpeed: 2.5
+  spawnDistance: 34
   rounds:
   - startOfRoundTime: 0
     waves:
@@ -268,7 +268,7 @@ MonoBehaviour:
       endOfWaveTime: 15
     roundRepeatCount: 0
   guiController: {fileID: 1544497579}
-  startingRound: -1
+  startingRound: 0
   tutorialText: {fileID: 1187603482}
   screenFade: {fileID: 1945893335}
   centerText: {fileID: 641231241}
@@ -702,12 +702,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
   zoomStep: 1
-  minSize: 1
-  maxSize: 7
-  minX: -15
-  maxX: 15
-  minY: -15
-  maxY: 15
+  minSize: 3
+  maxSize: 10
+  minX: -24
+  maxX: 24
+  minY: -24
+  maxY: 24
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
