@@ -233,6 +233,15 @@ public class Harvester : MonoBehaviour, Selectable
         Harvester spawnedHarvester = Instantiate(harvester, transform.position, Quaternion.identity);
         spawnedHarvester.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0);
         spawnedHarvester.growthLevel = growthLevel;
+        spawnedHarvester.Deselect();
+
+        if (gm.selectedObject.Equals(this))
+        {
+            gm.selectedObject = null;
+            Deselect();
+        }
+            
+        
     }
 
     void SetFiringPath(Vector2 shotVelocity)
