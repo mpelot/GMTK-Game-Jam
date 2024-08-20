@@ -58,7 +58,18 @@ public class GameMangager : MonoBehaviour
         tutorialPositionMarker.gameObject.SetActive(false);
         musicAudioSource = GetComponent<AudioSource>();
         musicAudioSource.clip = regularMusic;
+        GetComponent<AudioSource>().Play();
         core = FindFirstObjectByType<Core>();
+
+        if (! PlayerPrefs.HasKey("SkipTutorial"))
+        {
+            PlayerPrefs.SetInt("SkipTutorial", 0);
+        }
+        else
+        {
+            startingRound = PlayerPrefs.GetInt("SkipTutorial") == 0 ? -1 : 0;
+        }
+
         if (startingRound < 0)
         {
             tutorialPlanet.gameObject.SetActive(true);
@@ -145,8 +156,6 @@ public class GameMangager : MonoBehaviour
         centerText.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
 
         yield return new WaitForSeconds(1f);
-
-        GetComponent<AudioSource>().Play();
 
         for (float a = 4; a >= 0; a -= Time.deltaTime)
         {
@@ -453,6 +462,8 @@ public class GameMangager : MonoBehaviour
 
         yield return new WaitForSeconds(7.0f);
 
+        PlayerPrefs.SetInt("SkipTutorial", 1);
+        
         StartCoroutine(StartRounds());
     }
 
