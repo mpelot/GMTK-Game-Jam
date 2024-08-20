@@ -717,6 +717,24 @@ public class GameMangager : MonoBehaviour
         int alertTime = 10;
         int waveTimer = 2;
 
+        SetTutorialText("ATTENTION: THE LARGE ASTEROID HAS CAUSED LINGERING EFFECTS ON THE GROWTH OF THE SUN.");
+
+        yield return new WaitForSeconds(8.0f);
+
+        SetTutorialText("FROM NOW ON, YOUR MISSION IS TO SURVIVE AS LONG AS POSSIBLE.");
+
+        yield return new WaitForSeconds(8.0f);
+
+        SetTutorialText("GOOD LUCK.");
+
+        yield return new WaitForSeconds(3.0f);
+
+        SetTutorialText("");
+        yield return new WaitForSeconds(1.0f);
+        StartCoroutine(ClearTutorialTextCoroutine(0.0f));
+
+        core.growthPerGrowthEvent = 0.75f;
+
         while (true)
         {
             yield return new WaitForSeconds(5.0f);

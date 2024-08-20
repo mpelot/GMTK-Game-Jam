@@ -3326,7 +3326,7 @@ MonoBehaviour:
   growthLimit: 30
   scaleRate: 0.1
   disableGrowing: 0
-  secondsBetweenGrowthEvent: 5
+  secondsBetweenGrowthEvent: 8
   growthPerGrowthEvent: 0
   growthEventDuration: 0.3
   _growthLevel: 0
