@@ -18,8 +18,8 @@ GameObject:
   - component: {fileID: 5414007771370027969}
   - component: {fileID: 6312446532099305741}
   m_Layer: 0
-  m_Name: Harvester
-  m_TagString: Harvester
+  m_Name: Tetradon
+  m_TagString: Tetradon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   isInvincible: 0
   allowSplitting: 1
   audioSource: {fileID: 6312446532099305741}
-  harvester: {fileID: 7819063478075708561}
+  tetradon: {fileID: 7819063478075708561}
 --- !u!95 &3016545604663011438
 Animator:
   serializedVersion: 7

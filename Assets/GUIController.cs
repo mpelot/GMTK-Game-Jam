@@ -43,7 +43,7 @@ public class GUIController : MonoBehaviour
                 selectedName.sprite = planetName;
                 description.text = "CAN REDIRECT INCOMING ASTEROIDS";
                 ChangeBorderColor(planetColor);
-            } else if (selectedObject.gameObj.tag.Equals("Harvester")) {
+            } else if (selectedObject.gameObj.tag.Equals("Tetradon")) {
                 selectedName.sprite = tetradonName;
                 description.text = "CAN CONVERT ASTEROIDS INTO ARDIUM";
                 ChangeBorderColor(tetradonColor);

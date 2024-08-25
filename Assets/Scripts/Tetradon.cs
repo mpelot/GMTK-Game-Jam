@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Harvester : MonoBehaviour, Selectable
+public class Tetradon : MonoBehaviour, Selectable
 {
     private bool selected;
     private bool isAiming;
@@ -38,7 +38,7 @@ public class Harvester : MonoBehaviour, Selectable
     public bool isInvincible = false;
     public bool allowSplitting = true;
     public AudioSource audioSource;
-    [SerializeField] Harvester harvester;
+    [SerializeField] Tetradon tetradon;
 
     private float consumeTimer = 0;
     private int consumeStreak = 0;
@@ -165,7 +165,7 @@ public class Harvester : MonoBehaviour, Selectable
                 {
                     if (growthLevel >= splitThreshold)
                     {
-                        SplitHarvester();
+                        SplitTetradon();
                     }
                 }
                 doubleClickTimer = 0f;
@@ -225,15 +225,15 @@ public class Harvester : MonoBehaviour, Selectable
         }
     }
 
-    void SplitHarvester()
+    void SplitTetradon()
     {
         if (!allowSplitting)
             return;
         growthLevel = (growthLevel - splitThreshold) / 2;
-        Harvester spawnedHarvester = Instantiate(harvester, transform.position, Quaternion.identity);
-        spawnedHarvester.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0);
-        spawnedHarvester.growthLevel = growthLevel;
-        spawnedHarvester.Deselect();
+        Tetradon spawnedTetradon = Instantiate(tetradon, transform.position, Quaternion.identity);
+        spawnedTetradon.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0);
+        spawnedTetradon.growthLevel = growthLevel;
+        spawnedTetradon.Deselect();
 
         if (gm.selectedObject.Equals(this))
         {

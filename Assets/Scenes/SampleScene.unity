@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 4123538215520549574, guid: 594195e5ffd540f44a6a966a31438cf2, type: 3}
   planetPrefab: {fileID: 1370430673509114698, guid: 676db081c7e3a7641ab7ffa1d481849b, type: 3}
-  harvesterPrefab: {fileID: 7819063478075708561, guid: 9bf0bb590acdae346b08c1caffc26008, type: 3}
+  tetradonPrefab: {fileID: 7819063478075708561, guid: 9bf0bb590acdae346b08c1caffc26008, type: 3}
   asteroidSpeed: 2.5
   spawnDistance: 27
   rounds:
@@ -295,7 +295,7 @@ MonoBehaviour:
   screenFade: {fileID: 1945893335}
   centerText: {fileID: 641231241}
   tutorialPlanet: {fileID: 0}
-  tutorialHarvester: {fileID: 0}
+  tutorialTetradon: {fileID: 0}
   tutorialPositionMarker: {fileID: 0}
   typingAudioSource: {fileID: 51138263}
   regularMusic: {fileID: 8300000, guid: 5f23a5dcb9313df43ae7a64cd5747e15, type: 3}
@@ -666,7 +666,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 507900419027450303, guid: 9bf0bb590acdae346b08c1caffc26008, type: 3}
       propertyPath: m_Name
-      value: Harvester
+      value: Tetradon
       objectReference: {fileID: 0}
     - target: {fileID: 507900419027450303, guid: 9bf0bb590acdae346b08c1caffc26008, type: 3}
       propertyPath: m_IsActive

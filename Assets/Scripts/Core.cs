@@ -122,7 +122,7 @@ public class Core : MonoBehaviour, Selectable
             growthLevel += asteroid.growthLevel;
             SFXPlayer.instance.PlaySFX("HitSun");
         }
-        else if (collision.gameObject.CompareTag("Planet") || collision.gameObject.CompareTag("Harvester"))
+        else if (collision.gameObject.CompareTag("Planet") || collision.gameObject.CompareTag("Tetradon"))
         {
             Destroy(collision.gameObject);
             growthLevel += growthFromPlanet;

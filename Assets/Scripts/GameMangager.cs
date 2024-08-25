@@ -8,7 +8,7 @@ public class GameMangager : MonoBehaviour
     private Selectable _selectedObject;
     [SerializeField] private Spawner spawner;
     public Planet planetPrefab;
-    public Harvester harvesterPrefab;
+    public Tetradon tetradonPrefab;
     [SerializeField] private float asteroidSpeed;
     [SerializeField] private float spawnDistance;
     public Round[] rounds;
@@ -20,7 +20,7 @@ public class GameMangager : MonoBehaviour
     public Text centerText;
     private Coroutine currentTutorialTextCoroutine;
     public Planet tutorialPlanet;
-    public Harvester tutorialHarvester;
+    public Tetradon tutorialTetradon;
     public TutorialPositionMarker tutorialPositionMarker;
     public AudioSource typingAudioSource;
     private Core core;
@@ -53,7 +53,7 @@ public class GameMangager : MonoBehaviour
     {
         tutorialText.text = "";
         tutorialPlanet = GetComponentInChildren<Planet>();
-        tutorialHarvester = GetComponentInChildren<Harvester>();
+        tutorialTetradon = GetComponentInChildren<Tetradon>();
         tutorialPositionMarker = GetComponentInChildren<TutorialPositionMarker>();
         tutorialPositionMarker.gameObject.SetActive(false);
         musicAudioSource = GetComponent<AudioSource>();
@@ -67,27 +67,30 @@ public class GameMangager : MonoBehaviour
         }
         else
         {
-            startingRound = PlayerPrefs.GetInt("SkipTutorial") == 0 ? -1 : 0;
+            if (startingRound == -1)
+            {
+                startingRound = PlayerPrefs.GetInt("SkipTutorial") == 0 ? -1 : 0;
+            }
         }
 
         if (startingRound < 0)
         {
             tutorialPlanet.gameObject.SetActive(true);
-            tutorialHarvester.gameObject.SetActive(true);
+            tutorialTetradon.gameObject.SetActive(true);
             startingRound = 0;
             StartCoroutine(IntroSequence());
         }
         else if (startingRound < 100)
         {
             tutorialPlanet.gameObject.SetActive(false);
-            tutorialHarvester.gameObject.SetActive(false);
+            tutorialTetradon.gameObject.SetActive(false);
             SpawnInMissingObjects();
             StartCoroutine(StartRounds());
         }
         else
         {
             tutorialPlanet.gameObject.SetActive(false);
-            tutorialHarvester.gameObject.SetActive(false);
+            tutorialTetradon.gameObject.SetActive(false);
             SpawnInMissingObjects();
             StartCoroutine(EndlessMode());
         }
@@ -119,16 +122,16 @@ public class GameMangager : MonoBehaviour
             }
         }
 
-        int harvestersToSpawn = Mathf.FloorToInt((totalGrowth / harvesterPrefab.splitThreshold) * 0.5f) + 2;
+        int tetradonsToSpawn = Mathf.FloorToInt((totalGrowth / tetradonPrefab.splitThreshold) * 0.5f) + 2;
 
         for (int i = 0; i < planetsToSpawn; i++)
         {
             SpawnPlanet(Random.Range(0, 360), Random.Range(4, 7), false);
         }
 
-        for (int i = 0; i < harvestersToSpawn; i++)
+        for (int i = 0; i < tetradonsToSpawn; i++)
         {
-            SpawnHarvester(Random.Range(0, 360), Random.Range(4, 7));
+            SpawnTetradon(Random.Range(0, 360), Random.Range(4, 7));
         }
 
 
@@ -143,9 +146,9 @@ public class GameMangager : MonoBehaviour
 
     IEnumerator IntroSequence()
     {
-        tutorialHarvester.GetComponent<Movable>().disableInteraction = true;
-        tutorialHarvester.isInvincible = true;
-        tutorialHarvester.allowSplitting = false;
+        tutorialTetradon.GetComponent<Movable>().disableInteraction = true;
+        tutorialTetradon.isInvincible = true;
+        tutorialTetradon.allowSplitting = false;
         Camera.main.GetComponent<CameraMovement>().enabled = false;
 
 
@@ -210,9 +213,9 @@ public class GameMangager : MonoBehaviour
 
         SetTutorialText("YOU MUST MAKE USE OF THE ALIENTECH TETRADON MACHINES TO INTERCEPT THE ASTEROIDS AND PROTECT THE SUN");
 
-        tutorialHarvester.GetComponent<Movable>().targetPos = new Vector3(0, 4, 0);
-        tutorialHarvester.GetComponent<Movable>().destinationSet = true;
-        tutorialHarvester.GetComponent<Movable>().dragSpeedMultiplier = 8f;
+        tutorialTetradon.GetComponent<Movable>().targetPos = new Vector3(0, 4, 0);
+        tutorialTetradon.GetComponent<Movable>().destinationSet = true;
+        tutorialTetradon.GetComponent<Movable>().dragSpeedMultiplier = 8f;
 
         yield return new WaitForSeconds(11f);
 
@@ -224,24 +227,24 @@ public class GameMangager : MonoBehaviour
 
             yield return new WaitForSeconds(4f);
 
-            tutorialHarvester.GetComponent<Movable>().dragSpeedMultiplier = 1f;
+            tutorialTetradon.GetComponent<Movable>().dragSpeedMultiplier = 1f;
             SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
 
-            while (tutorialHarvester.growthLevel == 0)
+            while (tutorialTetradon.growthLevel == 0)
             {
                 yield return null;
             }
 
             SetTutorialText("LEFT CLICK TO SELECT THE TETRADON...");
 
-            while (selectedObject == null || selectedObject.GetType() != typeof(Harvester))
+            while (selectedObject == null || selectedObject.GetType() != typeof(Tetradon))
             {
                 yield return null;
             }
 
             SetTutorialText("...THEN DRAG WITH RIGHT CLICK TO FIRE ARDIUM INTO THE SUN'S CORE");
 
-            while (tutorialHarvester.growthLevel > 0)
+            while (tutorialTetradon.growthLevel > 0)
             {
                 yield return null;
             }
@@ -250,7 +253,7 @@ public class GameMangager : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         SetTutorialText("TETRADON MACHINES CONSUME MATTER AND SYNTHESIZE ARDIUM. ARDIUM CAN BE FIRED INTO DIFFERENT OBJECTS TO SHRINK THEM.");
         yield return new WaitForSeconds(8.0f);
-        tutorialHarvester.ClearFiringPath();
+        tutorialTetradon.ClearFiringPath();
 
         SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
         tutorialPlanet = SpawnPlanet(135f, 15f);
@@ -262,7 +265,7 @@ public class GameMangager : MonoBehaviour
         while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
         {
             yield return null;
-            if (tutorialHarvester.growthLevel == 0)
+            if (tutorialTetradon.growthLevel == 0)
             {
                 SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
                 yield return new WaitForSeconds(5f);
@@ -277,7 +280,7 @@ public class GameMangager : MonoBehaviour
             while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
             {
                 yield return null;
-                if (tutorialHarvester.growthLevel == 0)
+                if (tutorialTetradon.growthLevel == 0)
                 {
                     SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
                     yield return new WaitForSeconds(5f);
@@ -304,7 +307,7 @@ public class GameMangager : MonoBehaviour
             while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
             {
                 yield return null;
-                if (tutorialHarvester.growthLevel == 0)
+                if (tutorialTetradon.growthLevel == 0)
                 {
                     SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
                     yield return new WaitForSeconds(5f);
@@ -320,7 +323,7 @@ public class GameMangager : MonoBehaviour
         while (tutorialPlanet.growthLevel > 0)
         {
             yield return null;
-            while (tutorialHarvester.growthLevel == 0)
+            while (tutorialTetradon.growthLevel == 0)
             {
                 SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
                 yield return new WaitForSeconds(5f);
@@ -334,7 +337,7 @@ public class GameMangager : MonoBehaviour
                 while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
                 {
                     yield return null;
-                    if (tutorialHarvester.growthLevel == 0)
+                    if (tutorialTetradon.growthLevel == 0)
                     {
                         SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
                         yield return new WaitForSeconds(5f);
@@ -359,7 +362,7 @@ public class GameMangager : MonoBehaviour
                 while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
                 {
                     yield return null;
-                    if (tutorialHarvester.growthLevel == 0)
+                    if (tutorialTetradon.growthLevel == 0)
                     {
                         SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
                         yield return new WaitForSeconds(5f);
@@ -379,8 +382,8 @@ public class GameMangager : MonoBehaviour
 
         FindAnyObjectByType<Core>().disableGrowing = true;
 
-        float growthLevel = tutorialHarvester.growthLevel;
-        while (tutorialHarvester.growthLevel == growthLevel)
+        float growthLevel = tutorialTetradon.growthLevel;
+        while (tutorialTetradon.growthLevel == growthLevel)
         {
             Spawner sp = SpawnAsteroidStream(180f, spawnDistance, 10f, 5, 1.0f);
 
@@ -396,7 +399,7 @@ public class GameMangager : MonoBehaviour
                     while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
                     {
                         yield return null;
-                        if (tutorialHarvester.growthLevel == 0)
+                        if (tutorialTetradon.growthLevel == 0)
                         {
                             SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
                             yield return new WaitForSeconds(5f);
@@ -415,7 +418,7 @@ public class GameMangager : MonoBehaviour
 
         SetTutorialText("CONTINUE TO FEED ASTEROIDS INTO THE TETRADON TO GROW IT TO FULL SIZE");
 
-        while (tutorialHarvester.growthLevel < tutorialHarvester.splitThreshold)
+        while (tutorialTetradon.growthLevel < tutorialTetradon.splitThreshold)
         {
             Spawner sp = SpawnAsteroidStream(180f - Random.Range(-20f, 20f), spawnDistance, 7f, 5, 1.0f);
 
@@ -430,7 +433,7 @@ public class GameMangager : MonoBehaviour
                     while (tutorialPlanet.growthLevel == tutorialPlanet.unstableGrowthThreshold && tutorialPlanet != null)
                     {
                         yield return null;
-                        if (tutorialHarvester.growthLevel == 0)
+                        if (tutorialTetradon.growthLevel == 0)
                         {
                             SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
                             yield return new WaitForSeconds(5f);
@@ -448,18 +451,18 @@ public class GameMangager : MonoBehaviour
 
         SetTutorialText("TETRADON ARE BIOLOGICAL MACHINES AND HAVE THE ABILITY TO SELF-REPLICATE. DOUBLE CLICK ON THE FILLED TETRADON TO SPLIT IT.");
 
-        tutorialHarvester.allowSplitting = true;
+        tutorialTetradon.allowSplitting = true;
 
 
 
-        while (FindObjectsByType<Harvester>(FindObjectsSortMode.None).Length < 2)
+        while (FindObjectsByType<Tetradon>(FindObjectsSortMode.None).Length < 2)
         {
             yield return null;
 
-            if (tutorialHarvester.growthLevel == 0)
+            if (tutorialTetradon.growthLevel == 0)
             {
                 yield return new WaitForSeconds(0.25f);
-                if (FindObjectsByType<Harvester>(FindObjectsSortMode.None).Length < 2)
+                if (FindObjectsByType<Tetradon>(FindObjectsSortMode.None).Length < 2)
                 {
                     SpawnAsteroidStream(90f, 15f, 0f, 5, 1.0f);
                     yield return new WaitForSeconds(5f);
@@ -469,12 +472,12 @@ public class GameMangager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        Harvester[] harvesters = FindObjectsByType<Harvester>(FindObjectsSortMode.None);
+        Tetradon[] tetradons = FindObjectsByType<Tetradon>(FindObjectsSortMode.None);
 
-        foreach (Harvester harvester in harvesters)
+        foreach (Tetradon tetradon in tetradons)
         {
-            harvester.GetComponent<Movable>().disableInteraction = false;
-            harvester.isInvincible = false;
+            tetradon.GetComponent<Movable>().disableInteraction = false;
+            tetradon.isInvincible = false;
         }
 
         SetTutorialText("BALANCING THE GROWTH OF TETRADONS AND KEEPING THE SUN'S CORE STABLE IS KEY TO SAVING THE SOLAR SYSTEM.");
@@ -483,7 +486,7 @@ public class GameMangager : MonoBehaviour
 
         SetTutorialText("TO PREPARE FOR THE INCOMING ASTEROID STORM, POSITION YOUR TETRADONS ON EITHER SIDE OF THE SUN TO COVER THE MOST GROUND.");
 
-        while (!isPassingThroughOrigin(harvesters[0].transform.position, harvesters[1].transform.position, 1f) && FindObjectsByType<Harvester>(FindObjectsSortMode.None).Length > 1)
+        while (!isPassingThroughOrigin(tetradons[0].transform.position, tetradons[1].transform.position, 1f) && FindObjectsByType<Tetradon>(FindObjectsSortMode.None).Length > 1)
         {
             yield return null;
         }
@@ -618,13 +621,13 @@ public class GameMangager : MonoBehaviour
         return planet;
     }
 
-    private Harvester SpawnHarvester(float angle, float spawnDistance)
+    private Tetradon SpawnTetradon(float angle, float spawnDistance)
     {
         Vector3 position = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle), 0f) * spawnDistance;
 
-        Harvester harvester = Instantiate(harvesterPrefab, position, Quaternion.identity);
+        Tetradon tetradon = Instantiate(tetradonPrefab, position, Quaternion.identity);
 
-        return harvester;
+        return tetradon;
     }
 
     IEnumerator StartRounds()

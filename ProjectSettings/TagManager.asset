@@ -7,7 +7,7 @@ TagManager:
   - Planet
   - Gravity
   - Core
-  - Harvester
+  - Tetradon
   - ShrinkRock
   - Asteroid
   - PositionTarget
@@ -23,7 +23,7 @@ TagManager:
   - Asteroid
   - Post Processing
   - Position Target
-  - Harvester
+  - Tetradon
   - Warning Symbol
   - 
   - 

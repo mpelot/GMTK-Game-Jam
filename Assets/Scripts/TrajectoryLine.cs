@@ -115,7 +115,7 @@ public class TrajectoryLine : MonoBehaviour
                         }
 
                     }
-                    else if (hit.collider.CompareTag("Harvester"))
+                    else if (hit.collider.CompareTag("Tetradon"))
                     {
                         if (growthLevel > 5)
                         {
