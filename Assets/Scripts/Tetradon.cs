@@ -13,7 +13,7 @@ public class Tetradon : MonoBehaviour, Selectable
     public float shotForce;
     public float shotCooldown;
     private bool isFiringPathSet;
-    public GameObject shrinkRockPrefab;
+    public GameObject ardiumPrefab;
     public GameObject warningSymbol;
     private Movable movable;
     public float splitThreshold;
@@ -255,9 +255,9 @@ public class Tetradon : MonoBehaviour, Selectable
     {
         while (growthLevel > 0 && isFiringPathSet)
         {
-            GameObject spawnedShrinkRock = Instantiate(shrinkRockPrefab, transform.position, Quaternion.identity);
-            spawnedShrinkRock.GetComponent<Rigidbody2D>().velocity = shotVelocity;
-            ignoredColliders.Add(spawnedShrinkRock.GetComponent<Collider2D>());
+            GameObject spawnedArdium = Instantiate(ardiumPrefab, transform.position, Quaternion.identity);
+            spawnedArdium.GetComponent<Rigidbody2D>().velocity = shotVelocity;
+            ignoredColliders.Add(spawnedArdium.GetComponent<Collider2D>());
             if (growthLevel < 1.0)
             {
                 growthLevel = 0;
@@ -320,11 +320,11 @@ public class Tetradon : MonoBehaviour, Selectable
             }
             
         }
-        else if (collision.gameObject.CompareTag("ShrinkRock"))
+        else if (collision.gameObject.CompareTag("Ardium"))
         {
-            ShrinkRock shrinkRock = collision.GetComponent<ShrinkRock>();
+            Ardium ardium = collision.GetComponent<Ardium>();
             Destroy(collision.gameObject);
-            growthLevel += shrinkRock.shinkAmount;
+            growthLevel += ardium.shinkAmount;
             PlayConsumedSound();
         }
         else if (collision.gameObject.CompareTag("Planet"))

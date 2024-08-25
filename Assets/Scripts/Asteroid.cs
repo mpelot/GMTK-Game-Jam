@@ -109,7 +109,7 @@ public class Asteroid : MonoBehaviour
                 rb.velocity = (rb.velocity + otherVelocity) / 2;
             }
         }
-        else if (collision.gameObject.CompareTag("ShrinkRock"))
+        else if (collision.gameObject.CompareTag("Ardium"))
         {
             Destroy(collision.gameObject);
 

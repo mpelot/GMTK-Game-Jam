@@ -118,11 +118,11 @@ public class Planet : MonoBehaviour, Selectable
             Destroy(collision.gameObject);
             growthLevel += asteroid.growthLevel;
         }
-        else if (collision.gameObject.CompareTag("ShrinkRock"))
+        else if (collision.gameObject.CompareTag("Ardium"))
         {
-            ShrinkRock shrinkRock = collision.GetComponent<ShrinkRock>();
+            Ardium ardium = collision.GetComponent<Ardium>();
             Destroy(collision.gameObject);
-            growthLevel -= shrinkRock.shinkAmount;
+            growthLevel -= ardium.shinkAmount;
         }
     }
 

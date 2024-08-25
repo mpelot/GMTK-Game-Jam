@@ -128,11 +128,11 @@ public class Core : MonoBehaviour, Selectable
             growthLevel += growthFromPlanet;
             SFXPlayer.instance.PlaySFX("HitSun");
         }
-        else if (collision.gameObject.CompareTag("ShrinkRock"))
+        else if (collision.gameObject.CompareTag("Ardium"))
         {
-            ShrinkRock shrinkRock = collision.GetComponent<ShrinkRock>();
+            Ardium ardium = collision.GetComponent<Ardium>();
             Destroy(collision.gameObject);
-            growthLevel -= shrinkRock.shinkAmount;
+            growthLevel -= ardium.shinkAmount;
             SFXPlayer.instance.PlaySFX("HitSun");
         }
     }

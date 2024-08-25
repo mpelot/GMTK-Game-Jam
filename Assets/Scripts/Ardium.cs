@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShrinkRock : MonoBehaviour
+public class Ardium : MonoBehaviour
 {
     public float coreForce;
     public float planetForce;

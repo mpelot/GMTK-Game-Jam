@@ -203,7 +203,7 @@ MonoBehaviour:
   maximumShotVelocity: 5
   shotForce: 1
   shotCooldown: 0.7
-  shrinkRockPrefab: {fileID: 2762680425495791541, guid: 82fe04a098aec474783b8196abaa3b80, type: 3}
+  ardiumPrefab: {fileID: 2762680425495791541, guid: 82fe04a098aec474783b8196abaa3b80, type: 3}
   warningSymbol: {fileID: 2772741151127113448}
   splitThreshold: 25
   unstableGrowthLevel: 33

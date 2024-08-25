@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: -5763060824989422429}
   - component: {fileID: -6437157962285716480}
   m_Layer: 8
-  m_Name: Shrink Rock
-  m_TagString: ShrinkRock
+  m_Name: Ardium
+  m_TagString: Ardium
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
